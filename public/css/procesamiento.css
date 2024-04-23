@@ -1,0 +1,481 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat|Montserrat+Alternates|Poppins&display=swap');
+	*{
+		margin: 0;
+		padding: 0;
+		box-sizing: border-box;
+		font-family: 'Montserrat Alternates', sans-serif;
+	}
+	body{
+		background-color: #bae0d1;
+	}
+	/*Estilos para el encabezado*/
+	.header{
+		width: 100%;
+		height: 120px;
+        position: fixed;
+		top: 0;left: 0;
+        background-color: #184B48;
+        
+	}
+	.container{
+		width: 90%;
+		max-width: 1200px;
+		margin: auto;   
+	}
+	.container .btn-menu, .logo{
+		float: left;
+		line-height:100px;
+        
+	}
+	.container .btn-menu label{
+		color: #fff;
+		font-size: 25px;
+		cursor: pointer;
+	}
+	.logo h1{
+		color: #EFF2F3;
+		font-weight: 400px;
+		font-size: 20px;
+		margin-left: 5px;
+	}
+
+    label img.imagen {
+        margin: 8px;
+        max-width: 70px;
+         /* Ajusta el ancho máximo según tus necesidades */
+    }
+    ---------
+    /* Estilos para la etiqueta label dentro del contenedor .container con la clase .btn-menu1 */
+.container .btn-menu1 label {
+    color: #fff;       
+    cursor: pointer;    
+  }
+  
+  /* Estilos para los enlaces dentro del contenedor .menu */
+  .menu a {
+    color: #f4f7f8;    
+  }
+  
+  label img.imagen1 {
+    margin: 20px;
+    max-width: 85px;
+    border: 2px solid #bae0d1; /* Borde sólido de 2px de color gris */
+    padding: 0px; /* Espacio interno alrededor de la imagen */
+    box-sizing: border-box; /* Incluir el borde en el tamaño total de la imagen */
+  }
+  
+  label .imagen1:empty::after {
+    content: "Imagen no disponible"; /* Texto de referencia */
+    display: block; /* Mostrar como bloque para ocupar espacio */
+    margin-top: 70px; /* Espacio superior al texto de referencia */
+    color: #184B48; /* Color del texto de referencia */
+  }
+  
+  /* Estilos para el contenedor .menu dentro del contenedor .container */
+  .container .menu {
+    float: right;   
+    line-height: 4px;  
+   
+}
+  
+  /* Estilos para los enlaces dentro del contenedor .menu dentro del contenedor .container */
+  .container .menu h3 {
+    margin-right: 25px;  
+    margin-top: 60px; 
+    float: right; 
+    font-size: 16px;  
+  }
+  
+
+  .imagen1 {
+    width: 30%; 
+    height: auto; 
+    border-radius: 50px; 
+  }
+  
+   ---------------------
+
+  
+  .submenu {
+    display: none;
+    list-style: none;
+    padding: 50px;
+    margin: 60px 0 0 0; 
+  }
+  
+  .menu {
+    position: relative;
+    transition: all 500ms ease;
+		transform: translateX(+21.5%); /*ELIMINAR SI EN CASO SEA NECESARIO*/
+  }
+  
+  .submenu {
+    display: none;
+    position: absolute;
+    background-color: #184B48;
+    border-radius: 8px;
+    top: 86%;
+    left: 0;
+    list-style: none;
+    padding: 0px 40px; 
+    margin: 0;
+  }
+  
+  .submenu li {
+    display: inline-block;
+    margin-right: 10px;
+  }
+  
+  .submenu a {
+    text-decoration: none;
+    color: #f0f9f6;
+    padding: 5px;
+    display: block; 
+  }
+  .submenu a:hover{
+    color: #8cc9b6;
+  }
+    
+
+  h3 {
+    text-decoration: none; /* Quitar el subrayado */
+    color: #f0f9f6; 
+    
+  }
+
+  h3:hover{
+    color: #bae0d1;
+    cursor: pointer;
+  }
+  
+  
+  
+     
+	
+    ----------
+	/*Fin de Estilos para el encabezado*/
+
+	/*Menù lateral*/
+	#btn-menu{
+		display: none;
+        
+	}
+
+  input[type="checkbox"] {
+    display: none;
+  }
+	.container-menu{
+		position: fixed;
+		background: rgba(0,0,0,0.5);
+		width: 100%;
+		height: 104vh;
+		top: 0;left: 0;
+		transition: all 500ms ease;
+		opacity: 0;
+		visibility: hidden;
+        
+	}
+	#btn-menu:checked ~ .container-menu{
+		opacity: 1;
+		visibility: visible;
+        color: #030303;
+        
+	}
+	.cont-menu{
+		width: 100%;
+		max-width: 250px;
+		background: #184B48;
+		height: 104vh;
+		position: relative;
+		transition: all 500ms ease;
+		transform: translateX(-100%);
+	}
+	#btn-menu:checked ~ .container-menu .cont-menu{
+		transform: translateX(0%);
+	}
+	.cont-menu nav{
+		transform: translateY(15%);
+	}
+	.cont-menu nav a{
+		display: block;
+		text-decoration: none;
+		padding: 20px;
+		color: #f5f3f3;
+		border-left: 5px solid transparent;
+		transition: all 400ms ease;
+	}
+	.cont-menu nav a:hover{
+		border-left: 5px solid #297260;
+		background: #bae0d1;
+        color: #030303;
+	}
+
+	.cont-menu label{
+		position: absolute;
+		right: 5px;
+		top: 10px;
+		color: #fff;
+		cursor: pointer;
+		font-size: 18px;
+	}
+
+    .search-container {
+        width: 100%;
+        align-items: center; 
+        padding: 14px;
+        margin-bottom: 0px; 
+    }
+    
+    .search-container i {
+        margin-right: 5px;
+        position: relative;
+        top: 47px; 
+        left: 93%; 
+        color: #a09d9d;
+    }
+    
+    
+    .search-container input {
+        padding: 10px;
+        width: 103%;
+        border-radius: 10px; 
+        border: none;
+    }
+
+    .img {
+      width: 50%;
+      left: 10px;
+      border: 2px solid #bae0d1; /* Borde sólido de 2px de color gris */
+      padding: 0px; /* Espacio interno alrededor de la imagen */
+      box-sizing: border-box; /* Incluir el borde en el tamaño total de la imagen */
+    }
+  
+    /* Estilo para la referencia visual cuando no hay imagen */
+    .img:empty::after {
+      content: "Imagen no disponible"; /* Texto de referencia */
+      display: block; /* Mostrar como bloque para ocupar espacio */
+      margin-top: 65%; /* Espacio superior al texto de referencia */
+      color: #184B48; /* Color del texto de referencia */
+    }
+    
+    .imagen-container {
+        text-align: center; 
+        padding: 1px; 
+       
+    }
+    h1, p{
+        color: beige;
+        font-size: 15px;
+    }
+
+
+    
+ /*titulo del registro*/
+.titulo-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 10%;
+    
+}
+
+h4 {
+    margin: 1px;
+
+    
+}
+
+
+
+
+/* Media query para pantallas más pequeñas */
+@media screen and (max-width: 768px) {
+  h4 {
+      margin: 12vw; /* Margen fijo para pantallas más pequeñas */
+  }
+  h3 {
+      display: none; /* Oculta el texto en dispositivos más pequeños */   
+  }
+  .imagen1 {
+    width: 50%; 
+    height: auto; 
+    border-radius: 50px; 
+
+  }
+  .container-menu{
+		position: absolute;
+		background: rgba(0,0,0,0.5);
+		width: 105%;
+		height: 114vh;
+		top: 0;left: 0;
+		transition: all 500ms ease;
+		opacity: 0;
+		visibility: hidden;
+        
+	}
+	#btn-menu:checked ~ .container-menu{
+		opacity: 1;
+		visibility: visible;
+        color: #030303;
+        
+	}
+	.cont-menu{
+		width: 100%;
+		max-width: 250px;
+		background: #184B48;
+		height: 114vh;
+		position: relative;
+		transition: all 500ms ease;
+		transform: translateX(-100%);
+	}
+	#btn-menu:checked ~ .container-menu .cont-menu{
+		transform: translateX(0%);
+	}
+
+}
+
+/*contenido*/
+/* from*/
+
+.capa1 {
+  
+  display: flex;
+  justify-content: center;
+}
+
+form {
+  width: 95%;
+  padding: 20px;
+  
+}
+
+.input-general, .input-general1, .input-general2, .input-general3,
+.input-general4, .input-general5, .input-general6{
+  display: flex;
+  flex-wrap: wrap;
+  color: #0b2827; /* Permite que los elementos se envuelvan a la siguiente línea */
+}
+
+
+
+
+.input-group, .input-group1, .input-group2,
+ .input-group3, .input-group4, .input-group5, .input-group6{
+  flex: 1; 
+  margin-right: 20px; 
+}
+
+
+
+
+.input-group:last-child,.input-group1:last-child, 
+.input-group2:last-child, .input-group3:last-child,
+.input-group4:last-child,.input-group5:last-child, 
+.input-group6:last-child {
+  margin-right: 0; 
+}
+input:focus, textarea:focus {
+  outline: none;
+}
+ .centro{
+  display: block; 
+  margin-bottom: 1px;
+
+}
+
+input, select {
+  width: 100%; 
+  padding: 10px;
+  border-radius: 5px;
+  margin: 20px 0px;
+  border: 1px solid #00961c;
+  
+}
+
+#fechaEmision{
+  width: 100%; 
+  padding: 10px;
+  border-radius: 5px;
+  margin: 20px 0px;
+  border: 1px solid #00961c;
+
+}
+
+ textarea {
+  width: 100%; /* Los inputs ocupan todo el ancho del grupo */
+  padding: 1px;
+  border-radius: 5px;
+  margin: 10px 0px;
+  border: 1px solid #00961c;
+}
+
+
+#resultado{
+  width: 100%; /* Los inputs ocupan todo el ancho del grupo */
+  padding: 20px;
+  height: 80%;
+  border-radius: 5px;
+  margin: 20px 0px;
+  border: 2px solid #edfff0;
+  background-color: #edfff0;
+}
+
+
+
+
+
+
+
+/* Asegúrate de que ".Act" y ".Env" estén dentro del mismo contenedor padre */
+.almacenar {
+  display: flex;
+  justify-content: center;
+  align-items: center; /* Alinea verticalmente los elementos en el contenedor */
+  margin-top: 0%;
+}
+
+.Actualizar button,
+.Enviar button {
+  width: 250px; /* Ocupa el 100% del ancho del contenedor */
+  padding: 10px; /* Puedes ajustar este valor según tus necesidades */
+  border-radius: 15px;
+  background-color: transparent;
+  border: 2px solid;
+  cursor: pointer;
+  margin: 5px;
+}
+
+.Actualizar button {
+  border-color:#01a8b9;
+  background-color: #1af0f6;
+}
+
+.Actualizar button:hover{
+  background-color: #09bcee;
+}
+
+.Enviar button {
+  border-color: #f81616;
+  background-color: #ff9898;
+  
+}
+
+.Enviar button:hover{
+  background-color: #ff2a2a;
+}
+  
+
+fieldset {
+  background-color: #edfff0;
+  margin-bottom: 20px;
+  padding: 10px;
+  border: 2px solid #00961c;
+  border-radius: 5px;
+}
+legend {
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: #fb0707;
+}
+/*Fin de Menù lateral*/

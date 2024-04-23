@@ -1,0 +1,180 @@
+/* styles.css */
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-color: #DDFFBC; /* Color de fondo opcional */
+  }
+  
+  /* Archivo estilos.css */
+  body {
+    background-image: url('../images/Sanidad.jpg');
+    background-size: cover; 
+    background-position: center; 
+    background-repeat: no-repeat; 
+  }
+  
+  
+  #login-container {
+    background-color: #bae0d1;
+    border-radius: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column; /* Añadido para que los elementos se apilen verticalmente */
+    align-items: center;
+    width: 50%;
+    height: 55%;
+    border: 3px solid #297260; /* Ajusta el grosor y el color del borde según tus preferencias */
+    box-sizing: border-box; /* Incluye el grosor del borde en el cálculo del tamaño total */
+  }
+  
+  #login-container h2 {
+    font-family: "Cooper Black", sans-serif;
+    margin: 20px 0 0;
+    width: 100%;
+    text-align: center;
+    color:#0d211d;
+  }
+  
+  #content-container {
+    display: flex;
+    width: 90%;
+  }
+  
+  .Izquierda, #login-form {
+    flex: 1;
+    padding: 20px;
+    box-sizing: border-box;
+  }
+  
+  .Izquierda {
+    text-align: center;
+  }
+  
+  .logo-image {
+    width: 85%;
+    height: auto;
+    max-width: 110%;
+    max-height: 100%;
+  }
+  
+  #login-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  form {
+    
+    width: 110%;
+    height: 90%;
+
+  }
+  
+  label {
+    display: flex;
+    align-items: center;
+    margin: 10px;
+    padding: 1px;
+    font-family: Comic Sans MS;
+    color: #0d211d;
+  }
+  
+  label i {
+    margin-right: 3px;
+    color: #464444; /* Cambié "black" por "#000" para mantener consistencia */
+  }
+  
+  /* styles.css */
+  
+  #username {
+    width: calc(100% - 0px); /* El ancho del input menos el espacio del icono */
+    padding-right: 40px; /* Asegura que haya suficiente espacio para el icono en la esquina derecha */
+    position: relative; /* Necesario para posicionar el ícono dentro del input */
+  }
+ 
+  
+  input {
+    width: calc(100% - 0px);
+    padding: 8px;
+    margin: 5px 0px;
+    border-radius: 50px;
+    border: none;
+    box-sizing: border-box;
+    border: 2px solid #297260;
+    
+  }
+  input:focus {
+    outline: none;
+  }
+ 
+  
+  .ingresar {
+    margin: 30px 0px;
+    font-family: calibri;
+    font-size: 1em;
+    width: 100%;
+    padding: 10px;
+    background-color: #297260; /* Puedes cambiar el color según tu preferencia */
+    color: #050505;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    
+    
+  }
+  
+  .ingresar:hover{
+    background-color: #5cab94;
+  }
+
+
+  a{
+    text-decoration: none;
+    color: #070707;
+  }
+  
+  /* Media queries para dispositivos más pequeños */
+  @media screen and (max-width: 768px) {
+    #login-container {
+      width: 90%;
+    }
+  
+    .ingresar {
+      margin-top: 15px;
+    }
+  
+    #username {
+      width: 100%;
+      padding-right: 20px; /* Ajustado para dispositivos más pequeños */
+      position: relative;
+    }
+  
+  
+  
+  #username {
+    width: 100%;
+    padding-right: 40px;
+    position: relative;
+  }
+  
+  #show-password {
+    position: absolute;
+    top: 53%;
+    right: 15%;
+    transform: translateY(-30%);
+    cursor: pointer;
+    color: #8c8e91;
+  }
+  
+  #show-password:hover {
+    color: #8c8e91;
+  }
+  
+  }
