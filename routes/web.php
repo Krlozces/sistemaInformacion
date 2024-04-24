@@ -38,15 +38,27 @@ Route::post('/register-personal', [RegisterController::class, 'registerPersonal'
 
 Route::post('/register-procesamiento', [RegisterController::class, 'registerProcesamiento'])->name('register-procesamiento');
 
+Route::post('/cambiar-imagen/{id}', [RegisterController::class, 'changeImage'])->name('cambiar-imagen');
+
 //Rutas protegidas por autenticación de usuario
 Route::group(['middleware' => ['auth']], function(){
-    Route::get('/principal', [ViewsController::class, 'principal'])->name('principal');
-    Route::get('/procesamiento/{dni}', [ViewsController::class, 'procesamiento'])->name('procesamiento');
-    Route::get('/extraccion', [ViewsController::class, 'extraccion'])->name('extraccion');
-    Route::get('/tbl-certificados', [ViewsController::class, 'tblCertificados'])->name('tbl-certificados');
-    Route::get('/generarPdf/{dni}', [ViewsController::class, 'generarPdf'])->name('generarPdf');
+    Route::get('/index', [ViewsController::class, 'home'])->name('home');
+
+    Route::group(['middleware' =>  ['role:admin']], function() {
+        Route::get('/principal', [ViewsController::class, 'principal'])->name('principal');
+    });
+    
+    Route::group(['middleware' => ['role:extractor|admin']], function() {
+        Route::get('/extraccion', [ViewsController::class, 'extraccion'])->name('extraccion');
+    });
+
+    Route::group(['middleware' => ['role:procesador|admin']], function() {
+        Route::get('/procesamiento/{dni}', [ViewsController::class, 'procesamiento'])->name('procesamiento');
+        Route::get('/tbl-certificados', [ViewsController::class, 'tblCertificados'])->name('tbl-certificados');
+        Route::get('/generarPdf/{dni}', [ViewsController::class, 'generarPdf'])->name('generarPdf');
+    });
+    
     //Editar Perfil
     Route::get('/editarPerfil/{id}', [ViewsController::class, 'editarPerfil'])->name('editarPerfil');
     Route::put('/updateUser/{id}', [ViewsController::class, 'actualizarUsuario'])->name('updateUser');
-
 });

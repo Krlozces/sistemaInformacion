@@ -1,4 +1,5 @@
 import './bootstrap';
+import 'flowbite';
 // Reference from published scripts
 require('./vendor/livewire-ui/modal');
 

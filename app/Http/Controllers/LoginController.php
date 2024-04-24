@@ -15,7 +15,7 @@ class LoginController extends Controller
 
         if(Auth::attempt($credentials)){
             $request->session()->regenerate();
-            return redirect()->intended(route('principal'));
+            return redirect()->intended(route('home'));
         }else{
             return redirect(route('index'))->with('error', 'Credenciales incorrectas. Por favor, inténtelo de nuevo.');
         }

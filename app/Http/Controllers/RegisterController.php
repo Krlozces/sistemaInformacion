@@ -17,6 +17,8 @@ use App\Models\Extraccion;
 use App\Models\Intervenido;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
 
 class RegisterController extends Controller
 {
@@ -26,7 +28,9 @@ class RegisterController extends Controller
             'email' => ['required'],
             'password' => ['required', 'min:8']
         ]);
-        User::create($incomingFields);
+        $user = User::create($incomingFields);
+        Role::create(['name' => 'admin']);
+        $user->assignRole('admin');
         return view('index')->with('success', '¡Registro exitoso!');
     }
 
@@ -81,6 +85,14 @@ class RegisterController extends Controller
             'password' => bcrypt($request->password),
             'imagen_perfil' => $incomingFields['imagen_perfil']
         ]);
+
+        if($personal['unidad_perteneciente'] == 'areaextra'){
+            Role::create(['name' => 'extractor']);
+            $usuario->assignRole('extractor');
+        }else{
+            Role::create(['name' => 'procesador']);
+            $usuario->assignRole('procesador');
+        }
 
         return redirect()->back();
     }
@@ -173,7 +185,7 @@ class RegisterController extends Controller
             'extractor' => $extractor
         ];
         
-        return view('tabla-certificados', ['elementos' => $elementos]);
+        return redirect()->back();
     }
 
     public function registerProcesamiento(Request $request){
@@ -278,5 +290,28 @@ class RegisterController extends Controller
         }
 
         return redirect()->route('tbl-certificados')->with('success', "Registro completado");
+    }
+
+    public function changeImage($id, Request $request){
+        //validar que el archivo sea una imagen y no exceder los 2MB
+        $incomingFields = $request->validate([
+            'imagen' => ['required', 'image', 'mimes:jpeg,png,jpg,gif', 'max:2048'],
+        ]);
+
+        if ($request->hasFile('imagen')) {
+            $imagenNombre = $request->file('imagen')->store('imagenes_perfil', 'public');
+    
+            $incomingFields['imagen_perfil'] = $imagenNombre;
+        }
+
+        $user = User::findOrFail($id);
+
+        // Guardar la imagen
+        // $imagePath = $request->file('imagen')->store('imagenes_perfil', 'public');
+
+        $user->imagen_perfil = $incomingFields['imagen_perfil'];
+        $user->save();
+
+        return redirect()->back()->with('success', 'La foto de perfil se ha actualizado correctamente.');
     }
 }

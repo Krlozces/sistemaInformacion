@@ -6,8 +6,10 @@ use App\Models\Persona;
 use App\Models\Personal;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade AS PDF;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Barryvdh\DomPDF\Facade\Pdf as FacadePdf;
+
 class ViewsController extends Controller
 {
     public function confirmarPassword(){
@@ -20,6 +22,10 @@ class ViewsController extends Controller
 
     public function principal(){
         return view('principal');
+    }
+
+    public function home(){
+        return view('home');
     }
 
     public function procesamiento($dni){

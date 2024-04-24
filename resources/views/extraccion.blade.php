@@ -4,12 +4,14 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Área de Extracción</title>
-        <link rel="stylesheet" href="{{ asset('css/extraccion.css') }}">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
         <link rel="icon" href="{{ asset('images/logo.png') }}">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
         <script src="{{asset('js/importante.js')}}"></script>
+        <link rel="stylesheet" href="{{ asset('css/extraccion.css') }}">
     </head>
     <body>
+        @include('modalCambiarFoto')
         <header class="header">
             <div class="container">
             <div class="btn-menu">
@@ -22,7 +24,7 @@
                     <label  for="btn-menu1"> <img src="{{ asset('storage/' . auth()->user()->imagen_perfil) }}" class="imagen1"> </label>
                     <h3 class="expandable">{{ Auth::user()->name }}</h3>
                     <ul class="submenu">
-                        <li><a href="#"><i class="fa-solid fa-users-viewfinder"></i> Cambiar foto</a></li>
+                        <li><button data-modal-target="modalCambiarImagen-{{ Auth::user()->id }}" data-modal-toggle="modalCambiarImagen-{{ Auth::user()->id }}"><i class="fa-solid fa-users-viewfinder"></i> Cambiar foto</button></li>
                         <li><a href="#"><i class="fa-solid fa-gear"></i> Configurar</a></li>
                     </ul>
                 </nav>
@@ -275,9 +277,9 @@
                 </div>              
                 <br><br>              
 
-                <a href="{{ route('principal') }}"> <i class="fa-solid fa-house"></i> Inicio</a>
-                <a href="#"><i class="fa-solid fa-circle-info"></i> Información General</a>
-                <a href="{{ route('extraccion') }}"><i class="fa-solid fa-chart-pie"></i> Estadistica</a>
+                <a href="{{ route('home') }}"> <i class="fa-solid fa-house"></i> Inicio</a>
+                <a href="{{ route('principal') }}"><i class="fa-solid fa-circle-info"></i> Añadir Usuario</a>
+                <a href="{{ route('extraccion') }}"><i class="fa-solid fa-chart-pie"></i> Extracción</a>
                 <a href="{{ route('tbl-certificados') }}"> <i class="fa-solid fa-user-tie"></i>Tabla certificados</a>
                 <a href="{{ route('logout') }}"><i class="fa-solid fa-arrow-right-from-bracket"></i> Cerrar Sesión</a>
             </nav>

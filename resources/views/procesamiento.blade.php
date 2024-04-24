@@ -4,10 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Área de Procesamiento</title>
-    <link rel="stylesheet" href="{{ asset('css/procesamiento.css') }}">
     <link rel="icon" href="{{ asset('images/logo.png') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src="{{asset('js/importante.js')}}"></script>
+    <link rel="stylesheet" href="{{ asset('css/procesamiento.css') }}">
 </head>
 <body>
     <header class="header">
@@ -291,8 +291,8 @@
                 </div>              
                 <br><br>
                 
-                <a href="{{ route('principal') }}"> <i class="fa-solid fa-house"></i> Inicio</a>
-                <a href="#"> <i class="fa-solid fa-circle-info"></i> Información General</a>
+                <a href="{{ route('home') }}"> <i class="fa-solid fa-house"></i> Inicio</a>
+                <a href="{{ route('principal') }}"> <i class="fa-solid fa-circle-info"></i> Añadir usuario</a>
                 <a href="{{ route('tbl-certificados') }}"> <i class="fa-solid fa-chart-pie"></i> Certificados</a>
                 <a href="{{ route('extraccion')}}"><i class="fa-solid fa-chart-pie"></i> Extracción</a>
                 <a href="{{ route('logout') }}"><i class="fa-solid fa-arrow-right-from-bracket"></i> Cerrar Seción</a>
