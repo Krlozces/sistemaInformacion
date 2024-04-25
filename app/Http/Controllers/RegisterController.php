@@ -87,10 +87,10 @@ class RegisterController extends Controller
         ]);
 
         if($personal['unidad_perteneciente'] == 'areaextra'){
-            Role::create(['name' => 'extractor']);
+            Role::firstOrCreate(['name' => 'extractor']);
             $usuario->assignRole('extractor');
         }else{
-            Role::create(['name' => 'procesador']);
+            Role::firstOrCreate(['name' => 'procesador']);
             $usuario->assignRole('procesador');
         }
 
