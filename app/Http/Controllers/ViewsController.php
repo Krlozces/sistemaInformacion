@@ -94,11 +94,16 @@ class ViewsController extends Controller
         ->where('dni', $dni)
         ->first();
 
-        $personalProcesamiento = Personal::find($elementos->procesador);
-        $procesamiento = $personalProcesamiento->persona->apellido_paterno . ' ' . $personalProcesamiento->persona->apellido_materno . ', ' . $personalProcesamiento->persona->nombre;
+        $personalProcesamiento = Personal::join('personas', 'personas.id', '=', 'personal.persona_id')
+            ->where('personal.persona_id', $elementos->procesador)
+            ->first();
+        
+        $procesamiento = $personalProcesamiento->apellido_paterno . ' ' . $personalProcesamiento->apellido_materno . ', ' . $personalProcesamiento->nombre;
 
-        $personalAreaExtra = Personal::find($elementos->extractor);
-        $extraccion = $personalAreaExtra->persona->apellido_paterno . ' ' . $personalAreaExtra->persona->apellido_materno . ', ' . $personalAreaExtra->persona->nombre;
+        $personalAreaExtra = Personal::join('personas', 'personas.id', '=', 'personal.persona_id')
+            ->where('personal.persona_id', $elementos->extractor)
+            ->first();
+        $extraccion = $personalAreaExtra->apellido_paterno . ' ' . $personalAreaExtra->apellido_materno . ', ' . $personalAreaExtra->nombre;
         
 
         $pdf = FacadePdf::loadView('certificado', compact('elementos', 'personalProcesamiento', 'procesamiento', 'extraccion'));
