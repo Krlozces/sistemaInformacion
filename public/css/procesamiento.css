@@ -3,7 +3,7 @@
 		margin: 0;
 		padding: 0;
 		box-sizing: border-box;
-		font-family: 'Montserrat Alternates', sans-serif;
+		font-family: Arial, sans-serif;
 	}
 	body{
 		background-color: #bae0d1;
@@ -268,7 +268,11 @@
         font-size: 15px;
     }
 
-
+    h2{
+      color: beige;
+      font-size: 18px;
+      margin: 10px;
+    }
     
  /*titulo del registro*/
 .titulo-container {
@@ -284,6 +288,16 @@ h4 {
     margin: 1px;
 
     
+}
+
+ /*titulo del registro*/
+ .titulo{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 3%;
+  
 }
 
 
@@ -404,7 +418,8 @@ input, select {
 
  textarea {
   width: 100%; /* Los inputs ocupan todo el ancho del grupo */
-  padding: 1px;
+  padding: 20px;
+  height: 60%;
   border-radius: 5px;
   margin: 10px 0px;
   border: 1px solid #00961c;
@@ -414,7 +429,7 @@ input, select {
 #resultado{
   width: 100%; /* Los inputs ocupan todo el ancho del grupo */
   padding: 20px;
-  height: 80%;
+  height: 60%;
   border-radius: 5px;
   margin: 20px 0px;
   border: 2px solid #edfff0;

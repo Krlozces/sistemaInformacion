@@ -3,10 +3,11 @@
 		margin: 0;
 		padding: 0;
 		box-sizing: border-box;
-		font-family: 'Montserrat Alternates', sans-serif;
+		font-family: Arial, sans-serif;
 	}
 	body{
 		background-color: #bae0d1;
+    
 	}
 	/*Estilos para el encabezado*/
 	.header{
@@ -89,7 +90,7 @@
   
 
   .imagen1 {
-    width: 30%; 
+    width: 100%; 
     height: auto; 
     border-radius: 50px; 
   }
@@ -345,7 +346,7 @@ form {
 
 }
 
-input, select {
+input[type="date"], input[type="text"], input[type="time"], select {
   width: 100%; 
   padding: 10px;
   border-radius: 5px;
@@ -376,8 +377,8 @@ input:focus {
   background-color: #bae0d1;
 }
 
-.codigo{
-  width: 10%; 
+#codigo{
+  width: 8%; 
   padding: 10px;
   border-radius: 5px;
   margin: 20px 10px;
@@ -458,6 +459,4 @@ legend {
     border-radius: 50px; 
 
   }
-
-
 }
