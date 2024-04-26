@@ -59,7 +59,7 @@
                 <div class="input-general">
                     <div class="input-group">
                         <label for="numero_oficio">Número de Oficio de referencia:</label>
-                        <input type="text" id="numero_oficio" name="recepcion_doc_referencia" required oninput="validarDocumento(this)">
+                        <input type="text" id="numero_oficio" name="recepcion_doc_referencia" required>
                     </div>
                     <div class="input-group">
                         <label for="procedencia">Procedencia:</label>
