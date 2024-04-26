@@ -112,4 +112,28 @@ function mostrarCampoOtros() {
     }
 }
 
+// Cambiar resultado
+function mostrarOtrosCampos() {
+    var tipoMuestra = document.getElementById("tipo_muestra").value;
+    var resultadoCualitativoSelect = document.getElementById("resultado_cualitativo");
+
+    if (tipoMuestra === "SIN MUESTRA") {
+        // Si se selecciona "SIN MUESTRA", cambiar las opciones del segundo select a "constatación" o "negación"
+        resultadoCualitativoSelect.innerHTML = `
+            <option value="">--SELECCIONAR--</option>
+            <option value="CONSTATACIÓN">CONSTATACIÓN</option>
+            <option value="NEGACIÓN">NEGACIÓN</option>
+        `;
+    } else {
+        // Si se selecciona otra opción, restaurar las opciones originales del segundo select
+        resultadoCualitativoSelect.innerHTML = `
+            <option value="">--SELECCIONAR--</option>
+            <option value="positivo">POSITIVO</option>
+            <option value="negativo">NEGATIVO</option>
+        `;
+    }
+    mostrarCampoOtros()
+}
+
+
 
