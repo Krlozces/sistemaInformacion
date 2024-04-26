@@ -241,6 +241,7 @@
                         <label class="centro" for="procesador">DNI - Nombres y Apellidos Completos - Cargo </label>
                         <select id="procesador" name="procesador">
                             <option disabled selected>--SELECCIONAR--</option>
+                            <option value="">-----------</option>
                             @foreach ($personalProcesamiento as $personal)
                                 <option value="{{ $personal->persona_id }}" @if(isset($personal->Persona)) selected @endif>
                                     @if(isset($personal->Persona))
