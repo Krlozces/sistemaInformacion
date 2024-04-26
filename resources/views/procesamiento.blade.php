@@ -194,8 +194,9 @@
                     <div class="input-group3">
                         <label for="tipo_muestra">Tipo de muestra:</label>
                         <select id="tipo_muestra" name="tipo_muestra" onchange="mostrarCampoOtros()">
-                            <option value="sangre" {{ $elemento->descripcion == 'sangre' ? 'selected' : '' }}>SANGRE</option>
-                            <option value="orina" {{ $elemento->descripcion == 'orina' ? 'selected' : '' }}>ORINA</option>
+                            <option value="SANGRE" {{ $elemento->descripcion == 'SANGRE' ? 'selected' : '' }}>SANGRE</option>
+                            <option value="ORINA" {{ $elemento->descripcion == 'ORINA' ? 'selected' : '' }}>ORINA</option>
+                            <option value="SIN MUESTRA" {{ $elemento->descripcion == 'SIN MUESTRA' ? 'selected' : '' }}>SIN MUESTRA</option>
                             <option value="otros" {{ $elemento->descripcion == 'otros' ? 'selected' : '' }}>OTROS</option>
                         </select>
                     </div>
@@ -211,6 +212,8 @@
                             <option disabled selected>--SELECCIONAR--</option>
                             <option value="positivo" {{ $elemento->resultado_cualitativo == 'positivo' ? 'selected' : '' }}>POSITIVO</option>
                             <option value="negativo" {{ $elemento->resultado_cualitativo == 'negativo' ? 'selected' : '' }}>NEGATIVO</option>
+                            <option value="CONSTATACIÓN" {{ $elemento->resultado_cualitativo == 'CONSTATACIÓN' ? 'selected' : '' }}>CONSTATACIÓN</option>
+                            <option value="NEGACIÓN" {{ $elemento->resultado_cualitativo == 'NEGACIÓN' ? 'selected' : '' }}>NEGACIÓN</option>
                         </select>
                     </div>
 
