@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('metodos', function (Blueprint $table) {
             $table->id();
-            $table->string('descripcion')->default('SHEFTEL MODIFICADO');
+            $table->string('descripcion')->default('SHEFTEL MODIFICADO PARA FOTOCOLORIMETRIA');
             $table->timestamps();
         });
     }
