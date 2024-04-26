@@ -211,8 +211,9 @@
                         <label for="tipo_muestra">Tipo de muestra:</label>
                         <select id="tipo_muestra" name="tipo_muestra" onchange="mostrarCampoOtros()">
                             <option value="">--SELECCIONAR--</option>
-                            <option value="sangre">SANGRE</option>
-                            <option value="orina">ORINA</option>
+                            <option value="SANGRE">SANGRE</option>
+                            <option value="ORINA">ORINA</option>
+                            <option value="SIN MUESTRA">SIN MUESTRA</option>
                             <option value="otros">OTROS</option>
                         </select>
                     </div>
