@@ -145,7 +145,7 @@
 
                     <div class="input-group1">
                         <label for="licencia">Licencia:</label>
-                        <input type="text" id="licencia" name="licencia"  required oninput="convertirMayusculas(this)">
+                        <input type="text" id="licencia" name="licencia" oninput="convertirMayusculas(this)">
                     </div>
 
 
@@ -153,19 +153,19 @@
                 <div class="input-general1">
                     <div class="input-group1">
                         <label for="clase">Clase:</label>
-                        <input type="text" id="clase" name="clase" required oninput="validarLetras(this)" maxlength="1">
+                        <input type="text" id="clase" name="clase" oninput="validarLetras(this)" maxlength="1">
                     </div>
                     <div class="input-group1">
                         <label for="categoria">Categoría:</label>
-                        <input type="text" id="categoria" name="categoria"  oninput="validarLetras(this)" maxlength="4">
+                        <input type="text" id="categoria" name="categoria" oninput="validarLetras(this)" maxlength="4">
                     </div>
                     <div class="input-group1">
                         <label for="vehiculo">Vehículo:</label>
-                        <input type="text" id="vehiculo" name="vehiculo" required oninput="validarLetras(this)">
+                        <input type="text" id="vehiculo" name="vehiculo" oninput="validarLetras(this)">
                     </div>
                     <div class="input-group1">
                         <label for="placa">N° de placa:</label>
-                        <input type="text" id="placa" name="placa" maxlength="20" required oninput="convertirMayusculas(this)">
+                        <input type="text" id="placa" name="placa" maxlength="20" oninput="convertirMayusculas(this)">
                     </div>
                 </div>
             </fieldset>
