@@ -55,7 +55,7 @@
                     </div>
                     <div class="input-group">
                         <label for="procedencia">Procedencia:</label>
-                        <input type="text" id="procedencia" name="procedencia" value="{{ $elemento->procedencia }}" required oninput="validarLetras(this)">
+                        <input type="text" id="procedencia" name="procedencia" value="{{ $elemento->procedencia }}" required oninput="convertirMayusculas(this)">
                     </div>
                     <div class="input-group">
                         <label for="fecha">Fecha:</label>
@@ -117,7 +117,7 @@
                 <div class="input-general1">
                     <div class="input-group1">
                         <label for="nacionalidad">Nacionalidad:</label>
-                        <input type="text" id="nacionalidad" name="nacionalidad" value="{{ $elemento->nacionalidad }}" required oninput="validarLetras(this)">
+                        <input type="text" id="nacionalidad" name="nacionalidad" value="{{ $elemento->nacionalidad }}" required oninput="convertirMayusculas(this)">
                     </div>
                     <div class="input-group1">
                         <label for="edad">Edad:</label>
@@ -141,15 +141,15 @@
                 <div class="input-general1">
                     <div class="input-group1">
                         <label for="clase">Clase:</label>
-                        <input type="text" id="clase" name="clase" value="{{ $elemento->clase }}" required oninput="validarLetras(this)" maxlength="1">
+                        <input type="text" id="clase" name="clase" value="{{ $elemento->clase }}" required oninput="convertirMayusculas(this)">
                     </div>
                     <div class="input-group1">
                         <label for="categoria">Categoría:</label>
-                        <input type="text" id="categoria" name="categoria"  oninput="validarLetras2(event)" value="{{ $elemento->categoria }}"  maxlength="4">
+                        <input type="text" id="categoria" name="categoria"  oninput="convertirMayusculas(this)" value="{{ $elemento->categoria }}"  maxlength="4">
                     </div>
                     <div class="input-group1">
                         <label for="vehiculo">Vehículo:</label>
-                        <input type="text" id="vehiculo" name="vehiculo" value="{{ $elemento->vehiculo }}" required oninput="validarLetras(this)">
+                        <input type="text" id="vehiculo" name="vehiculo" value="{{ $elemento->vehiculo }}" required oninput="convertirMayusculas(this)">
                     </div>
                     <div class="input-group1">
                         <label for="placa">N° de placa:</label>
@@ -227,7 +227,7 @@
                 <div class="input-general3">
                     <div class="input-group3">
                         <label for="observaciones">Observaciones:</label>
-                        <input type="text" id="observaciones" value="{{ $elemento->observaciones }}" name="observaciones" required oninput="validarLetras(this)">
+                        <input type="text" id="observaciones" value="{{ $elemento->observaciones }}" name="observaciones" required oninput="convertirMayusculas(this)">
                     </div>
                 </div>
             </fieldset>
@@ -269,7 +269,7 @@
                 <div class="input-general1">
                     <div class="input-group1">
                         <label for="conclusiones">Conclusiones:</label>
-                        <input type="text" id="conclusiones" name="conclusiones" oninput="validarLetras(this)" value="{{$elemento->conclusiones ?? '' }}">
+                        <input type="text" id="conclusiones" name="conclusiones" oninput="convertirMayusculas(this)" value="{{$elemento->conclusiones ?? '' }}">
                     </div>
                 </div>
             </fieldset>
