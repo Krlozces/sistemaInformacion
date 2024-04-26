@@ -43,7 +43,7 @@
     <div class="capa1">
         <form action="{{ route('register-extraccion') }}" method="POST">
             @csrf
-            <input type="hidden" name="descripcion" id="descripcion" value="SHEFTEL MODIFICADO">
+            <input type="hidden" name="descripcion" id="descripcion" value="SHEFTELL MODIFICADO PARA FOTOCOLORIMETRIA">
             <div class="titulo-container">
                 <h4>INFORMACIÓN GENERAL</h4>
             </div>
