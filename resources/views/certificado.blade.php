@@ -93,12 +93,12 @@
         }
 
         .espaciado-contenedor{
-            margin: 20px 0;
+            margin: 10px 0;
         }
 
         table{
             width: 90%;
-            margin: 0 20px;
+            margin: 10px 20px;
         }
 
         td{
@@ -134,7 +134,7 @@
                 <tr>
                     <td>Apellidos y Nombres del usuario</td>
                     <td>:</td>
-                    <td>{{ $elementos->apellido_paterno }} {{ $elementos->apellido_materno }}, {{ $elementos->nombre }}</td>
+                    <td colspan="4">{{ $elementos->apellido_paterno }} {{ $elementos->apellido_materno }}, {{ $elementos->nombre }}</td>
                 </tr>
                 <tr>
                     <td>Edad</td>
@@ -173,32 +173,47 @@
                 <tr>
                     <td>Doc. de referencia Hora y fecha de recepción</td>
                     <td>:</td>
+                    <td>OFICIO N°</td>
+                    <td>{{ $elementos->recepcion_doc_referencia }}</td>
                     <td>{{ $elementos->hora }} {{ $elementos->fecha }}</td>
                 </tr>
                 <tr>
                     <td>Motivo</td>
                     <td>:</td>
-                    <td>{{ $elementos->motivo }}</td>
+                    <td colspan="4">{{ $elementos->motivo }}</td>
                 </tr>
                 <tr>
                     <td>Personal de la Unidad Solicitante</td>
                     <td>:</td>
-                    <td colspan="2">{{ $elementos->persona }}</td>
+                    <td colspan="4">{{ $elementos->persona }}</td>
                 </tr>
                 <tr>
                     <td>Hora y Fecha de Infracción</td>
                     <td>:</td>
-                    <td>{{ $elementos->fecha_hora_infraccion }}</td>
+                    <td colspan="3">
+                        {{ date('H:i', strtotime($elementos->fecha_hora_infraccion)) }} &nbsp; HRS &nbsp;
+                        {{ date('d  m  Y', strtotime($elementos->fecha_hora_infraccion)) }}
+                    </td>
                 </tr>
                 <tr>
                     <td>Hora y Fecha de extracción</td>
                     <td>:</td>
-                    <td>{{ $elementos->fecha_hora_extraccion }}</td>
+                    <td colspan="3">
+                        {{ date('H:i', strtotime($elementos->fecha_hora_extraccion)) }} &nbsp; HRS &nbsp;
+                        {{ date('d m Y', strtotime($elementos->fecha_hora_extraccion)) }}    
+                    </td>
+                    <td>
+                        @if ($elementos->description == 'SIN MUESTRA')
+                            {{ $elementos->resultado_cualitativo }}
+                        @else
+                            ' '
+                        @endif
+                    </td>
                 </tr>
                 <tr>
                     <td>Personal que atiende o extrae la muestra</td>
                     <td>:</td>
-                    <td>{{ $extraccion }}</td>
+                    <td colspan="4">{{ $extraccion }}</td>
                 </tr>
                 <tr>
                     <td>Tipo y descripción de la muestra</td>
@@ -208,20 +223,44 @@
                 <tr>
                     <td>Método utilizado</td>
                     <td>:</td>
-                    <td>{{ $elementos->descripcion }}</td>
+                    <td>
+                        @if ($elementos->description == 'SIN MUESTRA')
+                            <div style="margin:0 auto; height:1px; width:100px; border-top:1px solid black;"></div>                            
+                        @else
+                            {{ $elementos->descripcion }}
+                        @endif
+                    </td>
                 </tr>
                 <tr>
                     <td>Apellidos y Nombres del procesador</td>
                     <td>:</td>
-                    <td>{{ $procesamiento }}</td>
+                    <td colspan="2">
+                        @if ($elementos->description == 'SIN MUESTRA')
+                        <div style="margin:0 auto; height:4px; width:100px; border-top:1px solid black;"></div>                            
+                        @else
+                            {{ $procesamiento }}
+                        @endif
+                    </td>
                 </tr>
                 <tr>
                     <td>Grado</td>
                     <td>:</td>
-                    <td>{{ $personalProcesamiento->grado }}</td>
+                    <td>
+                        @if ($elementos->description == 'SIN MUESTRA')
+                        <div style="margin:0 auto; height:4px; width:100px; border-top:1px solid black;"></div>                           
+                        @else
+                            {{ $personalProcesamiento->grado }}
+                        @endif
+                    </td>
                     <td>DNI N°</td>
                     <td>:</td>
-                    <td>{{ $personalProcesamiento->persona->dni }}</td>
+                    <td>
+                        @if ($elementos->description == 'SIN MUESTRA')
+                        <div style="margin:0 auto; height:4px; width:120px; border-top:1px solid black;"></div>                            
+                        @else
+                            {{ $personalProcesamiento->persona->dni }}
+                        @endif
+                    </td>
                 </tr>
                 <tr>
                     <td>Observaciones</td>
@@ -231,8 +270,37 @@
             </table>    
     
             <div class="espaciado-contenedor">
-                <p class="espaciado">RESULTADO :{{ $elementos->resultado_cuantitativo }}</p>
-                <p class="espaciado">CONCLUSIONES:</p>
+                <table>
+                    <tr>
+                        <td class="espaciado">RESULTADO</td>
+                        <td>:</td>
+                        <td colspan="2">
+                            @if ($elementos->description != 'SIN MUESTRA')
+                                <p style="text-align: center; font-size:20px;">{{ $elementos->resultado_cuantitativo }}g/L.</p>
+                                <div style="width: 100%; height: 20px; border:1px solid black; padding: 10px; margin-left: 10px;">
+                                    <p style="text-align: center;">{{ $resultadoCuantitativoLetras }}</p>
+                                </div>
+                                <p style="text-align: center;">{{ $contieneAlcohol }}</p>
+                            @else
+                                <p style="text-align: center; font-size:20px;">{{ $elementos->description }}</p>
+                                <div style="width: 100%; height: 20px; border:1px solid black; padding: 10px; margin-left: 10px;">
+                                    <p style="text-align: center;">{{ $elementos->resultado_cualitativo }}</p>
+                                </div>
+                                <div style="margin:0 auto; height:4px; width:80px; border-top:1px solid black; margin-top:2px;"></div>
+                                {{-- <p style="text-align: center;"><hr size="10"></p> --}}
+                            @endif
+                        </td>
+                    </tr>
+                </table>
+                <table>
+                    <tr>
+                        <td class="espaciado">CONCLUSIONES</td>
+                        <td>:</td>
+                        <td style="text-align: end;">
+                            CHICLAYO, {{ strtoupper(\Carbon\Carbon::now()->formatLocalized('%d DE %B DEL %Y')) }}
+                        </td>
+                    </tr>
+                </table>
             </div>
     
             <div style="display: flex; justify-content: space-between; align-items:center; margin-top: 50px;">
