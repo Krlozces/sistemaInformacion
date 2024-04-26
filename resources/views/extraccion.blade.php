@@ -63,7 +63,7 @@
                     </div>
                     <div class="input-group">
                         <label for="procedencia">Procedencia:</label>
-                        <input type="text" id="procedencia" name="procedencia" required oninput="validarLetras(this)">
+                        <input type="text" id="procedencia" name="procedencia" required oninput="convertirMayusculas(this)">
                     </div>
                     <div class="input-group">
                         <label for="fecha">Fecha:</label>
@@ -153,15 +153,15 @@
                 <div class="input-general1">
                     <div class="input-group1">
                         <label for="clase">Clase:</label>
-                        <input type="text" id="clase" name="clase" oninput="validarLetras(this)" maxlength="1">
+                        <input type="text" id="clase" name="clase" oninput="convertirMayusculas(this)" maxlength="1">
                     </div>
                     <div class="input-group1">
                         <label for="categoria">Categoría:</label>
-                        <input type="text" id="categoria" name="categoria" oninput="validarLetras(this)" maxlength="4">
+                        <input type="text" id="categoria" name="categoria" oninput="convertirMayusculas(this)" maxlength="4">
                     </div>
                     <div class="input-group1">
                         <label for="vehiculo">Vehículo:</label>
-                        <input type="text" id="vehiculo" name="vehiculo" oninput="validarLetras(this)">
+                        <input type="text" id="vehiculo" name="vehiculo" oninput="convertirMayusculas(this)">
                     </div>
                     <div class="input-group1">
                         <label for="placa">N° de placa:</label>
@@ -248,7 +248,7 @@
 
                     <div class="input-group3">
                         <label for="observaciones">Observaciones:</label>
-                        <input type="text" id="observaciones" name="observaciones" required oninput="validarLetras(this)">
+                        <input type="text" id="observaciones" name="observaciones" required oninput="convertirMayusculas(this)">
                     </div>
                 </div>
             </fieldset>
