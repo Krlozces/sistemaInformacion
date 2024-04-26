@@ -1,15 +1,15 @@
 //VER CONTRASEÑA
 
 function togglePasswordVisibility() {
-  const passwordInput = document.getElementById("password");
-  const showPasswordIcon = document.getElementById("show-password");
-  const type = passwordInput.getAttribute("type") === "password" ? "text" : "password";
-  passwordInput.setAttribute("type", type);
+    const passwordInput = document.getElementById("password");
+    const showPasswordIcon = document.getElementById("show-password");
+    const type = passwordInput.getAttribute("type") === "password" ? "text" : "password";
+    passwordInput.setAttribute("type", type);
 
-  // Cambiar el ícono del ojo
-  const eyeIconClass = type === "password" ? "fa-eye-slash" : "fa-eye";
-  showPasswordIcon.classList.remove("fa-eye-slash", "fa-eye");
-  showPasswordIcon.classList.add(eyeIconClass);
+    // Cambiar el ícono del ojo
+    const eyeIconClass = type === "password" ? "fa-eye-slash" : "fa-eye";
+    showPasswordIcon.classList.remove("fa-eye-slash", "fa-eye");
+    showPasswordIcon.classList.add(eyeIconClass);
 }
 
 // DNI
