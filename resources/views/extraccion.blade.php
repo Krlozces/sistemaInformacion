@@ -181,7 +181,7 @@
                 <div class="input-general2">
                     <div class="input-group2">
                         <label for="motivo">Motivo:</label>
-                        <input type="text" id="motivo" name="motivo" required oninput="validarLetras(this)">
+                        <input type="text" id="motivo" name="motivo" oninput="validarLetras(this)">
                     </div>
                     <div class="input-group2">
                         <label for="hora_infraccion">Hora de Infración:</label>
@@ -248,7 +248,7 @@
 
                     <div class="input-group3">
                         <label for="observaciones">Observaciones:</label>
-                        <input type="text" id="observaciones" name="observaciones" required oninput="convertirMayusculas(this)">
+                        <input type="text" id="observaciones" name="observaciones" oninput="convertirMayusculas(this)">
                     </div>
                 </div>
             </fieldset>
