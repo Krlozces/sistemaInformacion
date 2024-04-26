@@ -209,7 +209,7 @@
                 <div class="input-general3">
                     <div class="input-group3">
                         <label for="tipo_muestra">Tipo de muestra:</label>
-                        <select id="tipo_muestra" name="tipo_muestra" onchange="mostrarCampoOtros()">
+                        <select id="tipo_muestra" name="tipo_muestra" onchange="mostrarOtrosCampos()">
                             <option value="">--SELECCIONAR--</option>
                             <option value="SANGRE">SANGRE</option>
                             <option value="ORINA">ORINA</option>
