@@ -121,7 +121,7 @@ label .imagen1:empty::after {
   .menu {
     position: relative;
     transition: all 500ms ease;
-		transform: translateX(+21.5%); /*ELIMINAR SI EN CASO SEA NECESARIO*/
+		transform: translateX(+21.5%);
   }
   
   .submenu {
