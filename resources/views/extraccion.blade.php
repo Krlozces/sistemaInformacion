@@ -4,7 +4,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Área de Extracción</title>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
+        {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script> --}}
         <link rel="icon" href="{{ asset('images/logo.png') }}">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
         <script src="{{asset('js/importante.js')}}"></script>
@@ -16,18 +16,18 @@
             <div class="container">
             <div class="btn-menu">
                 <label for="btn-menu" > <img src="{{ asset('images/logo.png') }}" class="imagen"> </label>
-            </div>
-                <div class="logo">
+            </div class="flex justify-between">
+                <div class="logo w-[70%]">
                     <h1>Dosaje Etílico</h1>
                 </div>
-                <nav class="menu">
-                    <label  for="btn-menu1"> <img src="{{ asset('storage/' . auth()->user()->imagen_perfil) }}" class="imagen1"> </label>
+                <nav class="flex justify-between w-[20%] items-center relative">
+                    <div  for="btn-menu1" class="mt-4"> <img src="{{ asset('storage/' . auth()->user()->imagen_perfil) }}" class="w-1/2 rounded-full"> </div>
                     <h3 class="expandable">{{ Auth::user()->name }}</h3>
-                    <ul class="submenu">
-                        <li><button data-modal-target="modalCambiarImagen-{{ Auth::user()->id }}" data-modal-toggle="modalCambiarImagen-{{ Auth::user()->id }}"><i class="fa-solid fa-users-viewfinder"></i> Cambiar foto</button></li>
-                        <li><a href="#"><i class="fa-solid fa-gear"></i> Configurar</a></li>
-                    </ul>
                 </nav>
+                <ul class="submenu">
+                    <li><button data-modal-target="modalCambiarImagen-{{ Auth::user()->id }}" data-modal-toggle="modalCambiarImagen-{{ Auth::user()->id }}"><i class="fa-solid fa-users-viewfinder"></i> Cambiar foto</button></li>
+                    <li><a href="#"><i class="fa-solid fa-gear"></i> Configurar</a></li>
+                </ul>
                 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
                 <script>
                     $(document).ready(function(){
@@ -35,10 +35,10 @@
                             $('.submenu').toggle();
                         });
                     });
-                </script>   
+                </script>
             </div>
         </header>
-        
+
         <!--CONTENIDO-->
     <div class="capa1">
         <form action="{{ route('register-extraccion') }}" method="POST">
@@ -47,10 +47,10 @@
             <div class="titulo-container">
                 <h4>INFORMACIÓN GENERAL</h4>
             </div>
-            
+
             <div class="input-general">
-                <div class="input-group">   
-                    <input class="codigo" type="text" id="codigo" name="codigo" required oninput="validarDocumento1(this)">
+                <div class="input-group">
+                    <input class="codigo" type="text" id="campoIncremental" name="codigo" readonly>
                 </div>
             </div>
 
@@ -217,7 +217,7 @@
                             <option value="otros">OTROS</option>
                         </select>
                     </div>
-                    
+
                     <div class="input-group3" id="campo_otros" style="display: none;">
                             <label for="otro_tipo_muestra">Especificar otro tipo de muestra:</label>
                             <input type="text" id="otro_tipo_muestra" name="otro_tipo_muestra" oninput="validarLetras(this)">
@@ -265,18 +265,18 @@
             </div>
         </form>
     </div>
-        
+
 
     <!--	--------------->
     <input type="checkbox" id="btn-menu">
     <div class="container-menu">
         <div class="cont-menu">
             <nav>
-                <div class="imagen-container">
+                <div class="imagen-container flex justify-center items-center flex-col">
                     <img src="{{ asset('storage/' . auth()->user()->imagen_perfil) }}" class="img" alt="Logo">
                     <h1>{{ Auth::user()->name }}</h1>
-                </div>              
-                <br><br>              
+                </div>
+                <br><br>
 
                 <a href="{{ route('home') }}"> <i class="fa-solid fa-house"></i> Inicio</a>
                 <a href="{{ route('principal') }}"><i class="fa-solid fa-circle-info"></i> Añadir Usuario</a>
@@ -288,5 +288,16 @@
             <label for="btn-menu"><i class="fa-solid fa-list"></i></label>
         </div>
     </div>
+    <script async defer>
+        let contador = {{ $ultimoContador ?? 1 }};
+
+        function agregarRegistro() {
+            let campoIncremental = document.getElementById('campoIncremental');
+            campoIncremental.value = ('00' + contador).slice(-2);
+            contador++;
+        }
+
+        agregarRegistro();
+    </script>
     </body>
     </html>
