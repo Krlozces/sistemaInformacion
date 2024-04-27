@@ -67,10 +67,9 @@
                 <input type="text" id="searchInput" onkeyup="searchTable()" placeholder="Buscar por nombres, apellidos o códigos...">
                 <i class="fa-solid fa-magnifying-glass"></i>
             </div>
-            <button id="btnexel"><a id="letras" href="#"><i id="exel" class="fa-solid fa-file-excel"></i>Importar Exel</a></button>
+            <button id="btnexel"><a id="letras" href="{{ route('exportar') }}"><i id="exel" class="fa-solid fa-file-excel"></i>Exportar</a></button>
         </div>
         
-    
         <table id="dataTable">
             <thead>
                 <tr>
