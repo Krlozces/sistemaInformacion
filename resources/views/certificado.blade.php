@@ -224,7 +224,7 @@
                 <tr>
                     <td>Método utilizado</td>
                     <td>:</td>
-                    <td>
+                    <td colspan="4">
                         @if ($elementos->description == 'SIN MUESTRA')
                             <div style="margin:0 auto; height:1px; width:100px; border-top:1px solid black;"></div>                            
                         @else
