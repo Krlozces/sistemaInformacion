@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ViewsController;
+use App\Http\Controllers\ExportController;
 use App\Http\Controllers\RegisterController;
 
 /*
@@ -56,6 +57,7 @@ Route::group(['middleware' => ['auth']], function(){
         Route::get('/procesamiento/{dni}', [ViewsController::class, 'procesamiento'])->name('procesamiento');
         Route::get('/tbl-certificados', [ViewsController::class, 'tblCertificados'])->name('tbl-certificados');
         Route::get('/generarPdf/{dni}', [ViewsController::class, 'generarPdf'])->name('generarPdf');
+        Route::get('/exportar', [ExportController::class, 'export'])->name('exportar');
     });
     
     //Editar Perfil
