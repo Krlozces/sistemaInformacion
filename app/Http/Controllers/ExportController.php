@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\DataExport;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 
