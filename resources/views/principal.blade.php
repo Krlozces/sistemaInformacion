@@ -4,12 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registrar</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
+    {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script> --}}
     <link rel="icon" href="{{ asset('images/logo.png') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src="{{asset('js/importante.js')}}"></script>
     <link rel="stylesheet" href="{{ asset('css/principal.css') }}">
 </head>
+
 <body>
     @include('modalCambiarFoto')
     <header class="header">
@@ -17,41 +18,35 @@
             <div class="btn-menu">
                 <label for="btn-menu" > <img src="{{ asset('images/logo.png') }}" class="imagen"> </label>
             </div>
-            <div class="logo">
-                <h1>Dosaje Etílico</h1>
-            </div>
-            <nav class="menu">
-                <label for="btn-menu1"> <img src="{{ asset('storage/' . auth()->user()->imagen_perfil) }}" class="imagen1"> </label>
-                <h3 class="expandable">{{ Auth::user()->name }}</h3>
-                <ul class="submenu">
-                    <li><button data-modal-target="modalCambiarImagen-{{ Auth::user()->id }}" data-modal-toggle="modalCambiarImagen-{{ Auth::user()->id }}"><i class="fa-solid fa-users-viewfinder"></i> Cambiar foto</button></li>i>
-                    <li><a href="#"><i class="fa-solid fa-gear"></i> Configurar</a></li>
-                </ul>
-            </nav>
-            <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-            <script>
-                $(document).ready(function(){
-                    $('.expandable').click(function(){
-                        $('.submenu').toggle();
-                    });
-                });
-
-                $(document).ready(function(){
-                    $('.expandable').click(function(){
-                        setTimeout(function() {
+            <div class="flex justify-between">
+                <div class="logo w-[70%]">
+                    <h1>Dosaje Etílico</h1>
+                </div>
+                <nav class="flex justify-between w-[20%] items-center relative">
+                    <div for="btn-menu1"> <img src="{{ asset('storage/' . auth()->user()->imagen_perfil) }}" class="w-1/2 rounded-full"> </div>
+                    <h3 class="expandable">{{ Auth::user()->name }}</h3>
+                    <ul class="submenu">
+                        <li><a data-modal-target="modalCambiarImagen-{{ Auth::user()->id }}" data-modal-toggle="modalCambiarImagen-{{ Auth::user()->id }}"><i class="fa-solid fa-users-viewfinder"></i> Cambiar foto</a></li>
+                        <li><a href="#"><i class="fa-solid fa-gear"></i> Configurar</a></li>
+                    </ul>
+                </nav>
+                <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+                <script>
+                    $(document).ready(function(){
+                        $('.expandable').click(function(){
                             $('.submenu').toggle();
-                        }, 5000); // 2000 milisegundos = 2 segundos (ajusta según tus necesidades)
+                        });
                     });
-                });
-
-            </script>                  
+    
+                </script>
+            </div>                  
         </div>
     </header>
     <!--CONTENIDO-->
     <div class="capa1">
         <form method="POST" action="{{ route('register-personal') }}" enctype="multipart/form-data">
             @csrf
-            <div class="titulo-">
+            <div class="titulo">
                 <h4>Registro del Personal de la Unidad Desconcentrada de Dosaje Etílico</h4>
             </div>
             <fieldset>
@@ -191,14 +186,12 @@
     <div class="container-menu">
         <div class="cont-menu">
             <nav>
-                <div class="imagen-container">
+                <div class="imagen-container flex flex-col justify-center items-center">
                     <img src="{{ asset('storage/' . Auth::user()->imagen_perfil) }}" class="img" alt="Logo">
 
                     <h2>{{ Auth::user()->name }}</h2>
                     <h6>SUBOFICIAL</h6>
-                </div>              
-                <br><br>
-                
+                </div>                              
                 <a href="{{ route('home') }}"> <i class="fa-solid fa-house"></i> Inicio</a>
                 <a href="{{ route('principal') }}"><i class="fa-solid fa-user-plus"></i> Añadir Usuario</a>
                 <a href="{{ route('extraccion') }}"><i class="fa-solid fa-file-pdf"></i> Extracción</a>
