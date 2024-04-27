@@ -13,10 +13,10 @@ return new class extends Migration
     {
         Schema::create('licencias', function (Blueprint $table) {
             $table->id();
-            $table->string('placa')->unique();
-            $table->string('vehiculo');
-            $table->string('categoria');
-            $table->string('licencia');
+            $table->string('placa')->unique()->nullable();
+            $table->string('vehiculo')->nullable();
+            $table->string('categoria')->nullable();
+            $table->string('licencia')->nullable();
             $table->unsignedBigInteger('intervenido_id');
             $table->unsignedBigInteger('clase_id');
             $table->foreign( 'intervenido_id' )->references( 'id' )->on( 'intervenidos' );

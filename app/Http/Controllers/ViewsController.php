@@ -70,7 +70,8 @@ class ViewsController extends Controller
         $personalAreaExtra = Personal::where('area_perteneciente', 'areaextra')
         ->with('Persona')
         ->get();
-        return view('extraccion', compact('personalAreaExtra'));
+        $ultimoContador = 1;
+        return view('extraccion', compact('personalAreaExtra', 'ultimoContador'));
     }
 
     public function tblCertificados(){
@@ -104,12 +105,45 @@ class ViewsController extends Controller
             ->where('personal.persona_id', $elementos->extractor)
             ->first();
         $extraccion = $personalAreaExtra->apellido_paterno . ' ' . $personalAreaExtra->apellido_materno . ', ' . $personalAreaExtra->nombre;
-        
 
-        $pdf = FacadePdf::loadView('certificado', compact('elementos', 'personalProcesamiento', 'procesamiento', 'extraccion'));
+        $resultadoCuantitativoLetras = $this->convertirResultadoALetras($elementos->resultado_cuantitativo);
+
+        $contieneAlcohol = $resultadoCuantitativoLetras > 0.00 ? "LA MUESTRA CONTIENE ALCOHOL ETILICO" : "LA MUESTRA NO CONTIENE ALCOHOL ETILICO";
+
+        $pdf = FacadePdf::loadView('certificado', compact('elementos', 'personalProcesamiento', 'procesamiento', 'extraccion', 'resultadoCuantitativoLetras', 'contieneAlcohol'));
         $pdf->setPaper('a4');
         $pdf->setOption(['isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true]);
 
         return $pdf->stream();
+    }
+
+    private function convertirResultadoALetras($resultadoNumerico){
+        $unidades = ["CERO", "UNO", "DOS", "TRES", "CUATRO", "CINCO", "SEIS", "SIETE", "OCHO", "NUEVE", "DIES",
+                    "ONCE", "DOCE", "TRECE", "CATORCE", "QUINCE", "dieciséis", "DIECISIETE", "DIECIOCHO", "DIECINUEVE"];
+
+        $decenas = ["", "", "VEINTE", "TREINTA", "CUARENTA", "CINCUENTA", "SESENTA", "SESENTA", "OCHENTA", "NOVENTA"];
+
+        $centesimas = ["", "UN", "DOS", "TRES", "CUATRO", "CINCO", "SEIS", "SIETE", "OCHO", "NUEVE"];
+
+        $parteEntera = floor($resultadoNumerico);
+        $parteDecimal = round(($resultadoNumerico - $parteEntera) * 100);
+
+        $parteEnteraEnPalabras = $unidades[$parteEntera];
+
+        $parteDecimalEnPalabras = "";
+        if ($parteDecimal > 0) {
+            if ($parteDecimal < 20) {
+                $parteDecimalEnPalabras = $unidades[$parteDecimal];
+            } else {
+                $decena = floor($parteDecimal / 10);
+                $unidad = $parteDecimal % 10;
+                $parteDecimalEnPalabras = $decenas[$decena];
+                if ($unidad > 0) {
+                    $parteDecimalEnPalabras .= " Y " . $centesimas[$unidad];
+                }
+            }
+        }
+
+        return ucfirst($parteEnteraEnPalabras . " GRAMOS " . $parteDecimalEnPalabras . " CENTIGRAMOS DE ALCOHOL POR LITRO DE SANGRE");
     }
 }

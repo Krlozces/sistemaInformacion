@@ -16,7 +16,7 @@ return new class extends Migration
             $table->dateTime( 'fecha_muestra');
             $table->string('descripcion')->nullable();
             $table->string('observaciones')->nullable();
-            $table->string('resultado_cualitativo', 10);
+            $table->string('resultado_cualitativo');
             $table->float('resultado_cuantitativo', 8, 2)->nullable();
             $table->time( 'hora_muestra');
             $table->unsignedBigInteger('metodo_id');
