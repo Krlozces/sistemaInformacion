@@ -142,7 +142,7 @@
                     <td>{{ $elementos->edad }}</td>
                     <td>Sexo</td>
                     <td>:</td>
-                    <td>{{ $elementos->sexo }}</td>
+                    <td>{{ $elementos->sexo === 'M' ? 'MASCULINO' : 'FEMENINO' }}</td>
                 </tr>
                 <tr>
                     <td>Documento de Identidad del Usuario</td>
@@ -175,7 +175,8 @@
                     <td>:</td>
                     <td>OFICIO N°</td>
                     <td>{{ $elementos->recepcion_doc_referencia }}</td>
-                    <td>{{ $elementos->hora }} {{ $elementos->fecha }}</td>
+                    <td colspan="2">{{ date('H:i', strtotime($elementos->hora)) }} &nbsp; HRS
+                        &nbsp;{{ date('d/m/Y', strtotime($elementos->fecha)) }}</td>
                 </tr>
                 <tr>
                     <td>Motivo</td>
@@ -206,7 +207,7 @@
                         @if ($elementos->description == 'SIN MUESTRA')
                             {{ $elementos->resultado_cualitativo }}
                         @else
-                            ' '
+                            <span></span>
                         @endif
                     </td>
                 </tr>
@@ -275,7 +276,17 @@
                         <td class="espaciado">RESULTADO</td>
                         <td>:</td>
                         <td colspan="2">
-                            @if ($elementos->description != 'SIN MUESTRA')
+                            @if($elementos->description == 'SIN MUESTRA' && $elementos->resultado_cualitativo == 'NEGACIÓN')
+                                <p style="text-align: center;">
+                                    USUARIO CON SIGNOS Y SINTOMAS DE EBRIEDAD SE NIEGA ROTUNDAMENTE AL EXAMEN DE DOSAJE ETILICO
+                                </p>
+                                <div style="width: 100%; height: 20px; border:1px solid black; padding: 10px; margin-left: 10px;">
+                                    <p style="text-align: center;">
+                                        INCURSO EN EL ART. 269 (M.2) DS. N° 016-2009-MTC DEL 21 ABR 2009 MODIFICADO POR EL ART. 1° DEL DS N°029-2009-MTC DEL 19JUL2009
+                                    </p>
+                                </div>
+                                <div style="margin:0 auto; height:4px; width:80px; border-top:1px solid black; margin-top:2px;"></div>
+                            @elseif ($elementos->description != 'SIN MUESTRA')
                                 <p style="text-align: center; font-size:20px;">{{ $elementos->resultado_cuantitativo }}g/L.</p>
                                 <div style="width: 100%; height: 20px; border:1px solid black; padding: 10px; margin-left: 10px;">
                                     <p style="text-align: center;">{{ $resultadoCuantitativoLetras }}</p>
@@ -287,7 +298,6 @@
                                     <p style="text-align: center;">{{ $elementos->resultado_cualitativo }}</p>
                                 </div>
                                 <div style="margin:0 auto; height:4px; width:80px; border-top:1px solid black; margin-top:2px;"></div>
-                                {{-- <p style="text-align: center;"><hr size="10"></p> --}}
                             @endif
                         </td>
                     </tr>
