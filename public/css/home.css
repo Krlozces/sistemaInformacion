@@ -1,0 +1,494 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat|Montserrat+Alternates|Poppins&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background-color: #bae0d1;
+}
+
+/*Estilos para el encabezado*/
+.header {
+    width: 100%;
+    height: 120px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: #184B48;
+}
+
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: auto;
+}
+
+.container .btn-menu,
+.logo {
+    float: left;
+    line-height: 100px;
+
+}
+
+.container .btn-menu label {
+    color: #fff;
+    font-size: 25px;
+    cursor: pointer;
+}
+
+.logo h1 {
+    color: #EFF2F3;
+    font-weight: 400px;
+    font-size: 20px;
+    margin-left: 5px;
+}
+
+label img.imagen {
+    margin: 8px;
+    max-width: 70px;
+    /* Ajusta el ancho máximo según tus necesidades */
+}
+
+---------
+
+/* Estilos para la etiqueta label dentro del contenedor .container con la clase .btn-menu1 */
+.container .btn-menu1 label {
+    color: #fff;
+    cursor: pointer;
+}
+
+/* Estilos para los enlaces dentro del contenedor .menu */
+.menu a {
+    color: #f4f7f8;
+}
+
+/* Estilos para la imagen con la clase .imagen1 dentro de la etiqueta label */
+/* Estilo del marco para la imagen */
+label img.imagen1 {
+    margin: 20px;
+    max-width: 85px;
+    border: 2px solid #bae0d1;
+    /* Borde sólido de 2px de color gris */
+    padding: 0px;
+    /* Espacio interno alrededor de la imagen */
+    box-sizing: border-box;
+    /* Incluir el borde en el tamaño total de la imagen */
+}
+
+label .imagen1:empty::after {
+    content: "Imagen no disponible";
+    /* Texto de referencia */
+    display: block;
+    /* Mostrar como bloque para ocupar espacio */
+    margin-top: 70px;
+    /* Espacio superior al texto de referencia */
+    color: #184B48;
+    /* Color del texto de referencia */
+}
+
+
+
+/* Estilos para el contenedor .menu dentro del contenedor .container */
+.container .menu {
+    float: right;
+    line-height: 4px;
+
+}
+
+/* Estilos para los enlaces dentro del contenedor .menu dentro del contenedor .container */
+.container .menu h3 {
+    margin-right: 25px;
+    margin-top: 60px;
+    float: right;
+    font-size: 16px;
+}
+
+
+.imagen1 {
+    width: 30%;
+    height: auto;
+    border-radius: 50px;
+}
+
+h3 {
+    text-decoration: none;
+    /* Quitar el subrayado */
+    color: #f0f9f6;
+
+}
+
+h3:hover {
+    color: #bae0d1;
+    cursor: pointer;
+}
+
+--------------------- .submenu {
+    display: none;
+    list-style: none;
+    padding: 50px;
+    margin: 60px 0 0 0;
+}
+
+.menu {
+    position: relative;
+    transition: all 500ms ease;
+    transform: translateX(+21.5%);
+    /*ELIMINAR SI EN CASO SEA NECESARIO*/
+}
+
+.submenu {
+    display: none;
+    position: absolute;
+    background-color: #184B48;
+    border-radius: 8px;
+    top: 86%;
+    left: 0;
+    list-style: none;
+    padding: 0px 40px;
+    margin: 0;
+}
+
+.submenu li {
+    display: inline-block;
+    margin-right: 10px;
+    color: #f0f9f6;
+}
+
+.submenu a {
+    text-decoration: none;
+    color: #f0f9f6;
+    padding: 5px;
+    display: block;
+}
+
+.submenu a:hover {
+    color: #8cc9b6;
+}
+
+
+
+
+
+
+
+
+----------
+/*Fin de Estilos para el encabezado*/
+
+/*Menù lateral*/
+#btn-menu {
+    display: none;
+
+}
+
+input[type="checkbox"] {
+    display: none;
+}
+
+.container-menu {
+    position: fixed;
+    background: rgba(0, 0, 0, 0.5);
+    width: 100%;
+    height: 130vh;
+    top: 0;
+    left: 0;
+    transition: all 500ms ease;
+    opacity: 0;
+    visibility: hidden;
+
+}
+
+#btn-menu:checked~.container-menu {
+    opacity: 1;
+    visibility: visible;
+    color: #030303;
+
+}
+
+.cont-menu {
+    width: 100%;
+    max-width: 250px;
+    background: #184B48;
+    height: 130vh;
+    position: relative;
+    transition: all 500ms ease;
+    transform: translateX(-100%);
+}
+
+#btn-menu:checked~.container-menu .cont-menu {
+    transform: translateX(0%);
+}
+
+.cont-menu nav {
+    transform: translateY(15%);
+}
+
+.cont-menu nav a {
+    display: block;
+    text-decoration: none;
+    padding: 20px;
+    color: #f5f3f3;
+    border-left: 5px solid transparent;
+    transition: all 400ms ease;
+}
+
+.cont-menu nav a:hover {
+    border-left: 5px solid #297260;
+    background: #bae0d1;
+    color: #030303;
+}
+
+.cont-menu label {
+    position: absolute;
+    right: 5px;
+    top: 10px;
+    color: #fff;
+    cursor: pointer;
+    font-size: 18px;
+}
+
+.search-container {
+    width: 100%;
+    align-items: center;
+    padding: 14px;
+    margin-bottom: 0px;
+}
+
+.search-container i {
+    margin-right: 5px;
+    position: relative;
+    top: 47px;
+    left: 93%;
+    color: #a09d9d;
+}
+
+
+.search-container input {
+    padding: 10px;
+    width: 103%;
+    border-radius: 10px;
+    border: none;
+}
+
+/* Estilo del marco para la imagen */
+.img {
+    width: 50%;
+    left: 10px;
+    border: 2px solid #bae0d1;
+    /* Borde sólido de 2px de color gris */
+    padding: 0px;
+    /* Espacio interno alrededor de la imagen */
+    box-sizing: border-box;
+    /* Incluir el borde en el tamaño total de la imagen */
+}
+
+/* Estilo para la referencia visual cuando no hay imagen */
+.img:empty::after {
+    content: "Imagen no disponible";
+    /* Texto de referencia */
+    display: block;
+    /* Mostrar como bloque para ocupar espacio */
+    margin-top: 65%;
+    /* Espacio superior al texto de referencia */
+    color: #184B48;
+    /* Color del texto de referencia */
+}
+
+.imagen-container {
+    text-align: center;
+    padding: 1px;
+
+}
+
+h1,
+h5 {
+    color: beige;
+    font-size: 14px;
+    margin: 2px;
+}
+
+h2 {
+    color: beige;
+    font-size: 18px;
+    margin: 10px;
+}
+
+h6 {
+    color: beige;
+    font-size: 15px;
+    margin: 10px;
+}
+
+/*titulo del registro*/
+.titulo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 10%;
+
+}
+
+h4 {
+    margin: 15px;
+}
+
+/*contenido*/
+
+/* Media query para pantallas más pequeñas */
+@media screen and (max-width: 768px) {
+    h4 {
+        margin: 12vw;
+        /* Margen fijo para pantallas más pequeñas */
+    }
+
+    h3 {
+        display: none;
+        /* Oculta el texto en dispositivos más pequeños */
+    }
+
+    .imagen1 {
+        width: 50%;
+        height: auto;
+        border-radius: 50px;
+
+    }
+}
+
+li {
+    cursor: pointer;
+}
+
+/* BOTONES */
+/* Estilo para el contenedor de información */
+.informacion {
+    margin: 9% 0px;
+    padding: 2% 1%;
+    border: 1px solid #bae0d1;
+    background-color: #bae0d1;
+}
+    
+/* Estilo para los contenedores */
+.container3,
+.container4 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+    
+/* Estilo para los botones */
+.container3 .boton1,
+.boton2,
+.boton3,
+.boton4,
+.container4 .boton5,
+.boton6 {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1px 2vw;
+    margin: 5px;
+    border-radius: 5px;
+    text-align: center;
+    cursor: pointer;
+}
+    
+.boton5 {
+    border: 2px solid #e51d1d;
+    background-color: #ff6a6a;
+    color: #480707;
+    font-weight: bold;
+}
+    
+.boton6 {
+    border: 2px solid #ef4207;
+    background-color: #ff8038;
+    color: #450d05;
+    font-weight: bold;
+}
+    
+.boton1 {
+    border: 2px solid #cc9a02;
+    background-color: #fff045;
+    color: #432405;
+    font-weight: bold;
+}
+    
+.boton2 {
+    border: 2px solid #6bb800;
+    background-color: #c5ff50;
+    color: #1b3400;
+    font-weight: bold;
+}
+    
+.boton3 {
+    border: 2px solid #008dce;
+    background-color: #2cc5ff;
+    color: #04314d;
+    font-weight: bold;
+}
+    
+.boton4 {
+    border: 2px solid #9a2af3;
+    background-color: #c57eff;
+    color: #400269;
+    font-weight: bold;
+}
+    
+/* Estilo para el ícono */
+.container3 .boton1 i,
+.boton2 i,
+.boton3 i,
+.boton4 i,
+.container4 .boton5 i,
+.boton6 i {
+    margin: 0.5vw;
+    padding: 0px 2vw;
+    width: 3vw;
+    height: auto;
+    font-size: 2.5vw;
+}
+
+/* Media query para pantallas más pequeñas */
+@media only screen and (max-width: 768px) {
+    .informacion {
+        margin: 24% 0;
+    }
+
+    .container3 .boton1,
+    .boton2,
+    .boton3,
+    .boton4,
+    .container4 .boton5,
+    .boton6 {
+
+        padding: 5px 5vw;
+        margin: 5px;
+        border-radius: 5px;
+
+    }
+
+    /* Estilo para los contenedores */
+    .container3,
+    .container4 {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+    }
+
+
+    .container3 .boton1 i,
+    .boton2 i,
+    .boton3 i,
+    .boton4 i,
+    .container4 .boton5 i,
+    .boton6 i {
+        width: 1vw;
+        font-size: 5vw;
+    }
+}
