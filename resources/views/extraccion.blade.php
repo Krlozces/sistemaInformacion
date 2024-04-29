@@ -205,8 +205,6 @@
                             @endforeach
                         </select>
                     </div>
-                </div>
-                <div class="input-general3">
                     <div class="input-group3">
                         <label for="tipo_muestra">Tipo de muestra:</label>
                         <select id="tipo_muestra" name="tipo_muestra" onchange="mostrarOtrosCampos()">
@@ -222,7 +220,8 @@
                             <label for="otro_tipo_muestra">Especificar otro tipo de muestra:</label>
                             <input type="text" id="otro_tipo_muestra" name="otro_tipo_muestra" oninput="validarLetras(this)">
                     </div>
-
+                </div>
+                <div class="input-general3">
                     <div class="input-group3">
                         <label for="resultado_cualitativo">Resultado cualitativo:</label>
                         <select id="resultado_cualitativo" name="resultado_cualitativo">
@@ -237,18 +236,16 @@
                         <input type="time" id="hora_extraccion" name="hora_extraccion">
                     </div>
 
-                </div>
-
-                <div class="input-general3">
-
                     <div class="input-group3">
                         <label for="fecha_extraccion">Fecha de Extracción:</label>
                         <input type="date" id="fecha_extraccion" name="fecha_extraccion">
                     </div>
+                </div>
 
+                <div class="input-general3">
                     <div class="input-group3">
                         <label for="observaciones">Observaciones:</label>
-                        <input type="text" id="observaciones" name="observaciones" oninput="convertirMayusculas(this)">
+                        <textarea id="observaciones" name="observaciones" oninput="convertirMayusculas(this)"></textarea>
                     </div>
                 </div>
             </fieldset>
@@ -280,8 +277,8 @@
 
                 <a href="{{ route('home') }}"> <i class="fa-solid fa-house"></i> Inicio</a>
                 <a href="{{ route('principal') }}"><i class="fa-solid fa-circle-info"></i> Añadir Usuario</a>
-                <a href="{{ route('extraccion') }}"><i class="fa-solid fa-chart-pie"></i> Extracción</a>
-                <a href="{{ route('tbl-certificados') }}"> <i class="fa-solid fa-user-tie"></i>Tabla certificados</a>
+                <a href="{{ route('extraccion') }}"><i class="fa-solid fa-vials"></i> Extracción</a>
+                <a href="{{ route('tbl-certificados') }}"> <i class="fa-solid fa-table-list"></i>Tabla certificados</a>
                 <a href="{{ route('logout') }}"><i class="fa-solid fa-arrow-right-from-bracket"></i> Cerrar Sesión</a>
             </nav>
 
