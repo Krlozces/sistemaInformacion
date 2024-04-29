@@ -157,8 +157,8 @@
                 
                 <a href="{{ route('home') }}"> <i class="fa-solid fa-house"></i> Inicio</a>
                 <a href="{{ route('principal') }}"><i class="fa-solid fa-user-plus"></i> Añadir Usuario</a>
-                <a href="{{ route('extraccion') }}"><i class="fa-solid fa-file-pdf"></i> Extracción</a>
-                <a href="{{ route('tbl-certificados') }}"> <i class="fa-solid fa-chart-pie"></i> Certificados</a>
+                <a href="{{ route('extraccion') }}"><i class="fa-solid fa-vials"></i> Extracción</a>
+                <a href="{{ route('tbl-certificados') }}"> <i class="fa-solid fa-table-list"></i> Certificados</a>
                 <a href="{{ route('logout') }}"><i class="fa-solid fa-arrow-right-from-bracket"></i> Cerrar Sesión</a>
             </nav>
 
