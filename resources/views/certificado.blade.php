@@ -127,17 +127,17 @@
             <p class="section2" style="margin-bottom: 10px;">CERTIFICADO DE DOSAJE ETÍLICO N°0029 - {{ $elementos->recepcion_doc_referencia }}</p>
             <table style="border-collapse: collapse;">
                 <tr>
-                    <td style="padding: 10px 0;">Registro de Dosaje N°</td>
+                    <td colspan="6">Registro de Dosaje N°</td>
                     <td>:</td>
-                    <td colspan="2">{{ $elementos->recepcion_doc_referencia }}</td>
+                    <td colspan="6">{{ $elementos->recepcion_doc_referencia }}</td>
                 </tr>
                 <tr>
-                    <td>Apellidos y Nombres del usuario</td>
+                    <td colspan="6">Apellidos y Nombres del usuario</td>
                     <td>:</td>
-                    <td colspan="4">{{ $elementos->apellido_paterno }} {{ $elementos->apellido_materno }}, {{ $elementos->nombre }}</td>
+                    <td colspan="6">{{ $elementos->apellido_paterno }} {{ $elementos->apellido_materno }}, {{ $elementos->nombre }}</td>
                 </tr>
                 <tr>
-                    <td>Edad</td>
+                    <td colspan="6">Edad</td>
                     <td>:</td>
                     <td>{{ $elementos->edad }}</td>
                     <td>Sexo</td>
@@ -145,12 +145,12 @@
                     <td>{{ $elementos->sexo === 'M' ? 'MASCULINO' : 'FEMENINO' }}</td>
                 </tr>
                 <tr>
-                    <td>Documento de Identidad del Usuario</td>
+                    <td colspan="6">Documento de Identidad del Usuario</td>
                     <td>:</td>
                     <td>{{ $elementos->dni }}</td>
                 </tr>
                 <tr>
-                    <td>Licencia de Conducir del usuario N°</td>
+                    <td colspan="6">Licencia de Conducir del usuario N°</td>
                     <td>:</td>
                     <td>{{ $elementos->licencia }}</td>
                     <td>Clase</td>
@@ -158,86 +158,83 @@
                     <td>{{ $elementos->clase }}</td>
                 </tr>
                 <tr>
-                    <td>Vehículo</td>
+                    <td colspan="6">Vehículo</td>
                     <td>:</td>
                     <td>{{ $elementos->vehiculo }}</td>
                     <td>Placa N°</td>
                     <td>:</td>
-                    <td colspan="2">{{ $elementos->placa }}</td>
+                    <td>{{ $elementos->placa }}</td>
                 </tr>
                 <tr>
-                    <td>Procedencia</td>
+                    <td colspan="6">Procedencia</td>
                     <td>:</td>
-                    <td>{{ $elementos->procedencia }}</td>
+                    <td colspan="6">{{ $elementos->procedencia }}</td>
                 </tr>
                 <tr>
-                    <td>Doc. de referencia Hora y fecha de recepción</td>
+                    <td colspan="6">Doc. de referencia Hora y fecha de recepción</td>
                     <td>:</td>
-                    <td>OFICIO N°</td>
-                    <td>{{ $elementos->recepcion_doc_referencia }}</td>
-                    <td colspan="2">{{ date('H:i', strtotime($elementos->hora)) }} &nbsp; HRS
-                        &nbsp;{{ date('d/m/Y', strtotime($elementos->fecha)) }}</td>
+                    <td colspan="6">OFICIO N° {{ $elementos->recepcion_doc_referencia }} {{ date('H:i', strtotime($elementos->hora)) }} &nbsp; HRS
+                        &nbsp;{{ date('d/m/Y', strtotime($elementos->fecha)) }}
+                    </td>
                 </tr>
                 <tr>
-                    <td>Motivo</td>
+                    <td colspan="6">Motivo</td>
                     <td>:</td>
-                    <td colspan="4">{{ $elementos->motivo }}</td>
+                    <td colspan="6">{{ $elementos->motivo }}</td>
                 </tr>
                 <tr>
-                    <td>Personal de la Unidad Solicitante</td>
+                    <td colspan="6">Personal de la Unidad Solicitante</td>
                     <td>:</td>
-                    <td colspan="4">{{ $elementos->persona }}</td>
+                    <td colspan="6">{{ $elementos->persona }}</td>
                 </tr>
                 <tr>
-                    <td>Hora y Fecha de Infracción</td>
+                    <td colspan="6">Hora y Fecha de Infracción</td>
                     <td>:</td>
-                    <td colspan="3">
+                    <td colspan="6">
                         {{ date('H:i', strtotime($elementos->fecha_hora_infraccion)) }} &nbsp; HRS &nbsp;
                         {{ date('d  m  Y', strtotime($elementos->fecha_hora_infraccion)) }}
                     </td>
                 </tr>
                 <tr>
-                    <td>Hora y Fecha de extracción</td>
+                    <td colspan="6">Hora y Fecha de extracción</td>
                     <td>:</td>
-                    <td colspan="3">
+                    <td colspan="6">
                         {{ date('H:i', strtotime($elementos->fecha_hora_extraccion)) }} &nbsp; HRS &nbsp;
-                        {{ date('d m Y', strtotime($elementos->fecha_hora_extraccion)) }}    
-                    </td>
-                    <td>
+                        {{ date('d m Y', strtotime($elementos->fecha_hora_extraccion)) }} 
                         @if ($elementos->description == 'SIN MUESTRA')
                             {{ $elementos->resultado_cualitativo }}
                         @else
                             <span></span>
-                        @endif
+                        @endif  
                     </td>
                 </tr>
                 <tr>
-                    <td>Personal que atiende o extrae la muestra</td>
+                    <td colspan="6">Personal que atiende o extrae la muestra</td>
                     <td>:</td>
-                    <td colspan="4">{{ $extraccion }}</td>
+                    <td colspan="6">{{ $extraccion }}</td>
                 </tr>
                 <tr>
-                    <td>Tipo y descripción de la muestra</td>
+                    <td colspan="6">Tipo y descripción de la muestra</td>
                     <td>:</td>
-                    <td>{{ $elementos->description }}</td>
+                    <td colspan="6">{{ $elementos->description }}</td>
                 </tr>
                 <tr>
-                    <td>Método utilizado</td>
+                    <td colspan="6">Método utilizado</td>
                     <td>:</td>
-                    <td colspan="4">
+                    <td colspan="6">
                         @if ($elementos->description == 'SIN MUESTRA')
-                            <div style="margin:0 auto; height:1px; width:100px; border-top:1px solid black;"></div>                            
+                            <div style="margin:0 auto; height:1px; width:120px; border-top:1px solid black;"></div>                            
                         @else
                             {{ $elementos->descripcion }}
                         @endif
                     </td>
                 </tr>
                 <tr>
-                    <td>Apellidos y Nombres del procesador</td>
+                    <td colspan="6">Apellidos y Nombres del procesador</td>
                     <td>:</td>
-                    <td colspan="2">
+                    <td colspan="6">
                         @if ($elementos->description == 'SIN MUESTRA')
-                        <div style="margin:0 auto; height:4px; width:100px; border-top:1px solid black;"></div>                            
+                        <div style="margin:0 auto; height:1px; width:120px; border-top:1px solid black;"></div>                            
                         @else
                             {{ $procesamiento }}
                         @endif
@@ -248,7 +245,7 @@
                     <td>:</td>
                     <td>
                         @if ($elementos->description == 'SIN MUESTRA')
-                        <div style="margin:0 auto; height:4px; width:100px; border-top:1px solid black;"></div>                           
+                            <div style="margin:0 auto; height:1px; width:120px; border-top:1px solid black;"></div>                           
                         @else
                             {{ $personalProcesamiento->grado }}
                         @endif
@@ -257,16 +254,16 @@
                     <td>:</td>
                     <td>
                         @if ($elementos->description == 'SIN MUESTRA')
-                        <div style="margin:0 auto; height:4px; width:120px; border-top:1px solid black;"></div>                            
+                            <div style="margin:0 auto; height:1px; width:120px; border-top:1px solid black;"></div>                            
                         @else
                             {{ $personalProcesamiento->persona->dni }}
                         @endif
                     </td>
                 </tr>
                 <tr>
-                    <td>Observaciones</td>
+                    <td colspan="6">Observaciones</td>
                     <td>:</td>
-                    <td colspan="2">{{ $elementos->observaciones }}</td>
+                    <td colspan="6">{{ $elementos->observaciones }}</td>
                 </tr>
             </table>    
     
@@ -278,7 +275,7 @@
                         <td colspan="2">
                             @if($elementos->description == 'SIN MUESTRA' && $elementos->resultado_cualitativo == 'NEGACIÓN')
                                 <p style="text-align: center;">
-                                    USUARIO CON SIGNOS Y SINTOMAS DE EBRIEDAD SE NIEGA ROTUNDAMENTE AL EXAMEN DE DOSAJE ETILICO
+                                    USUARIO SE NIEGA ROTUNDAMENTE AL EXAMEN DE DOSAJE ETILICO
                                 </p>
                                 <div style="width: 100%; height: 20px; border:1px solid black; padding: 10px; margin-left: 10px;">
                                     <p style="text-align: center;">
@@ -307,7 +304,28 @@
                         <td class="espaciado">CONCLUSIONES</td>
                         <td>:</td>
                         <td style="text-align: end;">
-                            CHICLAYO, {{ strtoupper(\Carbon\Carbon::now()->formatLocalized('%d DE %B DEL %Y')) }}
+                            <?php
+                            $fecha = \Carbon\Carbon::now();
+                            $dia = $fecha->format('d');
+                            $numeroMes = $fecha->format('m');
+                            $nombresMeses = [
+                                '01' => 'ENERO',
+                                '02' => 'FEBRERO',
+                                '03' => 'MARZO',
+                                '04' => 'ABRIL',
+                                '05' => 'MAYO',
+                                '06' => 'JUNIO',
+                                '07' => 'JULIO',
+                                '08' => 'AGOSTO',
+                                '09' => 'SEPTIEMBRE',
+                                '10' => 'OCTUBRE',
+                                '11' => 'NOVIEMBRE',
+                                '12' => 'DICIEMBRE',
+                            ];
+                            $nombreMes = $nombresMeses[$numeroMes];
+                            $anio = $fecha->format('Y');
+                            echo "CHICLAYO, $dia DE $nombreMes DEL $anio";
+                            ?>
                         </td>
                     </tr>
                 </table>
