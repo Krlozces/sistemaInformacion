@@ -227,7 +227,9 @@
                 <div class="input-general3">
                     <div class="input-group3">
                         <label for="observaciones">Observaciones:</label>
-                        <input type="text" id="observaciones" value="{{ $elemento->observaciones }}" name="observaciones" required oninput="convertirMayusculas(this)">
+                        <textarea id="observaciones" name="observaciones" required oninput="convertirMayusculas(this)">
+                            {{ $elemento->observaciones }}
+                        </textarea>
                     </div>
                 </div>
             </fieldset>
@@ -296,9 +298,9 @@
                 <br><br>
                 
                 <a href="{{ route('home') }}"> <i class="fa-solid fa-house"></i> Inicio</a>
-                <a href="{{ route('principal') }}"> <i class="fa-solid fa-circle-info"></i> Añadir usuario</a>
-                <a href="{{ route('tbl-certificados') }}"> <i class="fa-solid fa-chart-pie"></i> Certificados</a>
-                <a href="{{ route('extraccion')}}"><i class="fa-solid fa-chart-pie"></i> Extracción</a>
+                <a href="{{ route('principal') }}"> <i class="fa-solid fa-user-plus"></i> Añadir usuario</a>
+                <a href="{{ route('tbl-certificados') }}"> <i class="fa-solid fa-table-list"></i> Certificados</a>
+                <a href="{{ route('extraccion')}}"><i class="fa-solid fa-vials"></i> Extracción</a>
                 <a href="{{ route('logout') }}"><i class="fa-solid fa-arrow-right-from-bracket"></i> Cerrar Seción</a>
             </nav>
             <label for="btn-menu"><i class="fa-solid fa-list"></i></label>
