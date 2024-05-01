@@ -25,7 +25,10 @@ class ViewsController extends Controller
     }
 
     public function home(){
-        return view('home');
+        $grado = Personal::select('grado')
+                ->where('usuario', Auth::user()->email)
+                ->first();
+        return view('home', compact('grado'));
     }
 
     public function procesamiento($dni){
