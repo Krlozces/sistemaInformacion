@@ -56,10 +56,14 @@ class ViewsController extends Controller
 
         Session::put('campos_completados', $camposCompletados);
 
+        $grado = Personal::select('grado')
+                ->where('usuario', Auth::user()->email)
+                ->first();
+
         // Verificar si se encontraron resultados
         if ($elementos !== false) {
             // Se encontraron resultados, devolver la vista con los datos
-            return view('procesamiento', compact('elementos', 'personalProcesamiento', 'personalAreaExtra'));
+            return view('procesamiento', compact('elementos', 'personalProcesamiento', 'personalAreaExtra', 'grado'));
         } else {
             return redirect()->back()->with('error', 'No se encontró ninguna persona con el DNI proporcionado.');
         }
@@ -74,7 +78,10 @@ class ViewsController extends Controller
         ->with('Persona')
         ->get();
         $ultimoContador = 1;
-        return view('extraccion', compact('personalAreaExtra', 'ultimoContador'));
+        $grado = Personal::select('grado')
+                ->where('usuario', Auth::user()->email)
+                ->first();
+        return view('extraccion', compact('personalAreaExtra', 'ultimoContador', 'grado'));
     }
 
     public function tblCertificados(){
@@ -82,7 +89,10 @@ class ViewsController extends Controller
         ->select('dni', 'nombre', 'apellido_paterno', 'apellido_materno')
         ->get();
         $camposCompletados = Session::get('campos_completados', 0);
-        return view('tabla-certificados', compact('elementos', 'camposCompletados'));
+        $grado = Personal::select('grado')
+                ->where('usuario', Auth::user()->email)
+                ->first();
+        return view('tabla-certificados', compact('elementos', 'camposCompletados', 'grado'));
     }
 
     public function generarPdf($dni){
