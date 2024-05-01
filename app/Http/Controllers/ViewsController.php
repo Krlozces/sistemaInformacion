@@ -63,6 +63,7 @@ class ViewsController extends Controller
         Session::put('campos_completados', $camposCompletados);
 
         $grado = Personal::select('grado')
+                ->join('grados', 'grados.id', '=', 'personal.grado_id')
                 ->where('usuario', Auth::user()->email)
                 ->first();
 
@@ -82,16 +83,13 @@ class ViewsController extends Controller
     public function extraccion(){
         $personalAreaExtra = Personal::where('area_perteneciente', 'areaextra')
         ->with('Persona')
+        ->with('Grado')
         ->get();
-        $ultimoContador = 1;
         $grado = Personal::select('grado')
                 ->join('grados', 'grados.id', '=', 'personal.grado_id')
                 ->where('usuario', Auth::user()->email)
                 ->first();
-        $codigo = Registro::select('numero_oficio')->first();
-        $codigo++;
-
-        return view('extraccion', compact('personalAreaExtra', 'ultimoContador', 'grado', 'codigo'));
+        return view('extraccion', compact('personalAreaExtra', 'ultimoContador', 'grado'));
     }
 
     public function tblCertificados(){
@@ -100,6 +98,7 @@ class ViewsController extends Controller
         ->get();
         $camposCompletados = Session::get('campos_completados', 0);
         $grado = Personal::select('grado')
+                ->join('grados', 'grados.id', '=', 'personal.grado_id')
                 ->where('usuario', Auth::user()->email)
                 ->first();
         return view('tabla-certificados', compact('elementos', 'camposCompletados', 'grado'));

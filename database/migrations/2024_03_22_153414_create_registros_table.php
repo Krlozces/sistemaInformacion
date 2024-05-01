@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('registros', function (Blueprint $table) {
             $table->id();
             $table->string('recepcion_doc_referencia');
-            $table->unsignedBigInteger('numero_oficio')->unique()->startingValue(629);
+            $table->unsignedBigInteger('numero_oficio')->unique()->default(629);
             $table->dateTime('fecha_hora_infraccion');
             $table->dateTime('fecha_hora_extraccion');
             $table->unsignedBigInteger('extractor');
