@@ -12,4 +12,8 @@ class Grado extends Model
     protected $fillable = [
         'grado',
     ];
+
+    public function personal(){
+        return $this->hasMany(Personal::class);
+    }
 }
