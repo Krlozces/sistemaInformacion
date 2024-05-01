@@ -125,7 +125,7 @@
                 <div class="imagen-container">
                     <img src="{{ asset('storage/' . Auth::user()->imagen_perfil) }}" class="img" alt="Logo">
                     <h2>{{ Auth::user()->name }}</h2>
-                    <h6>{{ $grado->grado }}</h6>
+                    <h6>{{ $grado ? $grado->grado : '' }}</h6>
                 </div>              
                 <br><br>
                 
