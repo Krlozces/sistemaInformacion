@@ -185,7 +185,7 @@
                         <select id="extractor" name="extractor" readonly>
                             <option disabled selected>--SELECCIONAR--</option>
                             @foreach ($personalAreaExtra as $personal)
-                                <option value="{{ $personal->persona_id }}"  {{ $personal->persona_id == $elemento->extractor ? 'selected' : '' }}>{{ $personal->Persona->nombre }} {{ $personal->Persona->apellido_paterno }} {{ $personal->Persona->apellido_materno }} - {{ $personal->grado }}</option>
+                                <option value="{{ $personal->persona_id }}"  {{ $personal->persona_id == $elemento->extractor ? 'selected' : '' }}>{{ $personal->Persona->nombre }} {{ $personal->Persona->apellido_paterno }} {{ $personal->Persona->apellido_materno }} - {{ $personal->grado->grado }}</option>
                             @endforeach
                         </select>
                     </div>
@@ -250,7 +250,7 @@
                             @foreach ($personalProcesamiento as $personal)
                                 <option value="{{ $personal->persona_id }}" @if(isset($personal->Persona)) selected @endif>
                                     @if(isset($personal->Persona))
-                                        {{ $personal->Persona->nombre }} {{ $personal->Persona->apellido_paterno }} {{ $personal->Persona->apellido_materno }} - {{ $personal->grado }}
+                                        {{ $personal->Persona->nombre }} {{ $personal->Persona->apellido_paterno }} {{ $personal->Persona->apellido_materno }} - {{ $personal->grado->grado }}
                                     @endif
                                 </option>
                             @endforeach
