@@ -207,7 +207,7 @@
                     <img src="{{ asset('storage/' . Auth::user()->imagen_perfil) }}" class="img" alt="Logo">
 
                     <h2>{{ Auth::user()->name }}</h2>
-                    <h6>{{ $grado->grado }}</h6>
+                    <h6>{{ $grado ? $grado->grado : '' }}</h6>
                 </div>                              
                 <a href="{{ route('home') }}"> <i class="fa-solid fa-house"></i> Inicio</a>
                 <a href="{{ route('principal') }}"><i class="fa-solid fa-user-plus"></i> Añadir Usuario</a>
