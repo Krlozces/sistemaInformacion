@@ -23,6 +23,7 @@ class ViewsController extends Controller
 
     public function principal(){
         $grado = Personal::select('grado')
+                ->join('grados', 'grados.id', '=', 'personal.grado_id')
                 ->where('usuario', Auth::user()->email)
                 ->first();
         return view('principal', compact('grado'));
@@ -30,6 +31,7 @@ class ViewsController extends Controller
 
     public function home(){
         $grado = Personal::select('grado')
+                ->join('grados', 'grados.id', '=', 'personal.grado_id')
                 ->where('usuario', Auth::user()->email)
                 ->first();
         return view('home', compact('grado'));
@@ -83,6 +85,7 @@ class ViewsController extends Controller
         ->get();
         $ultimoContador = 1;
         $grado = Personal::select('grado')
+                ->join('grados', 'grados.id', '=', 'personal.grado_id')
                 ->where('usuario', Auth::user()->email)
                 ->first();
         $codigo = Registro::select('numero_oficio')->first();
