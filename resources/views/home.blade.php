@@ -23,7 +23,11 @@
                 <label for="btn-menu1"> <img src="{{ asset('storage/' . auth()->user()->imagen_perfil) }}" class="imagen1"> </label>
                 <h3 class="expandable">{{ Auth::user()->name }}</h3>
                 <ul class="submenu">
-                    <li id="openModalBtn"><a href="#"><i class="fa-solid fa-users-viewfinder"></i> Cambiar foto</a></li>
+                    <li id="openModalBtn">
+                        <a href="#">
+                            <i class="fa-solid fa-users-viewfinder"></i> Cambiar foto
+                        </a>
+                    </li>
                     <li><a href="#"><i class="fa-solid fa-gear"></i> Configurar</a></li>
                 </ul>
             </nav>
@@ -120,9 +124,8 @@
             <nav>
                 <div class="imagen-container">
                     <img src="{{ asset('storage/' . Auth::user()->imagen_perfil) }}" class="img" alt="Logo">
-
                     <h2>{{ Auth::user()->name }}</h2>
-                    <h6>SUBOFICIAL</h6>
+                    <h6>{{ $grado->grado }}</h6>
                 </div>              
                 <br><br>
                 
