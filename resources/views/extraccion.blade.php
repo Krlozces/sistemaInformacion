@@ -287,6 +287,7 @@
                     <div class="imagen-container flex justify-center items-center flex-col">
                         <img src="{{ asset('storage/' . auth()->user()->imagen_perfil) }}" class="img" alt="Logo">
                         <h1>{{ Auth::user()->name }}</h1>
+                        <h3>{{ $grado->grado }}</h3>
                     </div>
                     <br><br>
 
