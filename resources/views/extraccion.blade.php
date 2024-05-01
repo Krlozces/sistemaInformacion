@@ -23,7 +23,7 @@
                     <label for="btn-menu1"> <img src="{{ asset('storage/' . auth()->user()->imagen_perfil) }}" class="imagen1"> </label>
                     <h3 class="expandable">{{ Auth::user()->name }}</h3>
                     <ul class="submenu">
-                        <li id="openModalBtn"><i class="fa-solid fa-users-viewfinder"></i> Cambiar foto</li>
+                        <li id="openModalBtn"><a href="#"><i class="fa-solid fa-users-viewfinder"></i> Cambiar foto</a></li>
                         <li><a href="#"><i class="fa-solid fa-gear"></i> Configurar</a></li>
                     </ul>
                 </nav>
