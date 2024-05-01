@@ -247,7 +247,7 @@
                         @if ($elementos->description == 'SIN MUESTRA')
                             <div style="margin:0 auto; height:1px; width:120px; border-top:1px solid black;"></div>                           
                         @else
-                            {{ $personalProcesamiento->grado }}
+                            {{ $personalProcesamiento->grado->grado }}
                         @endif
                     </td>
                     <td>DNI N°</td>
