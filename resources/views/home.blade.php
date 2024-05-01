@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src="{{asset('js/importante.js')}}"></script>
     <link rel="stylesheet" href="{{ asset('css/home.css') }}">
-
+    <link rel="stylesheet" href="{{ asset('css/principal.css') }}">
 </head>
 <body>
     <header class="header">
@@ -23,7 +23,7 @@
                 <label for="btn-menu1"> <img src="{{ asset('storage/' . auth()->user()->imagen_perfil) }}" class="imagen1"> </label>
                 <h3 class="expandable">{{ Auth::user()->name }}</h3>
                 <ul class="submenu">
-                    <li><a href="#"><i class="fa-solid fa-users-viewfinder"></i> Cambiar foto</a></li>
+                    <li id="openModalBtn"><i class="fa-solid fa-users-viewfinder"></i> Cambiar foto</li>
                     <li><a href="#"><i class="fa-solid fa-gear"></i> Configurar</a></li>
                 </ul>
             </nav>
@@ -136,5 +136,76 @@
             <label for="btn-menu"><i class="fa-solid fa-list"></i></label>
         </div>
     </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // Obtener el modal y el botón para abrirlo
+            var modal = document.getElementById("myModal");
+            var btn = document.getElementById("openModalBtn");
+            var span = document.getElementsByClassName("close")[0];
+            var mainImage = document.getElementById("mainImage");
+
+            var savedImage = sessionStorage.getItem("selectedImage");
+            if (savedImage) {
+                mainImage.src = savedImage;
+            }
+    
+            // Abrir el modal al hacer clic en el botón
+            btn.onclick = function () {
+                modal.style.display = "block";
+            }
+    
+            // Cerrar el modal al hacer clic en la "x"
+            span.onclick = function () {
+                modal.style.display = "none";
+            }
+    
+            // Cerrar el modal al hacer clic fuera del contenido del modal
+            window.onclick = function (event) {
+                if (event.target == modal) {
+                    modal.style.display = "none";
+                }
+            }
+    
+            // Previsualizar la imagen seleccionada antes de guardarla
+            var imageInput = document.getElementById("imageInput");
+            var previewImage = document.getElementById("previewImage");
+            imageInput.addEventListener("change", function () {
+                var file = this.files[0];
+                if (file) {
+                    var reader = new FileReader();
+                    reader.onload = function (e) {
+                        previewImage.src = e.target.result;
+                    }
+                    reader.readAsDataURL(file);
+                }
+            });
+    
+            // Enviar el formulario para guardar la imagen
+            var form = document.getElementById("imageForm");
+            form.onsubmit = function (event) {
+                event.preventDefault();
+                var formData = new FormData(form);
+                fetch("{{ route('cambiar-imagen', ['id' => Auth::user()->id]) }}", {
+                    method: "POST",
+                    body: formData
+                })
+                .then(data => {
+                    // alert(data.message);
+                    modal.style.display = "none";
+                    previewImage.src = "";
+                    mainImage.src = data.imageUrl;
+                    sessionStorage.setItem("selectedImage", data.imageUrl);
+                    
+                    
+                })
+                .catch(error => {
+                    console.error("Error al guardar la imagen:", error);
+                });
+                setTimeout(function () {
+                    window.location.reload();
+                }, 1000);
+            }
+        });
+    </script>
 </body>
 </html>
