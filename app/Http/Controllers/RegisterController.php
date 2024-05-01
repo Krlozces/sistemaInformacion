@@ -60,10 +60,11 @@ class RegisterController extends Controller
         // Crear una nueva persona
         $persona = Persona::create($request->only(['dni', 'nombre', 'apellido_paterno', 'apellido_materno']));
 
+        $grado = Grado::firstOrCreate($request->only('grado'));
+
         // Crear un nuevo personal asociado a la persona
         $personal = new Personal([
             'genero' => $request->genero,
-            'grado' => $request->grado,
             'unidad_perteneciente' => $request->unidad_perteneciente,
             'area_perteneciente' => $request->area_perteneciente,
             'direccion' => $request->direccion,
@@ -75,6 +76,8 @@ class RegisterController extends Controller
         // Asignar el ID de la persona al personal
         $personal->persona_id = $persona->id;
 
+        $personal->grado_id = $grado->id;
+        
         // Guardar el personal
         $personal->save();
 
