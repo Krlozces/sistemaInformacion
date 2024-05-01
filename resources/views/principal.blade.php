@@ -68,7 +68,7 @@
             </div>
             <fieldset>
                 <legend>Datos Personales</legend>
-                    <div class="input-general">
+                <div class="input-general">
                     <div class="input-group">
                         <label for="dni">Documento de Identidad (DNI):</label>
                         <input type="text" id="dni" name="dni" required oninput="validarDocumento(this)">    
