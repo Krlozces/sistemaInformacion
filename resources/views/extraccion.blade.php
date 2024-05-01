@@ -216,7 +216,7 @@
                             <select id="extractor" name="extractor">
                                 <option disabled selected>--SELECCIONAR--</option>
                                 @foreach ($personalAreaExtra as $personal)
-                                    <option value="{{ $personal->persona_id }}">{{ $personal->Persona->nombre }} {{ $personal->Persona->apellido_paterno }} {{ $personal->Persona->apellido_materno }} - {{ $personal->grado }}</option>
+                                    <option value="{{ $personal->persona_id }}">{{ $personal->Persona->nombre }} {{ $personal->Persona->apellido_paterno }} {{ $personal->Persona->apellido_materno }} - {{ $personal->grado->grado }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -302,14 +302,6 @@
             </div>
         </div>
         <script async defer>
-            let contador = {{ $ultimoContador ?? 1 }};
-
-            function agregarRegistro() {
-                let campoIncremental = document.getElementById('campoIncremental');
-                campoIncremental.value = ('00' + contador).slice(-2);
-                contador++;
-            }
-
             document.addEventListener("DOMContentLoaded", function () {
                 // Obtener el modal y el botón para abrirlo
                 var modal = document.getElementById("myModal");
@@ -379,7 +371,6 @@
                     }, 1000);
                 }
             });
-            agregarRegistro();
         </script>
     </body>
 </html>
