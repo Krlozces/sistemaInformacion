@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Persona;
 use App\Models\Personal;
+use App\Models\Registro;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade AS PDF;
 use Illuminate\Support\Facades\Auth;
@@ -84,7 +85,10 @@ class ViewsController extends Controller
         $grado = Personal::select('grado')
                 ->where('usuario', Auth::user()->email)
                 ->first();
-        return view('extraccion', compact('personalAreaExtra', 'ultimoContador', 'grado'));
+        $codigo = Registro::select('numero_oficio')->first();
+        $codigo++;
+
+        return view('extraccion', compact('personalAreaExtra', 'ultimoContador', 'grado', 'codigo'));
     }
 
     public function tblCertificados(){
