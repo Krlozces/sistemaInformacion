@@ -12,7 +12,6 @@
 </head>
 
 <body>
-    @include('modalCambiarFoto')
     <header class="header">
         <div class="container">
             <div class="btn-menu">
@@ -22,11 +21,12 @@
                 <div class="logo w-[70%]">
                     <h1>Dosaje Etílico</h1>
                 </div>
-                <nav class="flex justify-between w-[20%] items-center relative">
-                    <div for="btn-menu1"> <img src="{{ asset('storage/' . auth()->user()->imagen_perfil) }}" class="w-1/2 rounded-full"> </div>
+                <nav class="menu">
+                    <label for="btn-menu1"> <img src="{{ asset('storage/' . auth()->user()->imagen_perfil) }}"
+                            class="imagen1"> </label>
                     <h3 class="expandable">{{ Auth::user()->name }}</h3>
                     <ul class="submenu">
-                        <li><a data-modal-target="modalCambiarImagen-{{ Auth::user()->id }}" data-modal-toggle="modalCambiarImagen-{{ Auth::user()->id }}"><i class="fa-solid fa-users-viewfinder"></i> Cambiar foto</a></li>
+                        <li id="openModalBtn"><i class="fa-solid fa-users-viewfinder"></i> Cambiar foto</li>
                         <li><a href="#"><i class="fa-solid fa-gear"></i> Configurar</a></li>
                     </ul>
                 </nav>
@@ -42,6 +42,23 @@
             </div>                  
         </div>
     </header>
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <div class="direccion">
+                <h3>Cambiar foto de perfil</h3>
+                <span class="close">&times;</span>
+            </div>
+
+            <div id="previewContainer">
+                <img id="previewImage" src="" alt="Foto">
+            </div>
+            <form method="POST" action="#" id="imageForm" enctype="multipart/form-data">
+                @csrf
+                <input type="file" id="imageInput" name="imagen" required>
+                <button class="azul" type="submit">Guardar</button>
+            </form>
+        </div>
+    </div>
     <!--CONTENIDO-->
     <div class="capa1">
         <form method="POST" action="{{ route('register-personal') }}" enctype="multipart/form-data">
@@ -202,5 +219,78 @@
             <label for="btn-menu"><i class="fa-solid fa-list"></i></label>
         </div>
     </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // Obtener el modal y el botón para abrirlo
+            var modal = document.getElementById("myModal");
+            var btn = document.getElementById("openModalBtn");
+            var span = document.getElementsByClassName("close")[0];
+            var mainImage = document.getElementById("mainImage");
+
+            var savedImage = sessionStorage.getItem("selectedImage");
+            if (savedImage) {
+                mainImage.src = savedImage;
+            }
+    
+            // Abrir el modal al hacer clic en el botón
+            btn.onclick = function () {
+                modal.style.display = "block";
+            }
+    
+            // Cerrar el modal al hacer clic en la "x"
+            span.onclick = function () {
+                modal.style.display = "none";
+            }
+    
+            // Cerrar el modal al hacer clic fuera del contenido del modal
+            window.onclick = function (event) {
+                if (event.target == modal) {
+                    modal.style.display = "none";
+                }
+            }
+    
+            // Previsualizar la imagen seleccionada antes de guardarla
+            var imageInput = document.getElementById("imageInput");
+            var previewImage = document.getElementById("previewImage");
+            imageInput.addEventListener("change", function () {
+                var file = this.files[0];
+                if (file) {
+                    var reader = new FileReader();
+                    reader.onload = function (e) {
+                        previewImage.src = e.target.result;
+                    }
+                    reader.readAsDataURL(file);
+                }
+            });
+    
+            // Enviar el formulario para guardar la imagen
+            var form = document.getElementById("imageForm");
+            form.onsubmit = function (event) {
+                event.preventDefault();
+                var formData = new FormData(form);
+                fetch("{{ route('cambiar-imagen', ['id' => Auth::user()->id]) }}", {
+                    method: "POST",
+                    body: formData
+                })
+                .then(data => {
+                    // alert(data.message);
+                    modal.style.display = "none";
+                    previewImage.src = "";
+                    mainImage.src = data.imageUrl;
+                    sessionStorage.setItem("selectedImage", data.imageUrl);
+                    
+                    
+                })
+                .catch(error => {
+                    console.error("Error al guardar la imagen:", error);
+                });
+                setTimeout(function () {
+                    window.location.reload();
+                }, 1000);
+            }
+        });
+    </script>
+    
+    
 </body>
 </html>
