@@ -27,6 +27,7 @@ class DataExport implements FromCollection, WithHeadings
         $elementos = Persona::select(
             'registros.id',
             DB::raw('DATE_FORMAT(CURDATE(), "%d/%m/%Y") as fecha_actual'),
+            'numero_oficio',
             'procedencia',
             DB::raw('CONCAT(apellido_paterno, " ", apellido_materno, " ", nombre) as nombre_completo'),
             DB::raw('DATE(fecha_hora_infraccion) as fecha_infraccion'), 
