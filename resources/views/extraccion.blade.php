@@ -64,8 +64,8 @@
                 </div>
 
                 <div class="input-general">
-                    <div class="input-group">
-                        <input class="codigo1" type="text" id="campoIncremental" name="codigo" readonly>
+                    <div>
+                        <input class="w-14" type="text" id="campoIncremental" name="codigo" readonly>
                     </div>
                 </div>
 
