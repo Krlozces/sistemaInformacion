@@ -59,6 +59,23 @@
             </div>
         @endif
     </div>
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <div class="direccion">
+                <h3>Cambiar foto de perfil</h3>
+                <span class="close">&times;</span>
+            </div>
+
+            <div id="previewContainer">
+                <img id="previewImage" src="" alt="Foto">
+            </div>
+            <form method="POST" action="#" id="imageForm" enctype="multipart/form-data">
+                @csrf
+                <input type="file" id="imageInput" name="imagen" required>
+                <button class="azul" type="submit">Guardar</button>
+            </form>
+        </div>
+    </div>
     <div class="informacion">
         <div class="container3">
             <!-- Contenedores que parecen botones -->
