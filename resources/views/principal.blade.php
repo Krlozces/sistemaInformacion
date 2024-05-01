@@ -146,8 +146,10 @@
                         <label for="grado">Grado del Personal:</label>
                         <select id="grado" name="grado" required>
                             <option selected disabled>----SELECCIONAR----</option>
-                            <option value="SubOficial">SUBOFICIAL</option>
-                            <option value="Mayor">MAYOR</option>
+                            <option value="S1-SPNP">S1 SPNP</option>
+                            <option value="S2-PNP">S2 PNP</option>
+                            <option value="ST1-PNP">ST1 PNP</option>
+                            <option value="MAYOR-S.PNP">MAY. S.PNP</option>
                         </select>
                     </div>
     
