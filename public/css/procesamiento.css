@@ -285,9 +285,7 @@
 }
 
 h4 {
-    margin: 1px;
-
-    
+    margin: 1px; 
 }
 
  /*titulo del registro*/
@@ -423,6 +421,7 @@ input, select {
   border-radius: 5px;
   margin: 10px 0px;
   border: 1px solid #00961c;
+  resize: vertical;
 }
 
 
@@ -432,12 +431,20 @@ input, select {
   height: 60%;
   border-radius: 5px;
   margin: 20px 0px;
-  border: 2px solid #edfff0;
+  border: 1px solid #edfff0;
   background-color: #edfff0;
+  resize: vertical;
 }
 
 
-
+.codigo{
+  width: 8%; 
+  padding: 10px;
+  border-radius: 5px;
+  margin: 20px 10px;
+  border: 1px solid #00961c;
+  
+}
 
 
 

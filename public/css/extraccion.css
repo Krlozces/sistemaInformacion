@@ -358,26 +358,18 @@ input:focus {
   outline: none;
 }
 
- textarea {
-  width: 100%; /* Los inputs ocupan todo el ancho del grupo */
+textarea {
+  width: 100%;
   padding: 1px;
   border-radius: 5px;
   margin: 10px 0px;
   border: 1px solid #00961c;
+  height: 80px; /* Ajusta esta altura según lo necesites */
+  outline: none;
+  resize: vertical;
 }
 
-
-#resultado{
-  width: 100%; /* Los inputs ocupan todo el ancho del grupo */
-  padding: 20px;
-  height: 80%;
-  border-radius: 5px;
-  margin: 20px 0px;
-  border: 2px solid #bae0d1;
-  background-color: #bae0d1;
-}
-
-#codigo{
+.codigo1{
   width: 8%; 
   padding: 10px;
   border-radius: 5px;
