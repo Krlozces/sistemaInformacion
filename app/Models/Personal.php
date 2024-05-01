@@ -13,7 +13,7 @@ class Personal extends Model
     protected $fillable = [
         'persona_id',
         'genero',
-        'grado',
+        'grado_id',
         'unidad_perteneciente',
         'area_perteneciente',
         'direccion',
@@ -29,6 +29,10 @@ class Personal extends Model
 
     public function registro(){
         return $this->hasMany(Registro::class);
+    }
+
+    public function grado(){
+        return $this->belongsTo(Grado::class);
     }
 
 }
