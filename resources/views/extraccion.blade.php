@@ -65,7 +65,7 @@
 
                 <div class="input-general">
                     <div>
-                        <input class="w-14" type="text" id="campoIncremental" name="codigo" readonly>
+                        <input class="w-14" type="text" value="{{ $nuevoCodigo }}" id="campoIncremental" name="numero_oficio" readonly>
                     </div>
                 </div>
 
