@@ -160,7 +160,7 @@ class RegisterController extends Controller
         $muestraId['muestra_id'] = $muestra->id;
         $intervenidoId['intervenido_id'] = $intervenido->id ;
         $registroCert = Registro::create(array_merge(
-            $request->only(['recepcion_doc_referencia', 'motivo', 'extractor', 'fecha', 'hora']),
+            $request->only(['recepcion_doc_referencia', 'motivo', 'extractor', 'fecha', 'hora', 'numero_oficio']),
             $muestraData,
             $muestraId,
             $intervenidoId,

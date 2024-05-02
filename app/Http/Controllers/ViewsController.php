@@ -89,7 +89,9 @@ class ViewsController extends Controller
                 ->join('grados', 'grados.id', '=', 'personal.grado_id')
                 ->where('usuario', Auth::user()->email)
                 ->first();
-        return view('extraccion', compact('personalAreaExtra', 'grado'));
+        $ultimoCodigo = Registro::max('numero_oficio');
+        $nuevoCodigo = ($ultimoCodigo !== null) ? $ultimoCodigo + 1 : 629;
+        return view('extraccion', compact('personalAreaExtra', 'grado', 'nuevoCodigo'));
     }
 
     public function tblCertificados(){
