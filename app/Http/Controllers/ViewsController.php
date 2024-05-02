@@ -89,7 +89,7 @@ class ViewsController extends Controller
                 ->join('grados', 'grados.id', '=', 'personal.grado_id')
                 ->where('usuario', Auth::user()->email)
                 ->first();
-        return view('extraccion', compact('personalAreaExtra', 'ultimoContador', 'grado'));
+        return view('extraccion', compact('personalAreaExtra', 'grado'));
     }
 
     public function tblCertificados(){
