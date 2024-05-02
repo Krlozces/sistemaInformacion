@@ -77,7 +77,7 @@ class DataExport implements FromCollection, WithHeadings
         return [
             'N°', // ready
             'FECHA', // ready
-            'N° DE OFICIO',
+            'N° DE OFICIO', //ready
             'COMISARIA', // ready
             'APELLIDOS Y NOMBRES', // ready
             'FECHA DE INFRACCION', // ready
