@@ -11,6 +11,7 @@ class Registro extends Model
     protected $table = 'registros';
     protected $fillable = [
         'recepcion_doc_referencia',
+        'numero_oficio',
         'fecha_hora_infraccion',
         'fecha_hora_extraccion',
         'fecha',
