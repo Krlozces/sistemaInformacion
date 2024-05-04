@@ -152,6 +152,10 @@
                             <option value="MAYOR-S.PNP">MAY. S.PNP</option>
                         </select>
                     </div>
+                    <div class="input-group5" id="procesador" style="display: none;">
+                        <label for="colegiatura">Colegiatura: </label>
+                        <input type="text" id="colegiatura" name="certificado" oninput="convertirMayusculas(this)" maxlength="10">
+                    </div>
     
                     <div class="input-group5">
                         <label for="area_perteneciente">Área Preteneciente:</label>
