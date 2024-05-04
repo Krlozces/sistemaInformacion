@@ -14,6 +14,7 @@ class Personal extends Model
         'persona_id',
         'genero',
         'grado_id',
+        'certificado_id',
         'unidad_perteneciente',
         'area_perteneciente',
         'direccion',
@@ -35,4 +36,7 @@ class Personal extends Model
         return $this->belongsTo(Grado::class);
     }
 
+    public function certificado(){
+        return $this->belongsTo(Certificado::class,'certificado_id');
+    }
 }
