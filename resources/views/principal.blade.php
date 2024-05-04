@@ -144,7 +144,7 @@
                     </div>
                     <div class="input-group5">
                         <label for="grado">Grado del Personal:</label>
-                        <select id="grado" name="grado" required>
+                        <select id="grado" name="grado" required onchange="mostrarColegiatura()">
                             <option selected disabled>----SELECCIONAR----</option>
                             <option value="S1-SPNP">S1 SPNP</option>
                             <option value="S2-PNP">S2 PNP</option>
