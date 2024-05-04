@@ -37,6 +37,7 @@ class DataExport implements FromCollection, WithHeadings
             DB::raw('TIMESTAMPDIFF(MINUTE, fecha_hora_infraccion, fecha_hora_extraccion) as tiempo_transcurrido_minutos'),
             'dni',
             'resultado_cuantitativo',
+            'certificado',
             'motivo', 
             'intervenidos.edad',
             'persona', 'procesador')
@@ -48,27 +49,8 @@ class DataExport implements FromCollection, WithHeadings
         ->join('unidades', 'unidades.procedencia_id', '=', 'comisarias.id')
         ->join('muestras', 'muestras.id', '=', 'registros.muestra_id')
         ->join('metodos', 'muestras.metodo_id', '=', 'metodos.id')
+        ->join('certificados', 'certificados.id', '=', 'personal.certificado_id')
         ->get();
-        // $registro = Registro::select(
-        //     'registros.id', 
-        //     DB::raw('DATE_FORMAT(CURDATE(), "%d/%m/%Y") as fecha_actual'),
-        //     'procedencia', 
-        //     'registros.id', 
-        //     'procedencia', 
-        //     'procedencia',  
-        //     DB::raw('DATE(fecha_hora_infraccion) as fecha_infraccion'), 
-        //     DB::raw('TIME(fecha_hora_infraccion) as hora_infraccion'), 
-        //     DB::raw('DATE(fecha_hora_extraccion) as fecha_extraccion'), 
-        //     DB::raw('TIME(fecha_hora_extraccion) as hora_extraccion'),
-        //     DB::raw('TIMESTAMPDIFF(MINUTE, fecha_hora_infraccion, fecha_hora_extraccion) as tiempo_transcurrido_minutos'),
-        //     'muestras.resultado_cuantitativo', 
-        //     'motivo', 
-        //     'interveidos.edad'
-        // )
-        //     ->join('comisarias', 'comisarias.id', '=', 'registros.comisaria_id')
-        //     ->join('muestras', 'muestras.id', '=', 'registros.muestra_id')
-        //     ->join('intervenidos', 'intervenidos.id', '=', 'registros.intervenido_id')
-        //     ->get();
 
         return $elementos;
     }
@@ -88,7 +70,7 @@ class DataExport implements FromCollection, WithHeadings
             'DNI', // ready
             'RESULTADO (G/L)', // ready
             'PROCESADOR',
-            'COLEGIATURA PROCESADOR',
+            'COLEGIATURA PROCESADOR', //ready
             'MOTIVO', // ready
             'EDAD', // ready
             'N° DE CERTIFICADO DD.EE'
