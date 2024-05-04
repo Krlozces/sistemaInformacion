@@ -14,10 +14,11 @@ use App\Models\Personal;
 use App\Models\Registro;
 use App\Models\Comisaria;
 use App\Models\Extraccion;
+use App\Models\Certificado;
 use App\Models\Intervenido;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Spatie\Permission\Models\Role;
+use Illuminate\Support\Facades\Auth;
 use Spatie\Permission\Models\Permission;
 
 class RegisterController extends Controller
@@ -57,6 +58,12 @@ class RegisterController extends Controller
             $incomingFields['imagen_perfil'] = $imagenNombre;
         }
 
+        $certificado = '';
+
+        if($request->certificado){
+            $certificado =  Certificado::firstOrCreate($request->only('certificado'));
+        }
+
         // Crear una nueva persona
         $persona = Persona::create($request->only(['dni', 'nombre', 'apellido_paterno', 'apellido_materno']));
 
@@ -70,13 +77,15 @@ class RegisterController extends Controller
             'direccion' => $request->direccion,
             'telefono' => $request->telefono,
             'usuario' => $request->usuario,
-            'password'=> $request->password
+            'password'=> $request->password,
         ]);
 
         // Asignar el ID de la persona al personal
         $personal->persona_id = $persona->id;
 
         $personal->grado_id = $grado->id;
+
+        $personal->certificado_id = $certificado->id;
         
         // Guardar el personal
         $personal->save();
