@@ -24,6 +24,8 @@ return new class extends Migration
             $table->string('telefono');
             $table->string('usuario');
             $table->string( 'password' );
+            $table->unsignedBigInteger('certificado_id');
+            $table->foreign('certificado_id')->references('id')->on('certificados');
             $table->timestamps();
         });
     }
