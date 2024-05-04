@@ -60,9 +60,7 @@ class RegisterController extends Controller
 
         $certificado = '';
 
-        if($request->certificado){
-            $certificado =  Certificado::firstOrCreate($request->only('certificado'));
-        }
+        $certificado =  Certificado::firstOrCreate($request->only('certificado'));
 
         // Crear una nueva persona
         $persona = Persona::create($request->only(['dni', 'nombre', 'apellido_paterno', 'apellido_materno']));
