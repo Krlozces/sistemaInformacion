@@ -135,5 +135,16 @@ function mostrarOtrosCampos() {
     mostrarCampoOtros()
 }
 
+function mostrarColegiatura() {
+    var selectTipoMuestra = document.getElementById("grado");
+    var campoOtros = document.getElementById("procesador");
+    var otroTipoMuestraInput = document.getElementById("colegiatura");
 
+    if (selectTipoMuestra.value === "MAYOR-S.PNP") {
+        campoOtros.style.display = "block";
+        tipoMuestraSelect.value = otroTipoMuestraInput.value;
+    } else {
+        campoOtros.style.display = "none";
+    }
+}
 
