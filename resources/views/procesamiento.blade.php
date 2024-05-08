@@ -208,7 +208,7 @@
 
                     <div class="input-group3">
                         <label for="resultado_cualitativo">Resultado cualitativo:</label>
-                        <select id="resultado_cualitativo" name="resultado_cualitativo">
+                        <select id="resultado_cualitativo" name="resultado_cualitativo" onchange="mostrarIncurso()">
                             <option disabled selected>--SELECCIONAR--</option>
                             <option value="positivo" {{ $elemento->resultado_cualitativo == 'positivo' ? 'selected' : '' }}>POSITIVO</option>
                             <option value="negativo" {{ $elemento->resultado_cualitativo == 'negativo' ? 'selected' : '' }}>NEGATIVO</option>
@@ -261,6 +261,14 @@
                     <div class="input-group1">
                         <label for="numeroDecimal">Resultado(g/L):</label>
                         <input type="number" id="numeroDecimal" step="0.01" onchange="convertirNumeroALetras()" name="resultado_cuantitativo" value="{{ $elemento->resultado_cuantitativo ?? '' }}"> 
+                    </div>
+                    <div class="input-group" style="display: none;">>
+                        <label for="modificar">Sin Nombre:</label>
+                        <select id="modificar" name="incurso">
+                            <option value="" selected disabled>--SELECCIONAR--</option>
+                            <option value="1">M.1</option>
+                            <option value="2">M.2</option>
+                        </select>
                     </div>
                     <div class="input-group1">
                         <label for="resultado"></label>
