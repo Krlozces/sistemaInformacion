@@ -33,6 +33,7 @@ return new class extends Migration
             $table->foreign( 'extraccion_id' )->references( 'id' )->on( 'extraccion' );
             $table->unsignedBigInteger('usuario_id');
             $table->foreign( 'usuario_id' )->references('id')->on('users');
+            $table->char('incurso')->nullable()->default('');
             $table->timestamps();
         });
     }
