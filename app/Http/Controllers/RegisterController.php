@@ -201,7 +201,8 @@ class RegisterController extends Controller
     public function registerProcesamiento(Request $request){
         $dataProcesamiento = $request->validate([
             'procesador' => ['required'],
-            'resultado_cuantitativo' => ['required']
+            'resultado_cuantitativo' => ['required'],
+            'incurso' => ['nullable', 'string']
         ]);
 
         $dataExtraccion = $request->only([
@@ -231,9 +232,18 @@ class RegisterController extends Controller
         
         $registro = Registro::where('recepcion_doc_referencia', $dataExtraccion['recepcion_doc_referencia'])->first();
         if ($registro) {
-            $registro->update([
-                'procesador' => $dataProcesamiento['procesador']
-            ]);
+
+            if (isset($dataProcesamiento['incurso'])) {
+                $registro->update([
+                    'procesador' => $dataProcesamiento['procesador'],
+                    'incurso' => $dataProcesamiento['incurso']
+                ]);
+            } else {
+                $registro->update([
+                    'procesador' => $dataProcesamiento['procesador'],
+                ]);
+            }
+            
             $muestra = $registro->muestra;
 
             if ($muestra) {
