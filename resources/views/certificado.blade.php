@@ -279,7 +279,7 @@
                                 </p>
                                 <div style="width: 100%; height: 20px; border:1px solid black; padding: 10px; margin-left: 10px;">
                                     <p style="text-align: center;">
-                                        INCURSO EN EL ART. 269 (M.2) DS. N° 016-2009-MTC DEL 21 ABR 2009 MODIFICADO POR EL ART. 1° DEL DS N°029-2009-MTC DEL 19JUL2009
+                                        INCURSO EN EL ART. 269 ({{ $elementos->incurso }}) DS. N° 016-2009-MTC DEL 21 ABR 2009 MODIFICADO POR EL ART. 1° DEL DS N°029-2009-MTC DEL 19JUL2009
                                     </p>
                                 </div>
                                 <div style="margin:0 auto; height:4px; width:80px; border-top:1px solid black; margin-top:2px;"></div>
