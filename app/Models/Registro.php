@@ -24,7 +24,8 @@ class Registro extends Model
         'usuario_id',
         'extractor',
         'procesador',
-        'conclusiones'
+        'conclusiones',
+        'incurso'
     ];
     public function intervenido(){
         return $this->belongsTo(Intervenido::class);
