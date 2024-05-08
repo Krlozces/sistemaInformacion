@@ -148,3 +148,13 @@ function mostrarColegiatura() {
     }
 }
 
+function mostrarIncurso(){
+    let incurso=document.getElementById("resultado_cualitativo");
+    let modificar = document.getElementById("modificar");
+    if(incurso.value === 'NEGACIÓN'){
+        modificar.style.display = 'block'; 
+    }else{
+        modificar.style.display = 'none';  
+    }
+}
+
