@@ -16,40 +16,37 @@ class DataExport implements FromCollection, WithHeadings
     */
     public function collection()
     {
-        $personalProcesamiento = Personal::where('area_perteneciente', 'areapro')
-        ->with('Persona')
-        ->get();
-
-        $elementos = Persona::join('intervenidos', 'intervenidos.persona_id', '=', 'personas.id')
-        ->select('dni', 'nombre', 'apellido_paterno', 'apellido_materno')
-        ->get();
-
-        $elementos = Persona::select(
+        $elementos = Registro::select(
             'registros.id',
             DB::raw('DATE_FORMAT(CURDATE(), "%d/%m/%Y") as fecha_actual'),
             'numero_oficio',
             'procedencia',
-            DB::raw('CONCAT(apellido_paterno, " ", apellido_materno, " ", nombre) as nombre_completo'),
-            DB::raw('DATE(fecha_hora_infraccion) as fecha_infraccion'), 
-            DB::raw('TIME(fecha_hora_infraccion) as hora_infraccion'), 
-            DB::raw('DATE(fecha_hora_extraccion) as fecha_extraccion'), 
-            DB::raw('TIME(fecha_hora_extraccion) as hora_extraccion'),
-            DB::raw('TIMESTAMPDIFF(MINUTE, fecha_hora_infraccion, fecha_hora_extraccion) as tiempo_transcurrido_minutos'),
-            'dni',
-            'resultado_cuantitativo',
-            'certificado',
-            'motivo', 
+            DB::raw('CONCAT(personas.apellido_paterno, " ", personas.apellido_materno, " ", personas.nombre) as nombre_completo'),
+            DB::raw('DATE(registros.fecha_hora_infraccion) as fecha_infraccion'),
+            DB::raw('TIME(registros.fecha_hora_infraccion) as hora_infraccion'),
+            DB::raw('DATE(registros.fecha_hora_extraccion) as fecha_extraccion'),
+            DB::raw('TIME(registros.fecha_hora_extraccion) as hora_extraccion'),
+            DB::raw('TIMESTAMPDIFF(MINUTE, registros.fecha_hora_infraccion, registros.fecha_hora_extraccion) as tiempo_transcurrido_minutos'),
+            'personas.dni',
+            'muestras.resultado_cuantitativo',
+            DB::raw('CONCAT(pro.apellido_paterno, " ", pro.apellido_materno, " ", pro.nombre) as nombre_procesador'),
+            'certificados.certificado',
+            'registros.motivo',
             'intervenidos.edad',
-            'persona', 'procesador')
-        ->join('intervenidos', 'intervenidos.persona_id', '=', 'personas.id')
+            'numero_oficio'
+        )
+        ->join('intervenidos', 'registros.intervenido_id', '=', 'intervenidos.id')
+        ->join('personas', 'intervenidos.persona_id', '=', 'personas.id')
         ->join('licencias', 'intervenidos.id', '=', 'licencias.intervenido_id')
         ->join('clases', 'licencias.clase_id', '=', 'clases.id')
-        ->join('registros', 'registros.intervenido_id', '=', 'intervenidos.id')
         ->join('comisarias', 'registros.comisaria_id', '=', 'comisarias.id')
         ->join('unidades', 'unidades.procedencia_id', '=', 'comisarias.id')
-        ->join('muestras', 'muestras.id', '=', 'registros.muestra_id')
+        ->join('muestras', 'registros.muestra_id', '=', 'muestras.id')
         ->join('metodos', 'muestras.metodo_id', '=', 'metodos.id')
+        ->join('personal', 'personal.id', '=', 'registros.procesador')
         ->join('certificados', 'certificados.id', '=', 'personal.certificado_id')
+        ->join('personas as pro', 'personal.persona_id', '=', 'pro.id')
+        ->where('personal.area_perteneciente', 'areapro')
         ->get();
 
         return $elementos;
