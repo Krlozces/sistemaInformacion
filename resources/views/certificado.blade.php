@@ -124,12 +124,12 @@
         </div>
         <div class="section">
             {{-- @dd($elementos['unidad']['grado']) --}}
-            <p class="section2" style="margin-bottom: 10px;">CERTIFICADO DE DOSAJE ETÍLICO N°0029 - {{ $elementos->recepcion_doc_referencia }}</p>
+            <p class="section2" style="margin-bottom: 10px;">CERTIFICADO DE DOSAJE ETÍLICO N°{{ $elementos->numero_oficio }} - {{ $elementos->recepcion_doc_referencia }}</p>
             <table style="border-collapse: collapse;">
                 <tr>
                     <td colspan="6">Registro de Dosaje N°</td>
                     <td>:</td>
-                    <td colspan="6">{{ $elementos->recepcion_doc_referencia }}</td>
+                    <td colspan="6">{{ $elementos->numero_oficio }}</td>
                 </tr>
                 <tr>
                     <td colspan="6">Apellidos y Nombres del usuario</td>
