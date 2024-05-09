@@ -262,9 +262,9 @@
                         <label for="numeroDecimal">Resultado(g/L):</label>
                         <input type="number" id="numeroDecimal" step="0.01" onchange="convertirNumeroALetras()" name="resultado_cuantitativo" value="{{ $elemento->resultado_cuantitativo ?? '' }}"> 
                     </div>
-                    <div class="input-group" style="display: none;">>
-                        <label for="modificar">Sin Nombre:</label>
-                        <select id="modificar" name="incurso">
+                    <div class="input-group" id="modificar"style="display: none;">
+                        <label for="incurso">Incurso:</label>
+                        <select id="incurso" name="incurso">
                             <option value="" selected disabled>--SELECCIONAR--</option>
                             <option value="1">M.1</option>
                             <option value="2">M.2</option>
