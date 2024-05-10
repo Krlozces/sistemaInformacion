@@ -33,7 +33,7 @@ class DataExport implements FromCollection, WithHeadings
             'certificados.certificado',
             'registros.motivo',
             'intervenidos.edad',
-            'numero_oficio'
+            'recepcion_doc_referencia'
         )
         ->join('intervenidos', 'registros.intervenido_id', '=', 'intervenidos.id')
         ->join('personas', 'intervenidos.persona_id', '=', 'personas.id')
