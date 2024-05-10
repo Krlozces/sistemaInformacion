@@ -24,6 +24,9 @@ Route::get('/', function () {
 Route::get('/confirmar-password', [ViewsController::class, 'confirmarPassword'])->name('confirmar-password');
 Route::get('/ingresar-datos', [ViewsController::class, 'ingresoDatos'])->name('ingresar-datos');
 
+// Comisarias
+Route::get('/obtener-comisarias', [ViewsController::class, 'obtenerComisarias'])->name('obtener-comisarias');
+
 
 Route::get('/registrarte', [ViewsController::class, 'registrarte'])->name('registrarte');
 Route::get('/registrar-extraccion', [ViewsController::class, 'extraccion'])->name('registrar-extraccion');
