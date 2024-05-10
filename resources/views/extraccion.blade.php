@@ -371,6 +371,45 @@
                     }, 1000);
                 }
             });
+
+            // Comisarias sugerencia
+            async function autocompleteComisarias() {
+                const comisariaInput = document.getElementById('procedencia');
+
+                comisariaInput.addEventListener('input', async (e) => {
+                    const searchTerm = e.target.value.toUpperCase();
+                    
+                    const response = await fetch(`/obtener-comisarias`);
+                    const comisarias = await response.json();
+
+                    const filteredComisarias = comisarias.filter(comisaria =>
+                        comisaria.procedencia.toUpperCase().includes(searchTerm)
+                    );
+
+                    const suggestions = filteredComisarias.map(comisaria => comisaria.procedencia);
+                    
+                    comisariaInput.setAttribute('autocomplete', 'off');
+                    comisariaInput.setAttribute('list', 'suggestionsList');
+
+                    const datalist = document.createElement('datalist');
+                    datalist.id = 'suggestionsList';
+
+                    suggestions.forEach(suggestion => {
+                        const option = document.createElement('option');
+                        option.value = suggestion;
+                        datalist.appendChild(option);
+                    });
+
+                    const existingDatalist = document.getElementById('suggestionsList');
+                    if (existingDatalist) {
+                        existingDatalist.parentNode.removeChild(existingDatalist);
+                    }
+
+                    document.body.appendChild(datalist);
+                });
+            }
+
+            autocompleteComisarias();
         </script>
     </body>
 </html>
