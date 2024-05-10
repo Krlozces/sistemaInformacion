@@ -99,14 +99,17 @@
         table{
             width: 90%;
             margin: 10px 20px;
+            /* border: 1px solid black; */
         }
 
         td{
             padding: 10px 0;
+            /* border: 1px solid red; */
         }
 
         tr{
             width: 100%;
+            /* border: 1px solid blue; */
         }
         
     </style>
@@ -241,9 +244,9 @@
                     </td>
                 </tr>
                 <tr>
-                    <td>Grado</td>
+                    <td colspan="6">Grado</td>
                     <td>:</td>
-                    <td>
+                    <td colspan="2">
                         @if ($elementos->description == 'SIN MUESTRA')
                             <div style="margin:0 auto; height:1px; width:120px; border-top:1px solid black;"></div>                           
                         @else
