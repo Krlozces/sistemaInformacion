@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Persona;
 use App\Models\Personal;
 use App\Models\Registro;
+use App\Models\Comisaria;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade AS PDF;
 use Illuminate\Support\Facades\Auth;
@@ -169,5 +170,10 @@ class ViewsController extends Controller
         }
 
         return ucfirst($parteEnteraEnPalabras . " GRAMOS " . $parteDecimalEnPalabras . " CENTIGRAMOS DE ALCOHOL POR LITRO DE SANGRE");
+    }
+
+    public function obtenerComisarias(){
+        $comisarias = Comisaria::select('procedencia')->get();
+        return response()->json($comisarias);
     }
 }
