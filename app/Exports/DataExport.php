@@ -19,6 +19,7 @@ class DataExport implements FromCollection, WithHeadings
         $elementos = Registro::select(
             'registros.id',
             DB::raw('DATE_FORMAT(CURDATE(), "%d/%m/%Y") as fecha_actual'),
+            'recepcion_doc_referencia',
             'numero_oficio',
             'procedencia',
             DB::raw('CONCAT(personas.apellido_paterno, " ", personas.apellido_materno, " ", personas.nombre) as nombre_completo'),
@@ -28,12 +29,14 @@ class DataExport implements FromCollection, WithHeadings
             DB::raw('TIME(registros.fecha_hora_extraccion) as hora_extraccion'),
             DB::raw('TIMESTAMPDIFF(MINUTE, registros.fecha_hora_infraccion, registros.fecha_hora_extraccion) as tiempo_transcurrido_minutos'),
             'personas.dni',
-            'muestras.resultado_cuantitativo',
+            DB::raw('CAST(muestras.resultado_cuantitativo AS DECIMAL(10,2)) AS resultado_cuantitativo'),
+            // CAST(muestras.resultado_cuantitativo AS DECIMAL(10,2)) AS resultado_cuantitativo
+            // 'muestras.resultado_cuantitativo',
             DB::raw('CONCAT(pro.apellido_paterno, " ", pro.apellido_materno, " ", pro.nombre) as nombre_procesador'),
             'certificados.certificado',
             'registros.motivo',
             'intervenidos.edad',
-            'recepcion_doc_referencia'
+            DB::raw('CONCAT(numero_oficio, "-", recepcion_doc_referencia) as certificado_ddee'),
         )
         ->join('intervenidos', 'registros.intervenido_id', '=', 'intervenidos.id')
         ->join('personas', 'intervenidos.persona_id', '=', 'personas.id')
@@ -54,22 +57,23 @@ class DataExport implements FromCollection, WithHeadings
 
     public function headings(): array{
         return [
-            'N°', // ready
-            'FECHA', // ready
-            'N° DE OFICIO', //ready
-            'COMISARIA', // ready
-            'APELLIDOS Y NOMBRES', // ready
-            'FECHA DE INFRACCION', // ready
-            'HORA DE INFRACCION', // ready
-            'FECHA DE EXTRACCION', // ready
-            'HORA DE EXTRACCION', // ready
-            'TIEMPO TRANSCURRIDO', // ready
-            'DNI', // ready
-            'RESULTADO (G/L)', // ready
+            'N°',
+            'FECHA',
+            'REGISTRO',
+            'N° DE OFICIO',
+            'COMISARIA',
+            'APELLIDOS Y NOMBRES',
+            'FECHA DE INFRACCION',
+            'HORA DE INFRACCION',
+            'FECHA DE EXTRACCION',
+            'HORA DE EXTRACCION',
+            'TIEMPO TRANSCURRIDO',
+            'DNI',
+            'RESULTADO (G/L)',
             'PROCESADOR',
-            'COLEGIATURA PROCESADOR', //ready
-            'MOTIVO', // ready
-            'EDAD', // ready
+            'COLEGIATURA PROCESADOR',
+            'MOTIVO',
+            'EDAD',
             'N° DE CERTIFICADO DD.EE'
         ];
     }
