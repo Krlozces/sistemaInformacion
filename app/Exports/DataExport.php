@@ -25,10 +25,10 @@ class DataExport implements FromCollection, WithHeadings
             'numero_oficio',
             'procedencia',
             DB::raw('CONCAT(personas.apellido_paterno, " ", personas.apellido_materno, " ", personas.nombre) as nombre_completo'),
-            DB::raw('DATE(registros.fecha_hora_infraccion) as fecha_infraccion'),
-            DB::raw('TIME(registros.fecha_hora_infraccion) as hora_infraccion'),
-            DB::raw('DATE(registros.fecha_hora_extraccion) as fecha_extraccion'),
-            DB::raw('TIME(registros.fecha_hora_extraccion) as hora_extraccion'),
+            DB::raw('DATE_FORMAT(registros.fecha_hora_infraccion, "%d/%m/%Y") as fecha_infraccion'),
+            DB::raw('DATE_FORMAT(registros.fecha_hora_infraccion, "%H:%i") as hora_infraccion'),
+            DB::raw('DATE_FORMAT(registros.fecha_hora_extraccion, "%d/%m/%Y") as fecha_extraccion'),
+            DB::raw('DATE_FORMAT(registros.fecha_hora_extraccion, "%H:%i") as hora_extraccion'),
             DB::raw('TIME_FORMAT(
                 SEC_TO_TIME(
                     TIMESTAMPDIFF(MINUTE, registros.fecha_hora_infraccion, registros.fecha_hora_extraccion) * 60
