@@ -9,9 +9,10 @@ use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use PhpOffice\PhpSpreadsheet\Style\Alignment;
 use Maatwebsite\Excel\Concerns\FromCollection;
+use Maatwebsite\Excel\Concerns\WithStyles;
 use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 
-class DataExport implements FromCollection, WithHeadings
+class DataExport implements FromCollection, WithHeadings, WithStyles
 {
     /**
     * @return \Illuminate\Support\Collection
@@ -179,7 +180,7 @@ class DataExport implements FromCollection, WithHeadings
                 'vertical' => Alignment::VERTICAL_CENTER,
             ],
         ]);
-        // Establecer estilos de alineación centrada para las celdas en el rango
+        
         $sheet->getStyle($range4)->applyFromArray([
             'alignment' => [
                 'horizontal' => Alignment::HORIZONTAL_CENTER,
