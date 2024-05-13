@@ -96,7 +96,7 @@ class RegisterController extends Controller
             'imagen_perfil' => $incomingFields['imagen_perfil']
         ]);
 
-        if($personal['unidad_perteneciente'] == 'areaextra'){
+        if($personal['area_perteneciente'] == 'areaextra'){
             Role::firstOrCreate(['name' => 'extractor']);
             $usuario->assignRole('extractor');
         }else{
