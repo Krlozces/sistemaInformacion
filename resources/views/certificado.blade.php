@@ -304,8 +304,9 @@
                 </table>
                 <table>
                     <tr>
-                        <td class="espaciado">CONCLUSIONES</td>
+                        <td class="espaciado" colspan="6">CONCLUSIONES</td>
                         <td>:</td>
+                        <td colspan="2">{{ $elementos->conclusiones }}</td>
                         <td style="text-align: end;">
                             <?php
                             $fecha = \Carbon\Carbon::now();
