@@ -191,9 +191,6 @@
                             <label for="nombre_policial">Nombre - Apellidos - Grado:</label>
                             <input type="text" id="nombre_policial" name="nombre_policial" required oninput="convertirMayusculas(this)">
                         </div>
-
-                    </div>
-                    <div class="input-general2">
                         <div class="input-group2">
                             <label for="motivo">Motivo:</label>
                             <input type="text" id="motivo" name="motivo" oninput="validarLetras(this)">
