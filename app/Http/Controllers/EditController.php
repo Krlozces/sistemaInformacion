@@ -12,7 +12,7 @@ class EditController extends Controller
         $user = User::find($id);
         
         if (!Hash::check($request->password, $user->password)) {
-            return response()->with('error', 'La contraseña actual es incorrecta');
+            return redirect()->route('home')->with('error', 'La contraseña actual es incorrecta');
         }
 
         $request->validate([
@@ -23,6 +23,6 @@ class EditController extends Controller
         $user->password = Hash::make($request->password);
         $user->save();
 
-        return response()->with('success', 'Contraseña cambiada con éxito');
+        return redirect()->route('home')->with('success', 'Contraseña cambiada con éxito');
     }
 }
