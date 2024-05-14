@@ -11,14 +11,13 @@ class EditController extends Controller
     public function cambiarPassword($id, Request $request){
         $user = User::find($id);
         
-        if (!Hash::check($request->password_actual, $user->password)) {
+        if (!Hash::check($request->password, $user->password)) {
             return response()->with('error', 'La contraseña actual es incorrecta');
         }
 
-        $incomingFields = $request->validate([
+        $request->validate([
             'newPassword' => ['required', 'min:8'],
-            'nombre' => ['required'],
-            'apellido_paterno' => ['required']
+            'confirmedPassword' => ['required', 'same:newPassword']
         ]);
 
         $user->password = Hash::make($request->password);
