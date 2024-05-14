@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\EditController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ViewsController;
 use App\Http\Controllers\ExportController;
@@ -43,6 +44,9 @@ Route::post('/register-personal', [RegisterController::class, 'registerPersonal'
 Route::post('/register-procesamiento', [RegisterController::class, 'registerProcesamiento'])->name('register-procesamiento');
 
 Route::post('/cambiar-imagen/{id}', [RegisterController::class, 'changeImage'])->name('cambiar-imagen');
+
+// Change password
+Route::post('/cambiar-password/{id}', [EditController::class, 'cambiarPassword'])->name('cambiar-password');
 
 //Rutas protegidas por autenticación de usuario
 Route::group(['middleware' => ['auth']], function(){
