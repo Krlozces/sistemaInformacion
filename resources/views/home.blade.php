@@ -52,19 +52,7 @@
             </script>                  
         </div>
     </header>
-    <div>
-        @if (session('success'))
-            <div class="alert alert-success">
-                {{ session('success') }}
-            </div>
-        @endif
-
-        @if (session('error'))
-            <div class="alert alert-danger">
-                {{ session('error') }}
-            </div>
-        @endif
-    </div>
+    
     <div id="myModal" class="modal">
         <div class="modal-content">
             <div class="direccion">
@@ -96,6 +84,7 @@
             <!-- Modal body -->
             <div class="p-4 md:p-5">
                 <form method="POST" class="space-y-4" action="{{ route('cambiar-password', ['id' => Auth::user()->id]) }}">
+                    @csrf
                     <div>
                         <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Email</label>
                         <input type="email" name="email" id="email" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" value={{ Auth::user()->email }} readonly />
@@ -117,8 +106,21 @@
             </div>
         </div>
     </div>
-
+    
     <div class="informacion">
+        <div>
+            @if (session('success'))
+                <div class="alert alert-success">
+                    {{ session('success') }}
+                </div>
+            @endif
+    
+            @if (session('error'))
+                <div class="alert alert-danger">
+                    {{ session('error') }}
+                </div>
+            @endif
+        </div>
         <div class="container3">
             <!-- Contenedores que parecen botones -->
             <div class="boton1">
