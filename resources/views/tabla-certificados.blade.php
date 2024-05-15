@@ -123,8 +123,9 @@
                     placeholder="Buscar por nombres, apellidos o códigos...">
                 <i class="fa-solid fa-magnifying-glass"></i>
             </div>
-            <button id="btnexel"><a id="letras" href="{{ route('exportar') }}"><i id="exel"
-                        class="fa-solid fa-file-excel"></i>Exportar</a></button>
+            <button id="btnexel">
+                <a id="letras" href="{{ route('exportar') }}"><i id="exel"class="fa-solid fa-file-excel"></i>Exportar</a>
+            </button>
         </div>
 
         <table id="dataTable">
@@ -154,7 +155,9 @@
                             <button id="editar" onclick="editEntry()"><a
                                     href="{{ route('procesamiento', ['dni' => $elemento->dni]) }}"><i
                                         class="fa-solid fa-pen-to-square"></i> Editar </a></button>
-                            <button id="ver"><a href="#"><i class="fa-solid fa-eye"></i> Ver</a></button>
+                            <button id="ver">
+                                <a href="{{ route('exportar-certificado', ['dni' => $elemento->dni]) }}"><i class="fa-solid fa-eye"></i> Ver</a>
+                            </button>
                             <button id="pdf">
                                 <a href="{{ route('generarPdf', ['dni' => $elemento->dni]) }}" target="_blank"><i
                                         id="icopdf" class="fa-regular fa-file-pdf"></i> Generar PDF</a>
