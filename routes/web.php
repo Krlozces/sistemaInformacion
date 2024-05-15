@@ -6,6 +6,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ViewsController;
 use App\Http\Controllers\ExportController;
 use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\CertifiedController;
 
 /*
 |--------------------------------------------------------------------------
@@ -65,6 +66,7 @@ Route::group(['middleware' => ['auth']], function(){
         Route::get('/tbl-certificados', [ViewsController::class, 'tblCertificados'])->name('tbl-certificados');
         Route::get('/generarPdf/{dni}', [ViewsController::class, 'generarPdf'])->name('generarPdf');
         Route::get('/exportar', [ExportController::class, 'export'])->name('exportar');
+        Route::get('/exportar-cert/{dni}', [CertifiedController::class, 'exportCertified'])->name('exportar-certificado');
     });
     
     //Editar Perfil
