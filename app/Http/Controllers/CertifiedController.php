@@ -8,7 +8,7 @@ use Maatwebsite\Excel\Facades\Excel;
 
 class CertifiedController extends Controller
 {
-    public function exportCertified(){
-        return Excel::download(new CertificadoExport, 'certificado.xlsx');
+    public function exportCertified($dni){
+        return Excel::download(new CertificadoExport($dni), 'certificado.xlsx');
     }
 }
