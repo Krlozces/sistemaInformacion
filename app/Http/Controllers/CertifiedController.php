@@ -9,7 +9,6 @@ use Maatwebsite\Excel\Facades\Excel;
 class CertifiedController extends Controller
 {
     public function exportCertified($dni){
-        // necesito que en el nombre salgo algo así FORMATO MESAÑO
         $fecha = \Carbon\Carbon::now();
         $numeroMes = $fecha->format('m');
         $nombresMeses = [
