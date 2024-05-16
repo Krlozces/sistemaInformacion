@@ -9,6 +9,6 @@ use Maatwebsite\Excel\Facades\Excel;
 class ExportController extends Controller
 {
     public function export(){
-        return Excel::download(new DataExport, 'data.xlsx');
+        return Excel::download(new DataExport, 'BASE DE DATOS.xlsx');
     }
 }
