@@ -8,8 +8,10 @@ use App\Models\Personal;
 use App\Models\Certificado;
 use Maatwebsite\Excel\Concerns\WithMapping;
 use Maatwebsite\Excel\Concerns\FromCollection;
+use Maatwebsite\Excel\Concerns\WithStyles;
+use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 
-class CertificadoExport implements FromCollection
+class CertificadoExport implements FromCollection, WithStyles
 {
     /**
     * @return \Illuminate\Support\Collection
@@ -81,7 +83,7 @@ class CertificadoExport implements FromCollection
 
         $data = collect([
             ['Numero de Oficio' => $elementos->numero_oficio . ' - ' . date('Y', strtotime($elementos->fecha_hora_infraccion))],
-            ['Apellido Paterno' => $elementos->apellido_paterno],
+            ['Apellido Paterno' => $elementos->apellido_paterno . ' ' . $elementos->apellido_materno . ' ' . $elementos->nombre],
             ['Edad' => $elementos->edad],
             ['Sexo' => $elementos->sexo],
             ['DNI' => $elementos->dni],
@@ -109,6 +111,25 @@ class CertificadoExport implements FromCollection
         ]);
 
         return $data;
+    }
+
+    public function styles(Worksheet $sheet)
+    {
+        // Ajustar el espaciado y el estilo
+        $sheet->getDefaultColumnDimension()->setWidth(30);
+        $sheet->getDefaultRowDimension()->setRowHeight(20);
+
+        // Estilo para la primera fila (encabezados)
+        $sheet->getStyle('A1:B1')->applyFromArray([
+            'font' => [
+                'bold' => true,
+                'size' => 12,
+            ],
+        ]);
+
+        return [
+            'B' => ['font' => ['bold' => true]],
+        ];
     }
 
 }
