@@ -709,7 +709,7 @@ input[type="file"]::placeholder {
 #email,
 #confirmedPassword,
 #newPassword, 
-#Password1{
+#currentPassword{
   width: calc(100% - 40px);
   padding: 8px;
   margin: 5px 0px;

@@ -159,7 +159,7 @@ function mostrarIncurso(){
 }
 
 function togglePasswordVisibility1() {
-    const passwordInput = document.getElementById("password");
+    const passwordInput = document.getElementById("currentPassword");
     const showPasswordIcon = document.getElementById("show-password1");
     if (passwordInput.getAttribute("type") === "password") {
         passwordInput.setAttribute("type", "text");

@@ -184,7 +184,7 @@
                     </div>
 
                     <div class="input-group5">
-                        <label for="image">Imagen:</label><br><br>
+                        <label for="image">Imagen:</label><br>
                         <input type="file" name="imagen" id="image" />
                     </div>
                 </div>
@@ -193,6 +193,9 @@
             <div class="almacenar">
                 <div class="Actualizar">
                     <button type="submit">Registrar</button>
+                </div>
+                <div class="ver">
+                    <button type="#">VER USUARIOS</button>
                 </div>
                 <div class="Enviar">
                     <button type="reset">Cancelar</button>
@@ -223,8 +226,8 @@
                         <i id="arroba" class="fa-solid fa-at"></i>
                     </div>
                     <div class="form-group">
-                        <label for="password" class="password-label"><i class="fas fa-lock"></i> Contraseña actual</label>
-                        <input type="password" name="password" id="password" placeholder="••••••••" required />
+                        <label for="currentPassword" class="password-label"><i class="fas fa-lock"></i> Contraseña actual</label>
+                        <input type="password" name="password" id="currentPassword" placeholder="••••••••" required />
                         <i class="fas fa-eye-slash" id="show-password1" onclick="togglePasswordVisibility1()"></i>
                     </div>
                     <div class="form-group">

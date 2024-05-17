@@ -91,8 +91,8 @@
                         <i id="arroba" class="fa-solid fa-at"></i>
                     </div>
                     <div class="form-group">
-                        <label for="password" class="password-label"><i class="fas fa-lock"></i> Contraseña actual</label>
-                        <input type="password" name="password" id="password" placeholder="••••••••" required />
+                        <label for="currentPassword" class="password-label"><i class="fas fa-lock"></i> Contraseña actual</label>
+                        <input type="password" name="password" id="currentPassword" placeholder="••••••••" required />
                         <i class="fas fa-eye-slash" id="show-password1" onclick="togglePasswordVisibility1()"></i>
                     </div>
                     <div class="form-group">
