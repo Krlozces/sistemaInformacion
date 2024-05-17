@@ -146,7 +146,7 @@
     
             <div class="boton4">
                 SEGUN MUESTRAS
-                <a href="">
+                <a href="#">
                     <i class="fa-solid fa-square-poll-vertical"></i>
                 </a>
             </div>
@@ -155,7 +155,7 @@
         <div class="container4">
             <div class="boton5">
                 SEGUN EDAD
-                <a href="">
+                <a href="#">
                     <i class="fa-solid fa-square-poll-vertical"></i>
                 </a>
             </div>
