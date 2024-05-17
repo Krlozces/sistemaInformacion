@@ -453,6 +453,66 @@ li {
     font-size: 2.5vw;
 }
 
+/* Estilos modal cambiar constraseña */
+.cambiar-password-form {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    border-radius: 5px;
+    color: #07314a;
+}
+
+.form-group {
+    margin-bottom: 15px;
+    position: relative;
+}
+
+#email,
+#confirmedPassword,
+#newPassword, 
+#Password1{
+    width: calc(100% - 40px);
+    padding: 8px;
+    margin: 5px 0px;
+    border-radius: 4px;
+    border: 1px solid #008cff;
+    box-sizing: border-box;
+    padding: 8px;
+}
+
+#show-password1, #show-password2, #show-password3, #arroba{
+    position: absolute;
+    top: 50%;
+    right: 8px;
+    transform: translateY(-22%);
+    cursor: pointer;
+    color: #262626;
+    border-radius: 4px;
+    border: 1px solid #0b22f0;
+    background-color: #e7e7e7;
+    padding: 8px;
+}
+
+#show-password1:hover, #show-password2:hover, #show-password3:hover, #arroba:hover {
+    color: #262626; /* Cambia el color al pasar el ratón por encima si lo deseas */
+}
+
+.bot {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    background-color: #2cc5ff;
+    color: #07314a;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.bot:hover {
+    background-color: #008dce;
+}
+
 /* Media query para pantallas más pequeñas */
 @media only screen and (max-width: 768px) {
     .informacion {
