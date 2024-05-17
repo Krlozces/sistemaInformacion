@@ -124,32 +124,40 @@
         <div class="container3">
             <!-- Contenedores que parecen botones -->
             <div class="boton1">
+                RESUMEN ABRIL 2024
                 <a href="{{ route('exportar-consolidado') }}">
-                    RESUMEN ABRIL 2024
                     <i class="fa-solid fa-rectangle-list"></i>
                 </a>
             </div>
     
             <div class="boton2">
-                CONSOLIDADO DE ABRIL 2024 
-                <i class="fa-solid fa-handshake"></i>
+                SEGUN RESULTADOS
+                <a href="#">
+                    <i class="fa-solid fa-handshake"></i>
+                </a>
             </div>
     
             <div class="boton3">
-                PRODUCCION DIARIA  ABRIL 2024
-                <i class="fa-regular fa-calendar"></i>
+                SEGUN MOTIVOS
+                <a href="#">
+                    <i class="fa-regular fa-calendar"></i>
+                </a>
             </div>
     
             <div class="boton4">
-                POSITIVOS ABRIL 2024 FINAL 
-                <i class="fa-solid fa-square-poll-vertical"></i>
+                SEGUN MUESTRAS
+                <a href="">
+                    <i class="fa-solid fa-square-poll-vertical"></i>
+                </a>
             </div>
         </div>
     
         <div class="container4">
             <div class="boton5">
-                POSITIVOS ABRIL 2024 FINAL 
-                <i class="fa-solid fa-square-poll-vertical"></i>
+                SEGUN EDAD
+                <a href="">
+                    <i class="fa-solid fa-square-poll-vertical"></i>
+                </a>
             </div>
     
             <div class="boton6">
