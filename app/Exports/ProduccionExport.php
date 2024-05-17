@@ -5,17 +5,28 @@ namespace App\Exports;
 use App\Models\Muestra;
 use App\Models\Registro;
 use App\Models\Certificado;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
+use Maatwebsite\Excel\Concerns\FromArray;
+use Maatwebsite\Excel\Concerns\WithTitle;
+use Maatwebsite\Excel\Concerns\WithStyles;
+use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\FromCollection;
 
-class ProduccionExport implements FromCollection
+class ProduccionExport implements FromCollection, WithHeadings, WithTitle
 {
     /**
     * @return \Illuminate\Support\Collection
     */
 
+    public function collection()
+    {
+        $data = $this->resultados();
+        return $data;
+    }
+
     private function resultados(){
-        $resultados = Muestra::join('registros', 'registros.muestra_id', '=', 'muestras.id')
+        return Muestra::join('registros', 'registros.muestra_id', '=', 'muestras.id')
             ->join('intervenidos', 'intervenidos.id', '=', 'registros.intervenido_id')
             ->select(
                 DB::raw('DATE(muestras.fecha_muestra) as dia'),
@@ -36,51 +47,56 @@ class ProduccionExport implements FromCollection
             )
             ->groupBy(DB::raw('DATE(muestras.fecha_muestra)'))
             ->get();
-
-        return $resultados;
     }
 
-    private function resultadosConsolidados(){
-        $resultadosConsolidados = Muestra::join('registros', 'registros.muestra_id', '=', 'muestras.id')
-            ->join('intervenidos', 'intervenidos.id', '=', 'registros.intervenido_id')
-            ->select(
-                DB::raw('DATE(muestras.fecha_muestra) as dia'),
-                DB::raw('SUM(CASE WHEN muestras.resultado_cualitativo = "positivo" THEN 1 ELSE 0 END) as POSITIVO'),
-                DB::raw('SUM(CASE WHEN (muestras.resultado_cualitativo = "NEGACIÓN" OR muestras.resultado_cualitativo = "SIN MUESTRA") THEN 1 ELSE 0 END) as TSM'),
-                DB::raw('SUM(CASE WHEN muestras.resultado_cualitativo = "negativo" THEN 1 ELSE 0 END) as NEGATIVO'),
-                DB::raw('
-                SUM(CASE WHEN muestras.resultado_cualitativo = "positivo" THEN 1 ELSE 0 END) +
-                SUM(CASE WHEN muestras.resultado_cualitativo = "negativo" THEN 1 ELSE 0 END) +
-                SUM(CASE WHEN (muestras.resultado_cualitativo = "NEGACIÓN" OR muestras.resultado_cualitativo = "SIN MUESTRA") THEN 1 ELSE 0 END)
-                as TOTAL')
-            )
-            ->groupBy(DB::raw('DATE(muestras.fecha_muestra)'))
-            ->get();
-
-        return $resultadosConsolidados;
-    }
-
-    private function resultadosMotivos(){
-        $resultadosMotivos = Registro::select(
-                DB::raw('DATE(registros.fecha_hora_extraccion) as dia'),
-                DB::raw('SUM(CASE WHEN registros.motivo = "ACCIDENTE DE TRANSITO" THEN 1 ELSE 0 END) as AT'),
-                DB::raw('SUM(CASE WHEN registros.motivo = "PRESUNCION DE EBRIEDAD" THEN 1 ELSE 0 END) as PE'),
-                DB::raw('SUM(CASE WHEN registros.motivo != "PRESUNCION DE EBRIEDAD" AND registros.motivo != "ACCIDENTE DE TRANSITO" THEN 1 ELSE 0 END) as OTRO'),
-                DB::raw('
-                    SUM(CASE WHEN registros.motivo = "ACCIDENTE DE TRANSITO" THEN 1 ELSE 0 END) +
-                    SUM(CASE WHEN registros.motivo = "PRESUNCION DE EBRIEDAD" THEN 1 ELSE 0 END) +
-                    SUM(CASE WHEN registros.motivo != "PRESUNCION DE EBRIEDAD" AND registros.motivo != "ACCIDENTE DE TRANSITO" THEN 1 ELSE 0 END)
-                as TOTAL')
-            )
-            ->groupBy(DB::raw('DATE(registros.fecha_hora_extraccion)'))
-            ->get();
-
-        return $resultadosMotivos;
-    }
-
-    public function collection()
+    public function headings(): array
     {
-        $elements = Muestra::select()->get();
-        return Certificado::all();
+
+        $fecha = \Carbon\Carbon::now();
+        $numeroMes = $fecha->format('m');
+        $nombresMeses = [
+            '01' => 'ENERO',
+            '02' => 'FEBRERO',
+            '03' => 'MARZO',
+            '04' => 'ABRIL',
+            '05' => 'MAYO',
+            '06' => 'JUNIO',
+            '07' => 'JULIO',
+            '08' => 'AGOSTO',
+            '09' => 'SEPTIEMBRE',
+            '10' => 'OCTUBRE',
+            '11' => 'NOVIEMBRE',
+            '12' => 'DICIEMBRE',
+        ];
+        $nombreMes = $nombresMeses[$numeroMes];
+        $anio = $fecha->format('Y');    
+        return [
+            ['USUARIOS SEGÚN SEXO, DE LA UNIDAD DESCONCENTRADA DE DOSAJE ETILICO SEDE CHICLAYO, CORRESPONDIENTE AL MES DE '.$nombreMes.' '.$anio],
+            ['N°', 'MASCULINO', '', 'FEMENINO', '', 'TALONARIO SIN MUESTRA', '', 'TOTAL'],
+            ['', 'POSITIVO', 'NEGATIVO', 'POSITIVO', 'NEGATIVO', 'MASCULINO', 'FEMENINO']
+        ];
+    }
+
+    public function title(): string
+    {
+        $fecha = \Carbon\Carbon::now();
+        $numeroMes = $fecha->format('m');
+        $nombresMeses = [
+            '01' => 'ENERO',
+            '02' => 'FEBRERO',
+            '03' => 'MARZO',
+            '04' => 'ABRIL',
+            '05' => 'MAYO',
+            '06' => 'JUNIO',
+            '07' => 'JULIO',
+            '08' => 'AGOSTO',
+            '09' => 'SEPTIEMBRE',
+            '10' => 'OCTUBRE',
+            '11' => 'NOVIEMBRE',
+            '12' => 'DICIEMBRE',
+        ];
+        $nombreMes = $nombresMeses[$numeroMes];
+        $anio = $fecha->format('Y');
+        return $nombreMes . ' ' . $anio;
     }
 }
