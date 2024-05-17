@@ -429,7 +429,7 @@ input:focus {
 }
 
 .Actualizar button,
-.Enviar button {
+.Enviar button, .ver button {
   width: 250px; /* Ocupa el 100% del ancho del contenedor */
   padding: 10px; /* Puedes ajustar este valor según tus necesidades */
   border-radius: 15px;
@@ -456,6 +456,16 @@ input:focus {
 
 .Enviar button:hover{
   background-color: #ff2a2a;
+}
+
+.ver button {
+  border-color: #cc9a02;
+  background-color: #fcdf13;
+  color: #432405;
+}
+
+.ver button:hover{
+  background-color: #fff01f;
 }
 
 fieldset {
