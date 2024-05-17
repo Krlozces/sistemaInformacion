@@ -124,8 +124,10 @@
         <div class="container3">
             <!-- Contenedores que parecen botones -->
             <div class="boton1">
-                <span>RESUMEN ABRIL 2024</span>
-                <i class="fa-solid fa-rectangle-list"></i>
+                <a href="{{ route('exportar-consolidado') }}">
+                    RESUMEN ABRIL 2024
+                    <i class="fa-solid fa-rectangle-list"></i>
+                </a>
             </div>
     
             <div class="boton2">
