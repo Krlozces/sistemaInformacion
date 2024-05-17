@@ -20,7 +20,7 @@ class EditController extends Controller
             'confirmedPassword' => ['required', 'same:newPassword']
         ]);
 
-        $user->password = Hash::make($request->password);
+        $user->password = Hash::make($request->newPassword);
         $user->save();
 
         return redirect()->route('home')->with('success', 'Contraseña cambiada con éxito');
