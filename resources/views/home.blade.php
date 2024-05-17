@@ -276,48 +276,6 @@
                 }, 1000);
             }
         });
-
-        function togglePasswordVisibility1() {
-            const passwordInput = document.getElementById("password");
-            const showPasswordIcon = document.getElementById("show-password1");
-            if (passwordInput.getAttribute("type") === "password") {
-                passwordInput.setAttribute("type", "text");
-                showPasswordIcon.classList.remove("fa-eye-slash");
-                showPasswordIcon.classList.add("fa-eye");
-            } else {
-                passwordInput.setAttribute("type", "password");
-                showPasswordIcon.classList.remove("fa-eye");
-                showPasswordIcon.classList.add("fa-eye-slash");
-            }
-        }
-
-        function togglePasswordVisibility2() {
-            const newPasswordInput = document.getElementById("newPassword");
-            const showPasswordIcon = document.getElementById("show-password2");
-            if (newPasswordInput.getAttribute("type") === "password") {
-                newPasswordInput.setAttribute("type", "text");
-                showPasswordIcon.classList.remove("fa-eye-slash");
-                showPasswordIcon.classList.add("fa-eye");
-            } else {
-                newPasswordInput.setAttribute("type", "password");
-                showPasswordIcon.classList.remove("fa-eye");
-                showPasswordIcon.classList.add("fa-eye-slash");
-            }
-        }
-
-        function togglePasswordVisibility3() {
-            const confirmedPasswordInput = document.getElementById("confirmedPassword");
-            const showPasswordIcon = document.getElementById("show-password3");        
-            if (confirmedPasswordInput.getAttribute("type") === "password") {
-                confirmedPasswordInput.setAttribute("type", "text");
-                showPasswordIcon.classList.remove("fa-eye-slash");
-                showPasswordIcon.classList.add("fa-eye");
-            } else {
-                confirmedPasswordInput.setAttribute("type", "password");
-                showPasswordIcon.classList.remove("fa-eye");
-                showPasswordIcon.classList.add("fa-eye-slash");
-            }
-        }
     </script>
 </body>
 </html>
