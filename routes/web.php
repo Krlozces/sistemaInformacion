@@ -7,6 +7,7 @@ use App\Http\Controllers\ViewsController;
 use App\Http\Controllers\ExportController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\CertifiedController;
+use App\Http\Controllers\ProduccionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -67,6 +68,7 @@ Route::group(['middleware' => ['auth']], function(){
         Route::get('/generarPdf/{dni}', [ViewsController::class, 'generarPdf'])->name('generarPdf');
         Route::get('/exportar', [ExportController::class, 'export'])->name('exportar');
         Route::get('/exportar-cert/{dni}', [CertifiedController::class, 'exportCertified'])->name('exportar-certificado');
+        Route::get('/exportar/resumen', [ProduccionController::class, 'exportProduccion'])->name('exportar-consolidado');
     });
     
     //Editar Perfil
