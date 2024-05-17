@@ -501,3 +501,212 @@ legend {
   color: #fb0707;
 }
 /*Fin de Menù lateral*/
+
+/*MODAL PARA CAMBIAR LA FOTO*/
+
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(2px);
+  overflow: auto;
+}
+
+.modal-content {
+  background-color: #ffffff;
+  margin: 8% auto;
+  padding: 20px;
+  width: 35%;
+  border-radius: 10px;
+}
+
+
+h3 {
+  /* Estilos específicos para el título */
+  margin: 0;
+  color: #a7a1a1
+  /* Elimina el margen predeterminado del título */
+}
+
+.direccion {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  border-bottom: 1px solid #ccc;
+}
+
+/* Estilos para el botón de cerrar */
+.close {
+  color: #cecdcd;
+  float: right;
+  font-size: 30px;
+}
+
+.close:hover,
+.close:focus {
+  color: #aaa7a7;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* Estilos para la previsualización de la imagen */
+#previewContainer {
+  padding-left: auto;
+}
+
+
+#previewImage {
+  max-width: 100%;
+  max-height: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  margin: 20px;
+}
+
+/* Estilos para la imagen principal */
+#mainImageContainer {
+  margin-top: 20px;
+}
+
+
+#previewContainer {
+display: flex;
+flex-direction: column;
+align-items: center;
+margin-bottom: 1px;
+/* Espacio inferior para separar del siguiente elemento */
+}
+
+#previewImage {
+max-width: 100%;
+max-height: 200px;
+}
+
+
+#imageForm {
+display: flex;
+justify-content: space-between;
+align-items: center;
+}
+
+#imageInput {
+margin: 15px;
+flex: 1;
+
+}
+
+/* Estilos para los botones */
+.azul {
+display: inline-block;
+padding: 11px 0px;
+border: 2px solid #008dce;
+background-color: #2cc5ff;
+color: #04314d;
+font-weight: bold;
+text-align: center;
+text-decoration: none;
+border-radius: 5px;
+cursor: pointer;
+transition: background-color 0.3s, color 0.3s;
+}
+
+.azul:hover {
+background-color: #1ec0ff;
+}
+
+
+.azul {
+width: 25%;
+margin: 0px;
+}
+
+
+/* Estilos generales para el input de tipo file */
+input[type="file"] {
+border: 2px solid #6bb800;
+padding: 8px;
+border-radius: 5px;
+background-color: #c5ff50;
+color: #1b3400;
+font-size: 14px;
+font-weight: bold;
+
+}
+
+/* Estilos cuando el input tiene el foco */
+input[type="file"]:focus {
+  outline: none;
+}
+
+/* Estilos para el texto dentro del input */
+input[type="file"]::placeholder {
+  color: #108b76;
+}
+
+/*FIN DEL MODAL*/
+
+/* Estilos modal cambiar constraseña */
+.cambiar-password-form {
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 20px;
+  border-radius: 5px;
+  color: #07314a;
+}
+
+.form-group {
+  margin-bottom: 15px;
+  position: relative;
+}
+
+#email,
+#confirmedPassword,
+#newPassword, 
+#password{
+  width: calc(100% - 40px);
+  padding: 8px;
+  margin: 5px 0px;
+  border-radius: 4px;
+  border: 1px solid #008cff;
+  box-sizing: border-box;
+  padding: 8px;
+}
+
+#show-password1, #show-password2, #show-password3, #arroba{
+  position: absolute;
+  top: 50%;
+  right: 8px;
+  transform: translateY(-22%);
+  cursor: pointer;
+  color: #262626;
+  border-radius: 4px;
+  border: 1px solid #0b22f0;
+  background-color: #e7e7e7;
+  padding: 8px;
+}
+
+#show-password1:hover, #show-password2:hover, #show-password3:hover, #arroba:hover {
+  color: #262626; /* Cambia el color al pasar el ratón por encima si lo deseas */
+}
+
+.bot {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  background-color: #2cc5ff;
+  color: #07314a;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.bot:hover {
+  background-color: #008dce;
+}

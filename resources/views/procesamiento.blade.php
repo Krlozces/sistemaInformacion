@@ -22,8 +22,14 @@
                     <label  class="expandable" for="btn-menu1"> <img src="{{ asset('storage/' . auth()->user()->imagen_perfil) }}" class="imagen1"> </label>
                     <h3 class="expandable">{{ Auth::user()->name }}</h3>
                     <ul class="submenu">
-                        <li><a href="#"><i class="fa-solid fa-users-viewfinder"></i> Cambiar foto</a></li>
-                        <li><a href="#"><i class="fa-solid fa-gear"></i> Configurar</a></li>
+                        <li id="openModalBtn">
+                            <a href="#">
+                                <i class="fa-solid fa-users-viewfinder"></i> Cambiar foto
+                            </a>
+                        </li>
+                        <li id="openModalPassword">
+                            <a href="#"><i class="fa-solid fa-gear"></i> Configurar</a>
+                        </li>
                     </ul>
                 </nav>
                 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -37,6 +43,63 @@
                 </script> 
         </div>
     </header>
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <div class="direccion">
+                <h3>Cambiar foto de perfil</h3>
+                <span class="close">&times;</span>
+            </div>
+
+            <div id="previewContainer">
+                <img id="previewImage" src="" alt="Foto">
+            </div>
+            <form method="POST" action="#" id="imageForm" enctype="multipart/form-data">
+                @csrf
+                <input type="file" id="imageInput" name="imagen" required>
+                <button class="azul" type="submit">Guardar</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="myModalPassword" class="modal">
+        <!-- Modal content -->
+        <div class="modal-content">
+            <!-- Modal header -->
+            <div class="direccion">
+                <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
+                    Cambiar contraseña
+                </h3>
+                <span class="close" id="closePassword">&times;</span>
+            </div>
+            <!-- Modal body -->
+            <div class="cambiar-password-form">
+                <form method="POST" class="space-y-4" action="{{ route('cambiar-password', ['id' => Auth::user()->id]) }}">
+                    @csrf
+                    <div class="form-group">
+                        <label for="email"><i class="fa-solid fa-envelope"></i> Email</label>
+                        <input type="email" name="email" id="email" value={{ Auth::user()->email }} readonly />
+                        <i id="arroba" class="fa-solid fa-at"></i>
+                    </div>
+                    <div class="form-group">
+                        <label for="password" class="password-label"><i class="fas fa-lock"></i> Contraseña actual</label>
+                        <input type="password" name="password" id="password" placeholder="••••••••" required />
+                        <i class="fas fa-eye-slash" id="show-password1" onclick="togglePasswordVisibility1()"></i>
+                    </div>
+                    <div class="form-group">
+                        <label for="newPassword"><i class="fas fa-lock"></i> Nueva contraseña</label>
+                        <input type="password" name="newPassword" id="newPassword" placeholder="••••••••" required />
+                        <i class="fas fa-eye-slash" id="show-password2" onclick="togglePasswordVisibility2()"></i>
+                    </div>
+                    <div class="form-group">
+                        <label for="confirmedPassword"><i class="fas fa-lock"></i> Confirmar contraseña</label>
+                        <input type="password" name="confirmedPassword" id="confirmedPassword" placeholder="••••••••" required />
+                        <i class="fas fa-eye-slash" id="show-password3" onclick="togglePasswordVisibility3()"></i>
+                    </div>
+                    <button type="submit" class="bot">Cambiar contraseña</button>    
+                </form>
+            </div>
+        </div>
+    </div>
     <!--CONTENIDO-->
     <div class="capa1">
         <form method="POST" action="{{ route('register-procesamiento') }}">
@@ -314,5 +377,89 @@
             <label for="btn-menu"><i class="fa-solid fa-list"></i></label>
         </div>
     </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // Obtener el modal y el botón para abrirlo
+            var modal = document.getElementById("myModal");
+            var btn = document.getElementById("openModalBtn");
+            var span = document.getElementsByClassName("close")[0];
+            var mainImage = document.getElementById("mainImage");
+
+            var modalPassword = document.getElementById("myModalPassword");
+            var btnPassword = document.getElementById("openModalPassword");
+            var closePassword = document.getElementById("closePassword");
+
+            var savedImage = sessionStorage.getItem("selectedImage");
+            if (savedImage) {
+                mainImage.src = savedImage;
+            }
+    
+            // Abrir el modal al hacer clic en el botón
+            btn.onclick = function () {
+                modal.style.display = "block";
+            }
+
+            btnPassword.onclick=() => {
+                modalPassword.style.display = "block";
+            }
+    
+            // Cerrar el modal al hacer clic en la "x"
+            span.onclick = function () {
+                modal.style.display = "none";
+            }
+
+            closePassword.onclick = () => {
+                modalPassword.style.display = "none";
+            }
+    
+            // Cerrar el modal al hacer clic fuera del contenido del modal
+            window.onclick = function (event) {
+                if (event.target == modal || event.target == modalPassword) {
+                    modal.style.display = "none";
+                    modalPassword.style.display = "none";
+                }
+            }
+    
+            // Previsualizar la imagen seleccionada antes de guardarla
+            var imageInput = document.getElementById("imageInput");
+            var previewImage = document.getElementById("previewImage");
+            imageInput.addEventListener("change", function () {
+                var file = this.files[0];
+                if (file) {
+                    var reader = new FileReader();
+                    reader.onload = function (e) {
+                        previewImage.src = e.target.result;
+                    }
+                    reader.readAsDataURL(file);
+                }
+            });
+    
+            // Enviar el formulario para guardar la imagen
+            var form = document.getElementById("imageForm");
+            form.onsubmit = function (event) {
+                event.preventDefault();
+                var formData = new FormData(form);
+                fetch("{{ route('cambiar-imagen', ['id' => Auth::user()->id]) }}", {
+                    method: "POST",
+                    body: formData
+                })
+                .then(data => {
+                    // alert(data.message);
+                    modal.style.display = "none";
+                    previewImage.src = "";
+                    mainImage.src = data.imageUrl;
+                    sessionStorage.setItem("selectedImage", data.imageUrl);
+                    
+                    
+                })
+                .catch(error => {
+                    console.error("Error al guardar la imagen:", error);
+                });
+                setTimeout(function () {
+                    window.location.reload();
+                }, 1000);
+            }
+        });
+    </script>
 </body>
 </html>
