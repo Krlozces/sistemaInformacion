@@ -171,6 +171,7 @@
                 @endforeach
             </tbody>
         </table>
+        {{ $elementos->links() }}
     </div>
     <script>
         function searchTable() {
