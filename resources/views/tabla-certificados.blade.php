@@ -221,10 +221,10 @@
                     <h2>{{ Auth::user()->name }}</h2>
                     <h6>{{ $grado ? $grado->grado : '' }}</h6>
                 </div>
-                <br><br>
-
+                <br>
                 <a href="{{ route('home') }}"> <i class="fa-solid fa-house"></i> Inicio</a>
                 <a href="{{ route('principal') }}"><i class="fa-solid fa-user-plus"></i> Añadir Usuario</a>
+                <a href="{{ route('listar-usuarios') }}"><i class="fa-solid fa-list"></i> Listar Usuarios</a>
                 <a href="{{ route('extraccion') }}"><i class="fa-solid fa-vials"></i> Extracción</a>
                 <a href="{{ route('tbl-certificados') }}"> <i class="fa-solid fa-table-list"></i> Certificados</a>
                 <a href="{{ route('logout') }}"><i class="fa-solid fa-arrow-right-from-bracket"></i> Cerrar Sesión</a>
