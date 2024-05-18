@@ -39,7 +39,13 @@ class ViewsController extends Controller
         ->join('personal', 'personas.id', '=', 'personal.persona_id')
         ->join('grados', 'personal.grado_id', '=', 'grados.id')
         ->get();
-        return view('gestionarUsuarios', compact('elements'));
+
+        $grado = Personal::select('grado')
+                ->join('grados', 'grados.id', '=', 'personal.grado_id')
+                ->where('usuario', Auth::user()->email)
+                ->first();
+
+        return view('gestionarUsuarios', compact('elements', 'grado'));
     }   
 
     public function home(){
