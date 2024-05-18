@@ -34,6 +34,14 @@ class ViewsController extends Controller
         return view('principal', compact('grado'));
     }
 
+    public function listUsers(){
+        $elements = Persona::select('dni', 'nombre', 'apellido_paterno', 'apellido_materno', 'grado', 'telefono')
+        ->join('personal', 'personas.id', '=', 'personal.persona_id')
+        ->join('grados', 'personal.grado_id', '=', 'grados.id')
+        ->get();
+        return view('gestionarUsuarios', compact('elements'));
+    }   
+
     public function home(){
         $data = Muestra::join('registros', 'muestras.id', '=', 'registros.muestra_id')
         ->join('intervenidos', 'intervenidos.id', '=', 'registros.intervenido_id' )
