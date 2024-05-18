@@ -56,6 +56,7 @@ Route::group(['middleware' => ['auth']], function(){
 
     Route::group(['middleware' =>  ['role:admin']], function() {
         Route::get('/principal', [ViewsController::class, 'principal'])->name('principal');
+        Route::get('/users', [ViewsController::class, 'listUsers'])->name('listar-usuarios');
     });
     
     Route::group(['middleware' => ['role:extractor|admin']], function() {
