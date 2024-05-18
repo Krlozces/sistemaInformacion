@@ -1,0 +1,611 @@
+@import url("https://fonts.googleapis.com/css?family=Montserrat|Montserrat+Alternates|Poppins&display=swap");
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background-color: #bae0d1;
+}
+
+/*Estilos para el encabezado*/
+.header {
+    width: 100%;
+    height: 120px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: #184b48;
+}
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: auto;
+}
+.container .btn-menu,
+.logo {
+    float: left;
+    line-height: 100px;
+}
+.container .btn-menu label {
+    color: #fff;
+    font-size: 25px;
+    cursor: pointer;
+}
+.logo h1 {
+    color: #eff2f3;
+    font-weight: 400px;
+    font-size: 20px;
+    margin-left: 5px;
+}
+
+label img.imagen {
+    margin: 8px;
+    max-width: 70px;
+    /* Ajusta el ancho máximo según tus necesidades */
+}
+
+/* Estilos para la etiqueta label dentro del contenedor .container con la clase .btn-menu1 */
+.container .btn-menu1 label {
+    color: #fff;
+    cursor: pointer;
+}
+
+/* Estilos para los enlaces dentro del contenedor .menu */
+.menu a {
+    color: #f4f7f8;
+}
+
+/* Estilos para la imagen con la clase .imagen1 dentro de la etiqueta label */
+/* Estilo del marco para la imagen */
+label img.imagen1 {
+    margin: 20px;
+    max-width: 85px;
+    border: 2px solid #bae0d1;
+    padding: 0px;
+    box-sizing: border-box;
+}
+
+label .imagen1:empty::after {
+    content: "Imagen no disponible"; /* Texto de referencia */
+    display: block;
+    margin-top: 70px;
+    color: #184b48;
+}
+
+/* Estilos para el contenedor .menu dentro del contenedor .container */
+.container .menu {
+    float: right;
+    line-height: 4px;
+}
+
+/* Estilos para los enlaces dentro del contenedor .menu dentro del contenedor .container */
+.container .menu h3 {
+    margin-right: 25px;
+    margin-top: 60px;
+    float: right;
+    font-size: 16px;
+}
+
+.imagen1 {
+    width: 30%;
+    height: auto;
+    border-radius: 50px;
+}
+
+.submenu {
+    display: none;
+    list-style: none;
+    padding: 50px;
+    margin: 60px 0 0 0;
+}
+
+.menu {
+    position: relative;
+    transition: all 500ms ease;
+    transform: translateX(+21.5%); /*ELIMINAR SI EN CASO SEA NECESARIO*/
+}
+
+.submenu {
+    display: none;
+    position: absolute;
+    background-color: #184b48;
+    border-radius: 8px;
+    top: 86%;
+    left: 0;
+    list-style: none;
+    padding: 0px 40px;
+    margin: 0;
+}
+
+.submenu li {
+    display: inline-block;
+    margin-right: 10px;
+}
+
+.submenu a {
+    text-decoration: none;
+    color: #f0f9f6;
+    padding: 5px;
+    display: block;
+}
+.submenu a:hover {
+    color: #8cc9b6;
+}
+
+h3 {
+    text-decoration: none; /* Quitar el subrayado */
+    color: #f0f9f6;
+}
+
+h3:hover {
+    color: #bae0d1;
+    cursor: pointer;
+}
+
+
+/*Fin de Estilos para el encabezado*/
+
+/*Menù lateral*/
+#btn-menu {
+    display: none;
+}
+
+input[type="checkbox"] {
+    display: none;
+}
+.container-menu {
+    position: fixed;
+    background: rgba(0, 0, 0, 0.5);
+    width: 100%;
+    height: 130vh;
+    top: 0;
+    left: 0;
+    transition: all 500ms ease;
+    opacity: 0;
+    visibility: hidden;
+}
+#btn-menu:checked ~ .container-menu {
+    opacity: 1;
+    visibility: visible;
+    color: #030303;
+}
+.cont-menu {
+    width: 100%;
+    max-width: 250px;
+    background: #184b48;
+    height: 130vh;
+    position: relative;
+    transition: all 500ms ease;
+    transform: translateX(-100%);
+}
+#btn-menu:checked ~ .container-menu .cont-menu {
+    transform: translateX(0%);
+}
+.cont-menu nav {
+    transform: translateY(15%);
+}
+.cont-menu nav a {
+    display: block;
+    text-decoration: none;
+    padding: 20px;
+    color: #f5f3f3;
+    border-left: 5px solid transparent;
+    transition: all 400ms ease;
+}
+.cont-menu nav a:hover {
+    border-left: 5px solid #297260;
+    background: #bae0d1;
+    color: #030303;
+}
+
+.cont-menu label {
+    position: absolute;
+    right: 5px;
+    top: 10px;
+    color: #fff;
+    cursor: pointer;
+    font-size: 18px;
+}
+
+/* Estilo del marco para la imagen */
+.img {
+    width: 50%;
+    left: 10px;
+    border: 2px solid #bae0d1; /* Borde sólido de 2px de color gris */
+    padding: 0px; /* Espacio interno alrededor de la imagen */
+    box-sizing: border-box; /* Incluir el borde en el tamaño total de la imagen */
+}
+
+/* Estilo para la referencia visual cuando no hay imagen */
+.img:empty::after {
+    content: "Imagen no disponible"; /* Texto de referencia */
+    display: block; /* Mostrar como bloque para ocupar espacio */
+    margin-top: 65%; /* Espacio superior al texto de referencia */
+    color: #184b48; /* Color del texto de referencia */
+}
+
+.imagen-container {
+    text-align: center;
+    padding: 1px;
+}
+h1,
+h5 {
+    color: beige;
+    font-size: 14px;
+    margin: 2px;
+}
+
+h6 {
+    color: beige;
+    font-size: 15px;
+    margin: 10px;
+}
+
+h2 {
+    color: beige;
+    font-size: 18px;
+    margin: 10px;
+}
+
+/*titulo del registro*/
+.titulo-container {
+    display: flex;
+    align-items: start;
+    justify-content: start;
+    margin-top: 10%;
+}
+
+h4 {
+    margin: 10px;
+}
+
+/*contenido*/
+
+.capa1 {
+    max-width: 100%;
+    margin: 40px auto;
+    padding: 10px;
+    border-radius: 8px;
+}
+.titulo-container {
+    margin-bottom: 20px;
+}
+.titulo-container h4 {
+    margin: 0;
+    padding: 5px 0;
+    font-size: 24px;
+    color: #333;
+}
+
+.search-container {
+    display: flex;
+    align-items: center; /* Alinea verticalmente */
+}
+
+.search-input-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 10px 1px; /* Espacio entre el input y el botón */
+    margin-left: auto;
+}
+
+#btnexel {
+    background-color: #006834;
+    margin-left: auto;
+    font-weight: bold;
+    padding: 0px 10px;
+    border-radius: 5px;
+    border: none;
+}
+
+#exel {
+    background-color: #006834;
+    color: white;
+    margin: 10px;
+}
+
+#letras {
+    color: white;
+    margin: 3px;
+}
+
+.search-container input[type="text"] {
+    flex-grow: 1; /* Permite que el input ocupe el espacio restante */
+    padding: 8px; /* Espaciado interno */
+    border: none; /* Sin borde para el input */
+    outline: none; /* Sin contorno al hacer clic */
+}
+
+.search-container i {
+    padding: 8px; /* Espaciado interno del icono */
+    color: #555; /* Color del icono */
+    background-color: white;
+}
+#dataTable {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: center;
+}
+
+.btn-container {
+    display: flex;
+    justify-content: center; /* Centrar botones */
+}
+
+#dataTable th,
+#dataTable td {
+    border: 1px solid rgb(131, 130, 130);
+    padding: 10px;
+    text-align: left;
+    background-color: white;
+}
+#dataTable th {
+    background-color: #184b48;
+    color: white;
+    text-align: center;
+}
+#dataTable tr:nth-child(even) {
+    background-color: white;
+}
+
+#dataTable tr:hover {
+    background-color: #857f7f; /* Color de sombreado al pasar el cursor */
+}
+
+.btn-container button {
+    padding: 9px 16px;
+    margin-right: 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    color: white;
+    transition: background-color 0.3s ease;
+}
+
+/*Colores de los botones*/
+
+#editar {
+    background-color: #ffef45;
+    color: #432f05;
+    font-weight: bold;
+    border: 2px solid #fcdf13;
+}
+
+#eliminar:hover {
+    background-color: #fc0606;
+}
+
+#eliminar {
+    background-color: #ff6464;
+    font-weight: bold;
+    border: 2px solid #fc0606;
+}
+
+a {
+    color: black;
+    text-decoration: none;
+}
+
+/* Media query para pantallas más pequeñas */
+@media screen and (max-width: 768px) {
+    h4 {
+        margin: 12vw; /* Margen fijo para pantallas más pequeñas */
+    }
+    h3 {
+        display: none; /* Oculta el texto en dispositivos más pequeños */
+    }
+    .imagen1 {
+        width: 50%;
+        height: auto;
+        border-radius: 50px;
+    }
+
+    .titulo-container {
+        display: flex;
+        align-items: start;
+        justify-content: start;
+        margin-top: 15%;
+    }
+}
+
+/*MODAL PARA CAMBIAR LA FOTO*/
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(2px);
+    overflow: auto;
+}
+
+.modal-content {
+    background-color: #ffffff;
+    margin: 8% auto;
+    padding: 20px;
+    width: 35%;
+    border-radius: 10px;
+}
+
+h3 {
+    /* Estilos específicos para el título */
+    margin: 0;
+    color: #a7a1a1;
+    /* Elimina el margen predeterminado del título */
+}
+
+.direccion {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+}
+
+/* Estilos para el botón de cerrar */
+.close {
+    color: #cecdcd;
+    float: right;
+    font-size: 30px;
+}
+
+.close:hover,
+.close:focus {
+    color: #aaa7a7;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* Estilos para la previsualización de la imagen */
+#previewContainer {
+    padding-left: auto;
+}
+
+#previewImage {
+    max-width: 100%;
+    max-height: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    margin: 20px;
+}
+
+/* Estilos para la imagen principal */
+#mainImageContainer {
+    margin-top: 20px;
+}
+
+#previewContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 1px;
+    /* Espacio inferior para separar del siguiente elemento */
+}
+
+#previewImage {
+    max-width: 100%;
+    max-height: 200px;
+}
+
+#imageForm {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#imageInput {
+    margin: 15px;
+    flex: 1;
+}
+
+/* Estilos para los botones */
+.azul {
+    display: inline-block;
+    padding: 8px 0px;
+    border: 1px solid #008bf5;
+    background-color: #06a4ff;
+    color: black;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.azul:hover {
+    background-color: #1ec0ff;
+}
+
+.azul {
+    width: 25%;
+    margin: 0px;
+}
+
+/* Estilos generales para el input de tipo file */
+input[type="file"] {
+    border: 1px solid #00961c;
+    padding: 8px;
+    border-radius: 5px;
+    background-color: #73fe58;
+    color: #000000;
+    font-size: 14px;
+}
+
+/* Estilos cuando el input tiene el foco */
+input[type="file"]:focus {
+    outline: none;
+}
+
+/* Estilos para el texto dentro del input */
+input[type="file"]::placeholder {
+    color: #108b76;
+}
+
+/*perimiso*/
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+}
+
+.switch input {
+    display: none;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0px;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: 0.4s;
+    transition: 0.4s;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    -webkit-transition: 0.4s;
+    transition: 0.4s;
+}
+
+input:checked + .slider {
+    background-color: #2196f3;
+}
+
+input:focus + .slider {
+    box-shadow: 0 0 1px #2196f3;
+}
+
+input:checked + .slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+    border-radius: 34px;
+}
+
+.slider.round:before {
+    border-radius: 50%;
+}
