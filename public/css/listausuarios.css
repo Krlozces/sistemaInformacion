@@ -609,3 +609,100 @@ input:checked + .slider:before {
 .slider.round:before {
     border-radius: 50%;
 }
+
+/* Modal eliminar usuario */
+.cotenedor-delete{
+    display: none; 
+    overflow-y: auto; 
+    overflow-x: hidden; 
+    position: fixed; 
+    top: 0; 
+    right: 0; 
+    left: 0; 
+    z-index: 50; 
+    justify-content: center; 
+    align-items: center; 
+    width: 100%; 
+    max-height: 100%; 
+    height: calc(100%-1rem);
+}
+
+.sub-contenedor{
+    position: relative; 
+    padding: 1rem; 
+    width: 100%; 
+    max-width: 28rem; 
+    max-height: 100%; 
+}
+
+.icon-contenedor{
+    padding: 1rem; 
+    text-align: center; 
+}
+
+.svg-contenedor{
+    margin-bottom: 1rem; 
+    width: 3rem; 
+    height: 3rem; 
+    color: #9CA3AF; 
+}
+
+.message{
+    margin-bottom: 1.25rem; 
+    color: #6B7280; 
+    font-size: 1.125rem;
+    line-height: 1.75rem; 
+    font-weight: 400; 
+}
+
+.btn-confirmed{
+    display: inline-flex; 
+    padding-top: 0.625rem;
+    padding-bottom: 0.625rem; 
+    padding-left: 1.25rem;
+    padding-right: 1.25rem; 
+    background-color: #DC2626; 
+    color: #ffffff; 
+    font-size: 0.875rem;
+    line-height: 1.25rem; 
+    font-weight: 500; 
+    text-align: center; 
+    align-items: center; 
+    border-radius: 0.5rem; 
+}
+
+.btn-confirmed:hover {
+    background-color: #991B1B;
+}
+
+.btn-cancel{
+    padding-top: 0.625rem;
+    padding-bottom: 0.625rem; 
+    padding-left: 1.25rem;
+    padding-right: 1.25rem; 
+    background-color: #ffffff; 
+    color: #111827; 
+    font-size: 0.875rem;
+    line-height: 1.25rem; 
+    font-weight: 500; 
+    border-radius: 0.5rem; 
+    border-width: 1px; 
+    border-color: #E5E7EB; 
+}
+
+.btn-cancel:hover {
+    background-color: #F3F4F6; 
+    color: #1D4ED8; 
+}
+
+@media (min-width: 768px) { 
+    .contenedor-delete{
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+    } 
+    .icon-contenedor{
+        padding: 1.25rem; 
+    }
+}
