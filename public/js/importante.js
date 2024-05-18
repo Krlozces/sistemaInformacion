@@ -1,4 +1,8 @@
 //VER CONTRASEÑA
+import { Chart, registerables } from 'chart.js';
+import 'chartjs-adapter-date-fns';
+
+Chart.register(...registerables);
 
 function togglePasswordVisibility() {
     const passwordInput = document.getElementById("password");
