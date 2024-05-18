@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use Log;
+use Carbon\Carbon;
+use App\Models\Muestra;
 use App\Models\Persona;
 use App\Models\Personal;
 use App\Models\Registro;
@@ -11,6 +14,7 @@ use Barryvdh\DomPDF\Facade AS PDF;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Barryvdh\DomPDF\Facade\Pdf as FacadePdf;
+use LaravelDaily\LaravelCharts\Classes\LaravelChart;
 
 class ViewsController extends Controller
 {
@@ -31,11 +35,34 @@ class ViewsController extends Controller
     }
 
     public function home(){
+        $data = Muestra::join('registros', 'muestras.id', '=', 'registros.muestra_id')
+        ->join('intervenidos', 'intervenidos.id', '=', 'registros.intervenido_id' )
+        ->where('resultado_cualitativo', 'positivo')
+        ->whereDate('muestras.created_at', '>=', Carbon::now()->subDays(30))
+        ->get()
+        ->groupBy(function ($date) {
+            // Agrupar por día
+            return Carbon::parse($date->created_at)->format('Y-m-d');
+        });
+
+        $labels = [];
+        $values = [];
+
+        foreach ($data as $date => $entries) {
+            $labels[] = $date;
+            $values[] = count($entries);
+        }
+        if (count($labels) === 1) {
+            $labels[] = Carbon::parse($labels[0])->addDay()->format('Y-m-d');
+            $values[] = 0;
+        }
+        $data['chart_data'] = json_encode($data);
+
         $grado = Personal::select('grado')
                 ->join('grados', 'grados.id', '=', 'personal.grado_id')
                 ->where('usuario', Auth::user()->email)
                 ->first();
-        return view('home', compact('grado'));
+        return view('home', compact('grado', 'labels', 'values'));
     }
 
     public function procesamiento($dni){
