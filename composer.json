@@ -7,10 +7,12 @@
     "require": {
         "php": "^8.1",
         "barryvdh/laravel-dompdf": "^2.1",
+        "consoletvs/charts": "6.*",
         "guzzlehttp/guzzle": "^7.2",
         "laravel/framework": "^10.10",
         "laravel/sanctum": "^3.3",
         "laravel/tinker": "^2.8",
+        "laraveldaily/laravel-charts": "^0.2.3",
         "maatwebsite/excel": "^3.1",
         "spatie/laravel-permission": "^6.7",
         "wire-elements/modal": "^2.0"
