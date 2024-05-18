@@ -9,6 +9,9 @@
     <script src="{{asset('js/importante.js')}}"></script>
     <link rel="stylesheet" href="{{ asset('css/home.css') }}">
     <link rel="stylesheet" href="{{ asset('css/principal.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
 </head>
 <body>
     <header class="header">
@@ -170,7 +173,10 @@
             </div>
         </div>
     </div>
-
+    
+    <div style="width: 80%; margin: auto;">
+        <canvas id="myChart"></canvas>
+    </div>  
     <!--	--------------->
     <input type="checkbox" id="btn-menu">
     <div class="container-menu">
@@ -275,7 +281,77 @@
                     window.location.reload();
                 }, 1000);
             }
+
+            const labels = @json($labels);
+            const values = @json($values);
+
+            console.log(labels);
+            console.log(values);
+
+            var ctx = document.getElementById('myChart').getContext('2d');
+            var myChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Positivos',
+                        data: values,
+                        borderColor: 'rgba(75, 192, 192, 1)',
+                        borderWidth: 2,
+                        backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                    }]
+                },
+                options: {
+                    scales: {
+                        x: {
+                            type: 'time',
+                            time: {
+                                unit: 'day'
+                            },
+                            display: true
+                        },
+                        y: {
+                            beginAtZero: true,
+                            display: true,
+                            ticks: {
+                                stepSize: 1,
+                                precision: 0
+                            }
+                        }
+                    },
+                    plugins: {
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return context.raw;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
         });
+
+//         const ctx = document.getElementById('myChart');
+
+// new Chart(ctx, {
+//   type: 'bar',
+//   data: {
+//     labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+//     datasets: [{
+//       label: '# of Votes',
+//       data: [12, 19, 3, 5, 2, 3],
+//       borderWidth: 1
+//     }]
+//   },
+//   options: {
+//     scales: {
+//       y: {
+//         beginAtZero: true
+//       }
+//     }
+//   }
+// });
     </script>
 </body>
 </html>
