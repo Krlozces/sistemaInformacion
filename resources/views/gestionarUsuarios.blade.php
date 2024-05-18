@@ -65,6 +65,26 @@
             </script>
         </div>
     </header>
+    
+    <div id="popup-modal" class="modal">
+        <div class="modal-content">
+            <div class="direccion">
+                <h3>Eliminar usuario</h3>
+                <span class="close" id="closeModal">&times;</span>
+            </div>
+            <div class="icon-contenedor">
+                <svg class="svg-contenedor" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 11V6m0 8h.01M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
+                </svg>
+                <h3 class="message">¿Estás seguro de inhabilitar al siguiente usuario?</h3>
+                <button data-modal-hide="popup-modal" type="button" class="btn-confirmed">
+                    Sí, estoy seguro
+                </button>
+                <button id="btn-cancel" data-modal-hide="popup-modal" type="button" class="btn-cancel">No, cancelar</button>
+            </div>
+        </div>
+    </div>
+    
     <div id="myModal" class="modal">
         <div class="modal-content">
             <div class="direccion">
@@ -82,6 +102,7 @@
             </form>
         </div>
     </div>
+
     <div class="capa1">
         <div class="titulo-container">
             <h4>Gestión de Certificados</h4>
@@ -148,8 +169,7 @@
                             </label>
                         </td>
                         <td class="btn-container">
-                            <button id="editar" onclick="editEntry()"><a href="#"><i class="fa-solid fa-pen-to-square"></i>
-                                    Editar</a></button>
+                            <button id="editar" onclick="editEntry()"><a href="#"><i class="fa-solid fa-pen-to-square"></i> Editar</a></button>
                             <button id="eliminar"><a href="#"><i class="fa-solid fa-trash"></i> Eliminar</a></button>
                         </td>
                     </tr>
@@ -225,8 +245,6 @@
                 console.log('Interruptor apagado');
             }
         }
-
-
     </script>
 
     <input type="checkbox" id="btn-menu">
@@ -259,6 +277,12 @@
         var span = document.getElementsByClassName("close")[0];
         var mainImage = document.getElementById("mainImage");
 
+
+        var popUpModal = document.getElementById("popup-modal");
+        var btnModal = document.getElementById("eliminar");
+        var closeModal = document.getElementById("closeModal");
+        var btnCancel = document.getElementById('btn-cancel');
+
         var savedImage = sessionStorage.getItem("selectedImage");
         if (savedImage) {
             mainImage.src = savedImage;
@@ -269,15 +293,28 @@
             modal.style.display = "block";
         }
 
+        btnModal.onclick=() => {
+            popUpModal.style.display = "block";
+        }
+
         // Cerrar el modal al hacer clic en la "x"
         span.onclick = function () {
             modal.style.display = "none";
         }
 
+        closeModal.onclick = () => {
+            popUpModal.style.display = "none";
+        }
+
+        btnCancel.onclick=() => {
+            popUpModal.style.display = "none";
+        }
+
         // Cerrar el modal al hacer clic fuera del contenido del modal
         window.onclick = function (event) {
-            if (event.target == modal) {
+            if (event.target == modal || event.target == popUpModal) {
                 modal.style.display = "none";
+                popUpModal.style.display = "none";
             }
         }
 
