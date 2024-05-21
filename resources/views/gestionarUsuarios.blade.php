@@ -170,7 +170,8 @@
                             </div>
                             <!-- Modal body -->
                             <div class="p-4 md:p-5">
-                                <form class="space-y-4" action="#">
+                                <form class="space-y-4" action="{{ route('editar-usuario', ['dni' => $element->dni]) }}" method="POST">
+                                    @csrf
                                     <div>
                                         <label for="dni" class="label-text">DNI</label>
                                         <input type="text" name="dni" id="dni" class="input-field" value="{{ $element->dni }}" required />
