@@ -109,28 +109,6 @@
             </script>
         </div>
     </header>
-    
-    <div id="popup-modal" class="modal">
-        <div class="modal-content">
-            <div class="direccion">
-                <h3>Eliminar usuario</h3>
-                <span class="close" id="closeModal">&times;</span>
-            </div>
-            <div class="icon-contenedor">
-                <svg class="svg-contenedor" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
-                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 11V6m0 8h.01M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
-                </svg>
-                <h3 class="message">¿Estás seguro de inhabilitar al siguiente usuario?</h3>
-                <button data-modal-hide="popup-modal" type="button" class="btn-confirmed">
-                    Sí, estoy seguro
-                </button>
-                <button id="btn-cancel" data-modal-hide="popup-modal" type="button" class="btn-cancel">No, cancelar</button>
-            </div>
-        </div>
-    </div>
-
-    
-
     <div id="myModal" class="modal">
         <div class="modal-content">
             <div class="direccion">
@@ -183,10 +161,10 @@
             </thead>
             <tbody id="content1">
                 @foreach ($elements as $element)
-                    <div id="edit-modal" class="modal">
+                    <div id="edit-modal-{{$element->dni}}" class="modal">
                         <!-- Modal content -->
                         <div class="modal-content">
-                            <div class="direccion" id="closeEdit">
+                            <div class="direccion" id="closeEdit" onclick="closeEdit({{ $element->dni }})">
                                 <h3>Editar</h3>
                                 <span class="close">&times;</span>
                             </div>
@@ -222,6 +200,24 @@
                             </div>
                         </div>
                     </div> 
+                    <div id="popup-modal-{{ $element->dni }}" class="modal">
+                        <div class="modal-content">
+                            <div class="direccion" onclick="closeDelete({{ $element->dni }})">
+                                <h3>Eliminar usuario</h3>
+                                <span class="close" id="closeModal">&times;</span>
+                            </div>
+                            <div class="icon-contenedor">
+                                <svg class="svg-contenedor" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 11V6m0 8h.01M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
+                                </svg>
+                                <h3 class="message">¿Estás seguro de inhabilitar al siguiente usuario?</h3>
+                                <button data-modal-hide="popup-modal" type="button" class="btn-confirmed">
+                                    Sí, estoy seguro
+                                </button>
+                                <button id="btn-cancel" data-modal-hide="popup-modal" type="button" class="btn-cancel" onclick="closeDelete({{ $element->dni }})">No, cancelar</button>
+                            </div>
+                        </div>
+                    </div>
                     <tr>
                         <td>
                             {{ $element->dni }}
@@ -254,8 +250,8 @@
                             </label>
                         </td>
                         <td class="btn-container">
-                            <button id="editar"><i class="fa-solid fa-pen-to-square"></i> Editar</button>
-                            <button id="eliminar"><i class="fa-solid fa-trash"></i> Eliminar</button>
+                            <button type="button" id="editar-{{ $element->dni }}" onclick="openEditModal({{ $element->dni }})"><i class="fa-solid fa-pen-to-square"></i> Editar</button>
+                            <button type="button" id="eliminar" onclick="openDeleteModal({{ $element->dni }})"><i class="fa-solid fa-trash"></i> Eliminar</button>
                         </td>
                     </tr>
                 @endforeach
@@ -264,36 +260,36 @@
     </div>
 
     <script>
-        $(document).ready(function () {
-            $('#dataTable').DataTable({
-                searching: true,
-                paging: true
-            });
-        });
+        // $(document).ready(function () {
+        //     $('#dataTable').DataTable({
+        //         searching: true,
+        //         paging: true
+        //     });
+        // });
 
-        function searchTable() {
-            var input, filter, table, tr, td, i, txtValue;
-            input = document.getElementById("searchInput");
-            filter = input.value.toUpperCase();
-            table = document.getElementById("dataTable");
-            tr = table.getElementsByTagName("tr");
-            for (i = 1; i < tr.length; i++) { // Empezar desde 1 para omitir la fila de encabezados
-                var found = false;
-                td = tr[i].getElementsByTagName("td");
-                for (var j = 0; j < td.length - 1; j++) { // Iterar hasta td.length - 1 para excluir la columna de acciones
-                    txtValue = td[j].textContent || td[j].innerText;
-                    if (txtValue.toUpperCase().indexOf(filter) > -1) {
-                        found = true;
-                        break;
-                    }
-                }
-                if (found) {
-                    tr[i].style.display = "";
-                } else {
-                    tr[i].style.display = "none";
-                }
-            }
-        }
+        // function searchTable() {
+        //     var input, filter, table, tr, td, i, txtValue;
+        //     input = document.getElementById("searchInput");
+        //     filter = input.value.toUpperCase();
+        //     table = document.getElementById("dataTable");
+        //     tr = table.getElementsByTagName("tr");
+        //     for (i = 1; i < tr.length; i++) { // Empezar desde 1 para omitir la fila de encabezados
+        //         var found = false;
+        //         td = tr[i].getElementsByTagName("td");
+        //         for (var j = 0; j < td.length - 1; j++) { // Iterar hasta td.length - 1 para excluir la columna de acciones
+        //             txtValue = td[j].textContent || td[j].innerText;
+        //             if (txtValue.toUpperCase().indexOf(filter) > -1) {
+        //                 found = true;
+        //                 break;
+        //             }
+        //         }
+        //         if (found) {
+        //             tr[i].style.display = "";
+        //         } else {
+        //             tr[i].style.display = "none";
+        //         }
+        //     }
+        // }
 
         function editEntry() {
             console.log("Editar entrada");
@@ -359,17 +355,6 @@
         var span = document.getElementsByClassName("close")[0];
         var mainImage = document.getElementById("mainImage");
 
-
-        var popUpModal = document.getElementById("popup-modal");
-        var btnModal = document.getElementById("eliminar");
-        var closeModal = document.getElementById("closeModal");
-        var btnCancel = document.getElementById('btn-cancel');
-
-        var editModal = document.getElementById("edit-modal");
-        var btnEdit = document.getElementById("editar");
-        var closeEdit = document.getElementById("closeEdit");
-        var btnCancelEdit = document.getElementById('btn-cancel-edit');
-
         var savedImage = sessionStorage.getItem("selectedImage");
         if (savedImage) {
             mainImage.src = savedImage;
@@ -380,29 +365,9 @@
             modal.style.display = "block";
         }
 
-        btnModal.onclick=() => {
-            popUpModal.style.display = "block";
-        }
-
-        btnEdit.onclick = () => {
-            editModal.style.display = "block";
-        }
-
         // Cerrar el modal al hacer clic en la "x"
         span.onclick = function () {
             modal.style.display = "none";
-        }
-
-        closeModal.onclick = () => {
-            popUpModal.style.display = "none";
-        }
-
-        closeEdit.onclick = () => {
-            editModal.style.display = "none";
-        }
-
-        btnCancel.onclick=() => {
-            popUpModal.style.display = "none";
         }
 
         // Cerrar el modal al hacer clic fuera del contenido del modal
@@ -450,6 +415,26 @@
             setTimeout(function () {
                 window.location.reload();
             }, 1000);
+        }
+
+        openEditModal = (dni) => {
+            var editModal = document.getElementById("edit-modal-" + dni);
+            editModal.style.display = "block";
+        }
+
+        closeEdit = (dni) => {
+            var editModal = document.getElementById("edit-modal-" + dni);
+            editModal.style.display = "none";
+        }
+
+        openDeleteModal = dni => {
+            var deleteModal = document.getElementById("popup-modal-" + dni);
+            deleteModal.style.display = "block";
+        }
+
+        closeDelete = dni => {
+            var deleteModal = document.getElementById("popup-modal-" + dni);
+            deleteModal.style.display = "none";
         }
     });
 </script>
