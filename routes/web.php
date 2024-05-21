@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DeleteController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EditController;
 use App\Http\Controllers\LoginController;
@@ -52,6 +53,9 @@ Route::post('/cambiar-password/{id}', [EditController::class, 'cambiarPassword']
 
 // Editar usuarios
 Route::post('/editar-usuario/{dni}', [EditController::class, 'editUser'])->name('editar-usuario');
+
+// Eliminar usuarios
+Route::post('/eliminar-usuario/{dni}', [DeleteController::class, 'deleteUser'])->name('eliminar-usuario');
 
 //Rutas protegidas por autenticación de usuario
 Route::group(['middleware' => ['auth']], function(){
