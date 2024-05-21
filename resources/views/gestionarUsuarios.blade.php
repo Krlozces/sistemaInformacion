@@ -26,6 +26,50 @@
             width: calc(100% ); /* Ancho igual al de la tabla menos el borde */
             font-weight: bold;
         }
+
+        .label-text{
+            display: block; 
+            margin-bottom: 0.5rem; 
+            color: #111827; 
+            font-size: 0.875rem;
+            line-height: 1.25rem; 
+            font-weight: 500; 
+        }
+
+        .input-field{
+            display: block; 
+            padding: 0.625rem; 
+            background-color: #F9FAFB; 
+            color: #111827; 
+            font-size: 0.875rem;
+            line-height: 1.25rem; 
+            width: 100%; 
+            border-radius: 0.5rem; 
+            border-width: 1px; 
+            border-color: #D1D5DB; 
+            outline: none;
+            margin-bottom: 20px;
+        }
+
+        .btn-editar{
+            padding-top: 0.625rem;
+            padding-bottom: 0.625rem; 
+            padding-left: 1.25rem;
+            padding-right: 1.25rem; 
+            background-color: #1D4ED8; 
+            color: #ffffff; 
+            font-size: 0.875rem;
+            line-height: 1.25rem; 
+            font-weight: 500; 
+            text-align: center; 
+            width: 100%; 
+            border-radius: 0.5rem; 
+            border:none;
+        }
+
+        .btn-editar:hover {
+            background-color: #1E40AF; 
+        }
     </style>
 </head>
 
@@ -85,37 +129,7 @@
         </div>
     </div>
 
-    <div id="edit-modal" class="modal">
-        <!-- Modal content -->
-        <div class="modal-content">
-            <div class="direccion" id="closeEdit">
-                <h3>Editar</h3>
-                <span class="close">&times;</span>
-            </div>
-            <!-- Modal body -->
-            <div class="p-4 md:p-5">
-                <form class="space-y-4" action="#">
-                    <div>
-                        <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your email</label>
-                        <input type="email" name="email" id="email" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="name@company.com" required />
-                    </div>
-                    <div>
-                        <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your password</label>
-                        <input type="password" name="password" id="password" placeholder="••••••••" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" required />
-                    </div>
-                    <div class="flex justify-between">
-                        <div class="flex items-start">
-                            <div class="flex items-center h-5">
-                                <input id="remember" type="checkbox" value="" class="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-blue-300 dark:bg-gray-600 dark:border-gray-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800" required />
-                            </div>
-                            <label for="remember" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Remember me</label>
-                        </div>
-                    </div>
-                    <button type="submit" class="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Editar</button>
-                </form>
-            </div>
-        </div>
-    </div> 
+    
 
     <div id="myModal" class="modal">
         <div class="modal-content">
@@ -169,6 +183,45 @@
             </thead>
             <tbody id="content1">
                 @foreach ($elements as $element)
+                    <div id="edit-modal" class="modal">
+                        <!-- Modal content -->
+                        <div class="modal-content">
+                            <div class="direccion" id="closeEdit">
+                                <h3>Editar</h3>
+                                <span class="close">&times;</span>
+                            </div>
+                            <!-- Modal body -->
+                            <div class="p-4 md:p-5">
+                                <form class="space-y-4" action="#">
+                                    <div>
+                                        <label for="dni" class="label-text">DNI</label>
+                                        <input type="text" name="dni" id="dni" class="input-field" value="{{ $element->dni }}" required />
+                                    </div>
+                                    <div>
+                                        <label for="nombre" class="label-text">Nombres</label>
+                                        <input type="text" name="nombre" id="nombre" class="input-field" value="{{ $element->nombre }}" required />
+                                    </div>
+                                    <div>
+                                        <label for="apellido_paterno" class="label-text">Apellido paterno</label>
+                                        <input type="text" name="apellido_paterno" id="apellido_paterno" class="input-field" value="{{ $element->apellido_paterno }}" required />
+                                    </div>
+                                    <div>
+                                        <label for="apellido_materno" class="label-text">Apellido materno</label>
+                                        <input type="text" name="apellido_materno" id="apellido_materno" class="input-field" value="{{ $element->apellido_materno }}" required />
+                                    </div>
+                                    <div>
+                                        <label for="grado" class="label-text">Grado</label>
+                                        <input type="text" name="grado" id="grado" class="input-field" value="{{ $element->grado }}" required />
+                                    </div>
+                                    <div>
+                                        <label for="telefono" class="label-text">Teléfono</label>
+                                        <input type="tel" name="telefono" id="telefono" class="input-field" value="{{ $element->telefono }}" required />
+                                    </div>
+                                    <button type="submit" class="btn-editar">Editar</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div> 
                     <tr>
                         <td>
                             {{ $element->dni }}
@@ -201,26 +254,23 @@
                             </label>
                         </td>
                         <td class="btn-container">
-                            <button id="editar" onclick="editEntry()"><a href="#"><i class="fa-solid fa-pen-to-square"></i> Editar</a></button>
-                            <button id="eliminar"><a href="#"><i class="fa-solid fa-trash"></i> Eliminar</a></button>
+                            <button id="editar"><i class="fa-solid fa-pen-to-square"></i> Editar</button>
+                            <button id="eliminar"><i class="fa-solid fa-trash"></i> Eliminar</button>
                         </td>
                     </tr>
                 @endforeach
             </tbody>
         </table>
-
-        <script>
-            $(document).ready(function () {
-                $('#dataTable').DataTable({
-                    searching: true,
-                    paging: true
-                });
-            });
-        </script>
     </div>
 
-
     <script>
+        $(document).ready(function () {
+            $('#dataTable').DataTable({
+                searching: true,
+                paging: true
+            });
+        });
+
         function searchTable() {
             var input, filter, table, tr, td, i, txtValue;
             input = document.getElementById("searchInput");
