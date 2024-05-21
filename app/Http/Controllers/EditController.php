@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Grado;
+use App\Models\Persona;
+use App\Models\Personal;
 use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\User;
 use Illuminate\Support\Facades\Hash;
@@ -25,4 +28,46 @@ class EditController extends Controller
 
         return redirect()->route('home')->with('success', 'Contraseña cambiada con éxito');
     }
+
+    public function editUser(Request $request, $dni)
+    {
+        $data = $request->validate([
+            'nombre' => ['required', 'string'],
+            'apellido_paterno' => ['required', 'string'],
+            'apellido_materno' => ['required', 'string'],
+            'grado' => ['required', 'string'],
+            'dni' => ['required', 'string', 'min:8'],
+            'telefono' => ['required', 'string'],
+        ]);
+
+        $user = Persona::where('dni', $dni)->first();
+
+        if (!$user) {
+            return redirect()->route('listar-usuarios')->with('error', 'Usuario no encontrado.');
+        }
+
+        $user->nombre = $data['nombre'];
+        $user->dni = $data['dni'];
+        $user->apellido_paterno = $data['apellido_paterno'];
+        $user->apellido_materno = $data['apellido_materno'];
+        $user->save();
+
+        $personal = Personal::where('persona_id', $user->id)->first();
+
+        if ($personal) {
+            $grado = Grado::where('grado', $data['grado'])->first();
+            $personal->telefono = $data['telefono'];
+            if ($grado) {
+                $personal->grado_id = $grado->id;
+                $personal->save();
+            } else {
+                return redirect()->route('listar-usuarios')->with('error', 'Grado no encontrado.');
+            }
+        } else {
+            return redirect()->route('listar-usuarios')->with('error', 'Registro de personal no encontrado.');
+        }
+
+        return redirect()->route('listar-usuarios')->with('success', 'Registro editado con éxito.');
+    }
+
 }
