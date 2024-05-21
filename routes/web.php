@@ -50,6 +50,9 @@ Route::post('/cambiar-imagen/{id}', [RegisterController::class, 'changeImage'])-
 // Change password
 Route::post('/cambiar-password/{id}', [EditController::class, 'cambiarPassword'])->name('cambiar-password');
 
+// Editar usuarios
+Route::post('/editar-usuario/{dni}', [EditController::class, 'editUser'])->name('editar-usuario');
+
 //Rutas protegidas por autenticación de usuario
 Route::group(['middleware' => ['auth']], function(){
     Route::get('/index', [ViewsController::class, 'home'])->name('home');
