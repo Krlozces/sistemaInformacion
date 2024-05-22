@@ -216,7 +216,7 @@
                     </div>
                     <div class="input-group1">
                         <label for="placa">N° de placa:</label>
-                        <input type="text" id="placa" name="placa" value="{{ $elemento->placa }}" required oninput="convertirMayusculas(this)" maxlength="20">
+                        <input type="text" id="placa" name="placa" value="{{ $elemento->placa }}" oninput="convertirMayusculas(this)" maxlength="20">
                     </div>
                 </div>
             </fieldset>
