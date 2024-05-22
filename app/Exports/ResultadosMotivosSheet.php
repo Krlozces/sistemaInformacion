@@ -7,8 +7,12 @@ use App\Models\Certificado;
 use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
+use Maatwebsite\Excel\Concerns\WithStyles;
+use PhpOffice\PhpSpreadsheet\Style\Alignment;
+use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
+use PhpOffice\PhpSpreadsheet\Style\Border;
 
-class ResultadosMotivosSheet implements FromCollection, WithHeadings
+class ResultadosMotivosSheet implements FromCollection, WithHeadings, WithStyles
 {
     /**
     * @return \Illuminate\Support\Collection
@@ -59,5 +63,64 @@ class ResultadosMotivosSheet implements FromCollection, WithHeadings
             ['USUARIOS SEGÚN MOTIVOS, DE LA UNIDAD DESCONCENTRADA DE DOSAJE ETILICO SEDE CHICLAYO, CORRESPONDIENTE AL MES DE '.$nombreMes.' '.$anio],
             ['N°', 'ACCIDENTE DE TRANSITO', 'PRESUNCION DE EBRIEDAD', 'OTRO', 'TOTAL']
         ];
+    }
+
+    public function styles(Worksheet $sheet)
+    {
+
+        $sheet->getColumnDimension('A')->setWidth(15);
+        $sheet->getColumnDimension('B')->setWidth(25);
+        $sheet->getColumnDimension('C')->setWidth(25);
+        $sheet->getColumnDimension('D')->setWidth(15);
+        $sheet->getColumnDimension('E')->setWidth(15);
+
+        $sheet->getStyle('A1:H1')->getAlignment()->setWrapText(true);
+        $sheet->getRowDimension(1)->setRowHeight(40);
+
+        $sheet->mergeCells('A1:E1');
+
+
+        $sheet->getStyle('A1:E1')->applyFromArray([
+            'font' => [
+                'bold' => true,
+                'size' => 10,
+                'name' => 'Arial',
+            ],
+            'alignment' => [
+                'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER,
+                'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER,
+            ],
+        ]);
+
+        // Aplicar estilos a A2:E2 (centrado y bordes)
+        $sheet->getStyle('A2:E2')->applyFromArray([
+            'font' => [
+                'bold' => true,
+            ],
+            'alignment' => [
+                'horizontal' => Alignment::HORIZONTAL_CENTER,
+                'vertical' => Alignment::VERTICAL_CENTER,
+            ],
+            'borders' => [
+                'outline' => [
+                    'borderStyle' => Border::BORDER_THIN,
+                ],
+                'inside' => [
+                    'borderStyle' => Border::BORDER_THIN,
+                ],
+            ],
+        ]);
+
+        // Aplicar bordes a todas las celdas desde A4 hacia abajo
+        $highestRow = $sheet->getHighestRow(); // Obtener la fila más alta que contiene datos
+        $sheet->getStyle('A3:E' . $highestRow)->applyFromArray([
+            'borders' => [
+                'allBorders' => [
+                    'borderStyle' => Border::BORDER_THIN,
+                    'color' => ['argb' => '000000'],
+                ],
+            ],
+        ]);
+
     }
 }

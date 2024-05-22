@@ -7,8 +7,12 @@ use App\Models\Certificado;
 use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
+use Maatwebsite\Excel\Concerns\WithStyles;
+use PhpOffice\PhpSpreadsheet\Style\Alignment;
+use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
+use PhpOffice\PhpSpreadsheet\Style\Border;
 
-class ResultadosNCMSheet implements FromCollection, WithHeadings
+class ResultadosNCMSheet implements FromCollection, WithHeadings, WithStyles
 {
     /**
     * @return \Illuminate\Support\Collection
@@ -60,8 +64,68 @@ class ResultadosNCMSheet implements FromCollection, WithHeadings
         $nombreMes = $nombresMeses[$numeroMes];
         $anio = $fecha->format('Y');
         return [
-            ['USUARIOS SEGÚN NCM, DE LA UNIDAD DESCONCENTRADA DE DOSAJE ETILICO SEDE CHICLAYO, CORRESPONDIENTE AL MES DE '.$nombreMes.' '.$anio],
+            ['USUARIOS SEGÚN MENORES DE EDAD, NEGATIVA A PASAR, CONSTATACION Y SUPLANTACION, DE LA UNIDAD DESCONCENTRADA DE DOSAJE ETILICO SEDE CHICLAYO, CORRESPONDIENTE AL MES DE '.$nombreMes.' '.$anio],
             ['N°', 'MENOR DE EDAD', 'NEGATIVA A PASAR', 'CONSTATACION', 'SUPLANTACION', 'TOTAL']
         ];
+    }
+
+    public function styles(Worksheet $sheet)
+    {
+
+        $sheet->getColumnDimension('A')->setWidth(15);
+        $sheet->getColumnDimension('B')->setWidth(25);
+        $sheet->getColumnDimension('C')->setWidth(25);
+        $sheet->getColumnDimension('D')->setWidth(20);
+        $sheet->getColumnDimension('E')->setWidth(20);
+        $sheet->getColumnDimension('F')->setWidth(13);
+
+        $sheet->getStyle('A1:F1')->getAlignment()->setWrapText(true);
+        $sheet->getRowDimension(1)->setRowHeight(40);
+
+        $sheet->mergeCells('A1:F1');
+
+
+        $sheet->getStyle('A1:F1')->applyFromArray([
+            'font' => [
+                'bold' => true,
+                'size' => 10,
+                'name' => 'Arial',
+            ],
+            'alignment' => [
+                'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER,
+                'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER,
+            ],
+        ]);
+
+        // Aplicar estilos a A2:E2 (centrado y bordes)
+        $sheet->getStyle('A2:F2')->applyFromArray([
+            'font' => [
+                'bold' => true,
+            ],
+            'alignment' => [
+                'horizontal' => Alignment::HORIZONTAL_CENTER,
+                'vertical' => Alignment::VERTICAL_CENTER,
+            ],
+            'borders' => [
+                'outline' => [
+                    'borderStyle' => Border::BORDER_THIN,
+                ],
+                'inside' => [
+                    'borderStyle' => Border::BORDER_THIN,
+                ],
+            ],
+        ]);
+
+        // Aplicar bordes a todas las celdas desde A4 hacia abajo
+        $highestRow = $sheet->getHighestRow(); // Obtener la fila más alta que contiene datos
+        $sheet->getStyle('A3:F' . $highestRow)->applyFromArray([
+            'borders' => [
+                'allBorders' => [
+                    'borderStyle' => Border::BORDER_THIN,
+                    'color' => ['argb' => '000000'],
+                ],
+            ],
+        ]);
+
     }
 }
