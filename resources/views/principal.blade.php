@@ -207,9 +207,6 @@
                 <div class="Actualizar">
                     <button type="submit">Registrar</button>
                 </div>
-                <div class="ver">
-                    <button type="#">VER USUARIOS</button>
-                </div>
                 <div class="Enviar">
                     <button type="reset">Cancelar</button>
                 </div>
