@@ -278,7 +278,7 @@
             <label for="btn-menu"><i class="fa-solid fa-list"></i></label>
         </div>
     </div>
-    <script async defer>
+    <script>
         document.addEventListener("DOMContentLoaded", function () {
             // Obtener el modal y el botón para abrirlo
             var modal = document.getElementById("myModal");
