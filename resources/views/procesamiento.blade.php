@@ -197,14 +197,14 @@
 
                     <div class="input-group1">
                         <label for="licencia">Licencia:</label>
-                        <input type="text" id="licencia" name="licencia" value="{{ $elemento->licencia }}" required oninput="convertirMayusculas(this)">
+                        <input type="text" id="licencia" name="licencia" value="{{ $elemento->licencia }}" oninput="convertirMayusculas(this)">
                     </div>
 
                 </div>
                 <div class="input-general1">
                     <div class="input-group1">
                         <label for="clase">Clase:</label>
-                        <input type="text" id="clase" name="clase" value="{{ $elemento->clase }}" required oninput="convertirMayusculas(this)">
+                        <input type="text" id="clase" name="clase" value="{{ $elemento->clase }}" oninput="convertirMayusculas(this)">
                     </div>
                     <div class="input-group1">
                         <label for="categoria">Categoría:</label>
