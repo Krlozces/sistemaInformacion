@@ -93,6 +93,16 @@
                 </div>
             </div>
         </div>
+        @if (session('success'))
+            <div class="alert alert-success">
+                {{ session('success') }}
+            </div>
+        @endif
+        @if (session('error'))
+            <div class="alert alert-danger">
+                {{ session('error') }}
+            </div>
+        @endif
         <!--CONTENIDO-->
         <div class="capa1">
             <form action="{{ route('register-extraccion') }}" method="POST">
@@ -201,8 +211,6 @@
                             <label for="licencia">Licencia:</label>
                             <input type="text" id="licencia" name="licencia" oninput="convertirMayusculas(this)">
                         </div>
-
-
                     </div>
                     <div class="input-general1">
                         <div class="input-group1">
