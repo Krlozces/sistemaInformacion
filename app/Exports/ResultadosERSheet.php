@@ -58,7 +58,7 @@ class ResultadosERSheet implements FromCollection, WithHeadings, WithStyles
         $nombreMes = $nombresMeses[$numeroMes];
         $anio = $fecha->format('Y');
         return [
-            ['USUARIOS SEGÚN ESTADO, DE LA UNIDAD DESCONCENTRADA DE DOSAJE ETILICO SEDE CHICLAYO, CORRESPONDIENTE AL MES DE '.$nombreMes.' '.$anio],
+            ['USUARIOS SEGÚN MUESTRAS EXTRAIDAS/REMITIDAS, DE LA UNIDAD DESCONCENTRADA DE DOSAJE ETILICO SEDE CHICLAYO, CORRESPONDIENTE AL MES '.$nombreMes.' '.$anio],
             ['N°', 'EXTRAIDAS', 'REMITIDAS', 'TOTAL']
         ];
     }
