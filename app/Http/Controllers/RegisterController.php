@@ -104,7 +104,7 @@ class RegisterController extends Controller
             $usuario->assignRole('procesador');
         }
 
-        return redirect()->back();
+        return redirect()->back()->with('success', 'Registro exitoso!');
     }
 
     public function registerExtraccion(Request $request){
