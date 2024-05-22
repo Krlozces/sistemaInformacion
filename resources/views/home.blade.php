@@ -182,12 +182,12 @@
     <div class="container-menu">
         <div class="cont-menu">
             <nav>
-                <div class="imagen-container">
+                <div class="imagen-container flex flex-col justify-center items-center">
                     <img src="{{ asset('storage/' . Auth::user()->imagen_perfil) }}" class="img" alt="Logo">
+
                     <h2>{{ Auth::user()->name }}</h2>
                     <h6>{{ $grado ? $grado->grado : '' }}</h6>
-                </div>              
-                <br>
+                </div>                              
                 <a href="{{ route('home') }}"> <i class="fa-solid fa-house"></i> Inicio</a>
                 <a href="{{ route('principal') }}"><i class="fa-solid fa-user-plus"></i> Añadir Usuario</a>
                 <a href="{{ route('listar-usuarios') }}"><i class="fa-solid fa-list"></i> Listar Usuarios</a>
