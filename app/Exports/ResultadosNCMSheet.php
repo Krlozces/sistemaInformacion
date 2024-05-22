@@ -31,13 +31,18 @@ class ResultadosNCMSheet implements FromCollection, WithHeadings, WithStyles
             DB::raw('SUM(CASE WHEN intervenidos.edad < 18 THEN 1 ELSE 0 END) as MENORES'),
             DB::raw('SUM(CASE WHEN muestras.resultado_cualitativo = "NEGACIÓN" THEN 1 ELSE 0 END) as NEGATIVA'),
             DB::raw('SUM(CASE WHEN muestras.resultado_cualitativo = "CONSTATACIÓN" THEN 1 ELSE 0 END) as CONSTATACION'),
-            DB::raw('SUM(CASE WHEN muestras.resultado_cualitativo = "SUPLANTACIÓN" THEN 1 ELSE 0 END) as CONSTATACION'),
+            DB::raw('SUM(CASE WHEN muestras.resultado_cualitativo = "SUPLANTACIÓN" THEN 1 ELSE 0 END) as SUPLANTACION'),
             DB::raw('
-                SUM(CASE WHEN intervenidos.edad < 18 THEN 1 ELSE 0 END) +
-                SUM(CASE WHEN muestras.resultado_cualitativo = "NEGACIÓN" THEN 1 ELSE 0 END) +
-                SUM(CASE WHEN muestras.resultado_cualitativo = "CONSTATACIÓN" THEN 1 ELSE 0 END) +
-                SUM(CASE WHEN muestras.resultado_cualitativo = "SUPLANTACIÓN" THEN 1 ELSE 0 END)
-            as TOTAL')
+                SUM(
+                    CASE 
+                        WHEN intervenidos.edad < 18 THEN 1 
+                        WHEN muestras.resultado_cualitativo = "NEGACIÓN" THEN 1 
+                        WHEN muestras.resultado_cualitativo = "CONSTATACIÓN" THEN 1 
+                        WHEN muestras.resultado_cualitativo = "SUPLANTACIÓN" THEN 1 
+                        ELSE 0 
+                    END
+                ) as TOTAL'
+            )
         )
         ->groupBy(DB::raw('DATE(registros.fecha_hora_extraccion)'))
         ->get();

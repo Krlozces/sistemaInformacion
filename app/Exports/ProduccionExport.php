@@ -24,26 +24,26 @@ class ProduccionExport implements FromCollection, WithHeadings, WithTitle, WithS
     private function resultados()
     {
         return Muestra::join('registros', 'registros.muestra_id', '=', 'muestras.id')
-            ->join('intervenidos', 'intervenidos.id', '=', 'registros.intervenido_id')
-            ->select(
-                DB::raw('DATE(muestras.fecha_muestra) as dia'),
-                DB::raw('SUM(CASE WHEN intervenidos.sexo = "M" AND muestras.resultado_cualitativo = "positivo" THEN 1 ELSE 0 END) as positivos_masculinos'),
-                DB::raw('SUM(CASE WHEN intervenidos.sexo = "M" AND muestras.resultado_cualitativo = "negativo" THEN 1 ELSE 0 END) as negativos_masculinos'),
-                DB::raw('SUM(CASE WHEN intervenidos.sexo = "M" AND (muestras.resultado_cualitativo = "NEGACIÓN" OR muestras.resultado_cualitativo = "SIN MUESTRA") THEN 1 ELSE 0 END) as sin_muestra_masculinos'),
-                DB::raw('SUM(CASE WHEN intervenidos.sexo = "F" AND muestras.resultado_cualitativo = "positivo" THEN 1 ELSE 0 END) as positivos_femeninos'),
-                DB::raw('SUM(CASE WHEN intervenidos.sexo = "F" AND muestras.resultado_cualitativo = "negativo" THEN 1 ELSE 0 END) as negativos_femeninos'),
-                DB::raw('SUM(CASE WHEN intervenidos.sexo = "F" AND (muestras.resultado_cualitativo = "NEGACIÓN" OR muestras.resultado_cualitativo = "SIN MUESTRA") THEN 1 ELSE 0 END) as sin_muestra_femeninos'),
-                DB::raw('
-                    SUM(CASE WHEN intervenidos.sexo = "M" AND muestras.resultado_cualitativo = "positivo" THEN 1 ELSE 0 END) +
-                    SUM(CASE WHEN intervenidos.sexo = "M" AND muestras.resultado_cualitativo = "negativo" THEN 1 ELSE 0 END) +
-                    SUM(CASE WHEN intervenidos.sexo = "M" AND (muestras.resultado_cualitativo = "NEGACIÓN" OR muestras.resultado_cualitativo = "SIN MUESTRA") THEN 1 ELSE 0 END) +
-                    SUM(CASE WHEN intervenidos.sexo = "F" AND muestras.resultado_cualitativo = "positivo" THEN 1 ELSE 0 END) +
-                    SUM(CASE WHEN intervenidos.sexo = "F" AND muestras.resultado_cualitativo = "negativo" THEN 1 ELSE 0 END) +
-                    SUM(CASE WHEN intervenidos.sexo = "F" AND (muestras.resultado_cualitativo = "NEGACIÓN" OR muestras.resultado_cualitativo = "SIN MUESTRA") THEN 1 ELSE 0 END) 
-                as total')
-            )
-            ->groupBy(DB::raw('DATE(muestras.fecha_muestra)'))
-            ->get();
+        ->join('intervenidos', 'intervenidos.id', '=', 'registros.intervenido_id')
+        ->select(
+            DB::raw('DATE(muestras.fecha_muestra) as dia'),
+            DB::raw('SUM(CASE WHEN intervenidos.sexo = "M" AND muestras.resultado_cualitativo = "positivo" THEN 1 ELSE 0 END) as positivos_masculinos'),
+            DB::raw('SUM(CASE WHEN intervenidos.sexo = "M" AND muestras.resultado_cualitativo = "negativo" THEN 1 ELSE 0 END) as negativos_masculinos'),
+            DB::raw('SUM(CASE WHEN intervenidos.sexo = "M" AND (muestras.resultado_cualitativo = "NEGACIÓN" OR muestras.resultado_cualitativo = "SIN MUESTRA") THEN 1 ELSE 0 END) as sin_muestra_masculinos'),
+            DB::raw('SUM(CASE WHEN intervenidos.sexo = "F" AND muestras.resultado_cualitativo = "positivo" THEN 1 ELSE 0 END) as positivos_femeninos'),
+            DB::raw('SUM(CASE WHEN intervenidos.sexo = "F" AND muestras.resultado_cualitativo = "negativo" THEN 1 ELSE 0 END) as negativos_femeninos'),
+            DB::raw('SUM(CASE WHEN intervenidos.sexo = "F" AND (muestras.resultado_cualitativo = "NEGACIÓN" OR muestras.resultado_cualitativo = "SIN MUESTRA") THEN 1 ELSE 0 END) as sin_muestra_femeninos'),
+            DB::raw('
+                SUM(CASE WHEN intervenidos.sexo = "M" AND muestras.resultado_cualitativo = "positivo" THEN 1 ELSE 0 END) +
+                SUM(CASE WHEN intervenidos.sexo = "M" AND muestras.resultado_cualitativo = "negativo" THEN 1 ELSE 0 END) +
+                SUM(CASE WHEN intervenidos.sexo = "M" AND (muestras.resultado_cualitativo = "NEGACIÓN" OR muestras.resultado_cualitativo = "SIN MUESTRA") THEN 1 ELSE 0 END) +
+                SUM(CASE WHEN intervenidos.sexo = "F" AND muestras.resultado_cualitativo = "positivo" THEN 1 ELSE 0 END) +
+                SUM(CASE WHEN intervenidos.sexo = "F" AND muestras.resultado_cualitativo = "negativo" THEN 1 ELSE 0 END) +
+                SUM(CASE WHEN intervenidos.sexo = "F" AND (muestras.resultado_cualitativo = "NEGACIÓN" OR muestras.resultado_cualitativo = "SIN MUESTRA") THEN 1 ELSE 0 END) 
+            as total')
+        )
+        ->groupBy(DB::raw('DATE(muestras.fecha_muestra)'))
+        ->get();
     }
 
     public function headings(): array
