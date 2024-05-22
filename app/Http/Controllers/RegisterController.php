@@ -195,7 +195,7 @@ class RegisterController extends Controller
             'extractor' => $extractor
         ];
         
-        return redirect()->back();
+        return redirect()->back()->with('success', 'Registro realizado con éxito.');
     }
 
     public function registerProcesamiento(Request $request){
