@@ -6,12 +6,21 @@
     <title>Registrar</title>
     <link rel="icon" href="{{ asset('images/logo.png') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="{{asset('js/importante.js')}}"></script>
     <link rel="stylesheet" href="{{ asset('css/home.css') }}">
     <link rel="stylesheet" href="{{ asset('css/principal.css') }}">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+    <script>
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+    </script>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 </head>
 <body>
     <header class="header">
@@ -144,14 +153,14 @@
                 </a>
             </div>
     
-            <div class="boton3">
+            <div class="boton3" id="segunMotivosBtn">
                 SEGUN MOTIVOS
                 <a href="#">
                     <i class="fa-regular fa-calendar"></i>
                 </a>
             </div>
     
-            <div class="boton4">
+            <div class="boton4" id="segunResultadosBtn">
                 SEGUN MUESTRAS
                 <a href="#">
                     <i class="fa-solid fa-square-poll-vertical"></i>
@@ -160,7 +169,7 @@
         </div>
     
         <div class="container4">
-            <div class="boton5">
+            <div class="boton5" id="segunEdadBtn">
                 SEGUN EDAD
                 <a href="#">
                     <i class="fa-solid fa-square-poll-vertical"></i>
@@ -285,9 +294,6 @@
             const labels = @json($labels);
             const values = @json($values);
 
-            console.log(labels);
-            console.log(values);
-
             var ctx = document.getElementById('myChart').getContext('2d');
             var myChart = new Chart(ctx, {
                 type: 'bar',
@@ -330,6 +336,141 @@
                     }
                 }
             });
+
+            $(document).ready(function() {
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+            });
+
+
+            $('#segunMotivosBtn').click(function(){
+                $.ajax({
+                    url: '{{ route("segun-motivos") }}',
+                    method: 'POST',
+                    success: function(data) {
+                        updateChart(data.type, data.motivosLabels, data.motivosValues);
+                    },
+                    error: function(xhr, status, error) {
+                        console.error('Error al obtener datos:', error);
+                    }
+                });
+            });
+
+            $('#segunEdadBtn').click(function(){
+                $.ajax({
+                    url: '{{ route("segun-edad") }}',
+                    method: 'POST',
+                    success: function(data) {
+                        updateChart(data.type, data.yearLabels, data.yearValues);
+                    },
+                    error: function(xhr, status, error) {
+                        console.error('Error al obtener datos:', error);
+                    }
+                });
+            });
+
+            $('#segunResultadosBtn').click(function(){
+                $.ajax({
+                    url: '{{ route("segun-resultados") }}',
+                    method: 'POST',
+                    success: function(data) {
+                        updateChart(data.type, data.resultsLabels, data.resultsValues);
+                    },
+                    error: function(xhr, status, error) {
+                        console.error('Error al obtener datos:', error);
+                    }
+                });
+            });
+
+            function updateChart(type, labels, values) {
+                if (myChart) {
+                    myChart.destroy();
+                }
+
+                let chartConfig = {
+                    type: type,
+                    data: {
+                        labels: labels,
+                        datasets: [{
+                            label: type === 'pie' || type === 'doughnut' ? '' : 'Datos',
+                            data: values,
+                            borderColor: type === 'pie' || type === 'doughnut' ? [] : 'rgba(75, 192, 192, 1)',
+                            borderWidth: type === 'pie' || type === 'doughnut' ? 1 : 2,
+                            backgroundColor: type === 'pie' || type === 'doughnut' ? getPieColors(values.length) : 'rgba(75, 192, 192, 0.2)',
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        plugins: {
+                            legend: {
+                                position: 'top',
+                            },
+                            title: {
+                                display: true,
+                                text: 'Gráfico ' + type.charAt(0).toUpperCase() + type.slice(1)
+                            },
+                            tooltip: {
+                                callbacks: {
+                                    label: function(context) {
+                                        return context.raw;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                };
+
+                if (type !== 'pie' && type !== 'doughnut') {
+                    chartConfig.options.scales = {
+                        x: {
+                            beginAtZero: true,
+                            display: true,
+                            ticks: {
+                                stepSize: 1,
+                                precision: 0
+                            }
+                        },
+                        y: {
+                            beginAtZero: true,
+                            display: true,
+                            ticks: {
+                                stepSize: 1,
+                                precision: 0
+                            }
+                        }
+                    };
+                }
+
+                myChart = new Chart(ctx, chartConfig);
+            }
+
+            function getPieColors(numColors) {
+                const colors = [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(255, 159, 64, 0.2)'
+                ];
+                const borderColor = [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)'
+                ];
+                let pieColors = [];
+                for (let i = 0; i < numColors; i++) {
+                    pieColors.push(colors[i % colors.length]);
+                }
+                return pieColors;
+            }
+
         });
     </script>
 </body>
