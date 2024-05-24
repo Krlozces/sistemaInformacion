@@ -6,9 +6,9 @@
         <title>Área de Extracción</title>
         <link rel="icon" href="{{ asset('images/logo.png') }}">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-        <script src="{{asset('js/importante.js')}}"></script>
         <link rel="stylesheet" href="{{ asset('css/extraccion.css') }}">
         <link rel="stylesheet" href="{{ asset('css/principal.css') }}">
+        
     </head>
     <body>
         <header class="header">
@@ -93,16 +93,6 @@
                 </div>
             </div>
         </div>
-        @if (session('success'))
-            <div class="alert alert-success">
-                {{ session('success') }}
-            </div>
-        @endif
-        @if (session('error'))
-            <div class="alert alert-danger">
-                {{ session('error') }}
-            </div>
-        @endif
         <!--CONTENIDO-->
         <div class="capa1">
             <form action="{{ route('register-extraccion') }}" method="POST">
@@ -111,7 +101,16 @@
                 <div class="titulo-container">
                     <h4>INFORMACIÓN GENERAL</h4>
                 </div>
-
+                @if (session('success'))
+                    <div class="alert alert-success">
+                        {{ session('success') }}
+                    </div>
+                @endif
+                @if (session('error'))
+                    <div class="alert alert-danger">
+                        {{ session('error') }}
+                    </div>
+                @endif
                 <div class="input-general">
                     <div>
                         <input class="w-14" type="text" value="{{ $nuevoCodigo }}" id="campoIncremental" name="numero_oficio" readonly>
@@ -307,6 +306,7 @@
                             <textarea id="observaciones" name="observaciones" oninput="convertirMayusculas(this)"></textarea>
                         </div>
                     </div>
+                    <script src="{{ asset('js/importante.js') }}"></script>
                 </fieldset>
 
                 <div class="almacenar">
@@ -317,7 +317,6 @@
                         <button type="reset">Cancelar</button>
                     </div>
                 </div>
-
                 </div>
             </form>
         </div>
@@ -345,7 +344,7 @@
                 <label for="btn-menu"><i class="fa-solid fa-list"></i></label>
             </div>
         </div>
-        <script async defer>
+        <script>
             document.addEventListener("DOMContentLoaded", function () {
                 // Obtener el modal y el botón para abrirlo
                 var modal = document.getElementById("myModal");
