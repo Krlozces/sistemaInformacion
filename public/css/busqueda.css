@@ -660,3 +660,28 @@ input[type="file"]::placeholder {
 .bot:hover {
   background-color: #008dce;
 }
+
+.alert-danger{
+  position: relative; 
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem; 
+  padding-left: 1rem;
+  padding-right: 1rem; 
+  background-color: #FEE2E2; 
+  color: #B91C1C; 
+  border-radius: 0.25rem; 
+  border-width: 1px; 
+  border-color: #F87171; 
+}
+
+.alert-success{
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem; 
+  padding-left: 1rem;
+  padding-right: 1rem; 
+  background-color: #DBEAFE; 
+  color: #1D4ED8; 
+  border-top-width: 1px; 
+  border-bottom-width: 1px; 
+  border-color: #3B82F6; 
+}
