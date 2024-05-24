@@ -51,12 +51,13 @@ class ViewsController extends Controller
     public function home(){
         $data = Muestra::join('registros', 'muestras.id', '=', 'registros.muestra_id')
         ->join('intervenidos', 'intervenidos.id', '=', 'registros.intervenido_id' )
-        ->where('resultado_cualitativo', 'positivo')
+        ->where('muestras.resultado_cualitativo', 'positivo')
         ->whereDate('muestras.created_at', '>=', Carbon::now()->subDays(30))
+        ->select('fecha_muestra')
         ->get()
-        ->groupBy(function ($date) {
+        ->groupBy(function ($item) {
             // Agrupar por día
-            return Carbon::parse($date->created_at)->format('Y-m-d');
+            return Carbon::parse($item->fecha_muestra)->format('Y-m-d');
         });
 
         $labels = [];
@@ -70,13 +71,111 @@ class ViewsController extends Controller
             $labels[] = Carbon::parse($labels[0])->addDay()->format('Y-m-d');
             $values[] = 0;
         }
-        $data['chart_data'] = json_encode($data);
+
+        $chartData = [
+            'labels' => $labels,
+            'values' => $values
+        ];
+
+        $chartDataJson = json_encode($chartData);
 
         $grado = Personal::select('grado')
                 ->join('grados', 'grados.id', '=', 'personal.grado_id')
                 ->where('usuario', Auth::user()->email)
                 ->first();
-        return view('home', compact('grado', 'labels', 'values'));
+
+        return view('home', compact('grado', 'chartDataJson'));
+    }
+
+    public function segunEdad(){
+        // polar area charts
+        $data = Muestra::join('registros', 'muestras.id', '=', 'registros.muestra_id')
+        ->join('intervenidos', 'intervenidos.id', '=', 'registros.intervenido_id' )
+        ->whereDate('muestras.created_at', '>=', Carbon::now()->subDays(30))
+        ->select('intervenidos.edad')
+        ->get()
+        ->groupBy(function ($item) {
+            // Agrupar por rangos de edad
+            $edad = $item->edad;
+            if ($edad <= 10) {
+                return '0-10';
+            } elseif ($edad <= 20) {
+                return '11-20';
+            } elseif ($edad <= 30) {
+                return '21-30';
+            } elseif ($edad <= 40) {
+                return '31-40';
+            } elseif ($edad <= 50) {
+                return '41-50';
+            } elseif ($edad <= 60) {
+                return '51-60';
+            } elseif ($edad <= 70) {
+                return '61-70';
+            } else {
+                return '71+';
+            }
+        });
+
+        $yearLabels = [];
+        $yearValues = [];
+        
+        foreach ($data as $range => $entries) {
+            $yearLabels[] = $range;
+            $yearValues[] = count($entries);
+        }
+
+        return response()->json([
+            'type' => 'polarArea',
+            'yearLabels' => $yearLabels,
+            'yearValues' => $yearValues
+        ]);
+    }
+
+    public function segunResultados(){
+        // gráfico circular
+        $data = Muestra::join('registros', 'muestras.id', '=', 'registros.muestra_id')
+        ->join('intervenidos', 'intervenidos.id', '=', 'registros.intervenido_id' )
+        ->whereDate('muestras.created_at', '>=', Carbon::now()->subDays(30))
+        ->select('muestras.resultado_cualitativo')
+        ->get()
+        ->groupBy('resultado_cualitativo');
+
+        $resultsLabels = [];
+        $resultsValues = [];
+
+        foreach ($data as $resultado => $entries) {
+            $resultsLabels[] = $resultado;
+            $resultsValues[] = count($entries);
+        }     
+
+        return response()->json([
+            'type' => 'doughnut',
+            'resultsLabels' => $resultsLabels,
+            'resultsValues' => $resultsValues
+        ]);
+    }
+
+    public function segunMotivos(){
+        // gráfico lineal
+        $data = Muestra::join('registros', 'muestras.id', '=', 'registros.muestra_id')
+        ->join('intervenidos', 'intervenidos.id', '=', 'registros.intervenido_id' )
+        ->whereDate('muestras.created_at', '>=', Carbon::now()->subDays(30))
+        ->select('registros.motivo')
+        ->get()
+        ->groupBy('motivo');
+        $motivosLabels = [];
+        $motivosValues = [];
+
+        foreach ($data as $motivo => $entries) {
+            $motivosLabels[] = $motivo;
+            $motivosValues[] = count($entries);
+        }
+        
+        return response()->json([
+            'type' => 'line',
+            'motivosLabels' => $motivosLabels,
+            'motivosValues' => $motivosValues
+        ]);
     }
 
     public function procesamiento($dni){
@@ -110,8 +209,7 @@ class ViewsController extends Controller
                 ->first();
 
         // Verificar si se encontraron resultados
-        if ($elementos !== false) {
-            // Se encontraron resultados, devolver la vista con los datos
+        if ($elementos->isNotEmpty()) {
             return view('procesamiento', compact('elementos', 'personalProcesamiento', 'personalAreaExtra', 'grado'));
         } else {
             return redirect()->back()->with('error', 'No se encontró ninguna persona con el DNI proporcionado.');
