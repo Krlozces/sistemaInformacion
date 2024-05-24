@@ -57,6 +57,11 @@ Route::post('/editar-usuario/{dni}', [EditController::class, 'editUser'])->name(
 // Eliminar usuarios
 Route::post('/eliminar-usuario/{dni}', [DeleteController::class, 'deleteUser'])->name('eliminar-usuario');
 
+// Gráficos
+Route::post('/edad', [ViewsController::class, 'segunEdad'])->name('segun-edad');
+Route::post('/motivos', [ViewsController::class, 'segunMotivos'])->name('segun-motivos');
+Route::post('/resultados', [ViewsController::class, 'segunResultados'])->name('segun-resultados');
+
 //Rutas protegidas por autenticación de usuario
 Route::group(['middleware' => ['auth']], function(){
     Route::get('/index', [ViewsController::class, 'home'])->name('home');
