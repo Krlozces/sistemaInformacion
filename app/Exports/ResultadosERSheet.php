@@ -26,11 +26,11 @@ class ResultadosERSheet implements FromCollection, WithHeadings, WithStyles
     private function resultadosER(){
         return Registro::select(
             DB::raw('DATE(registros.fecha_hora_extraccion) as dia'),
-            DB::raw('SUM(CASE WHEN registros.recepcion_doc_referencia NOT LIKE "C%" THEN 1 ELSE 0 END) as EXTRAIDAS'),
-            DB::raw('SUM(CASE WHEN registros.recepcion_doc_referencia LIKE "C%" THEN 1 ELSE 0 END) as REMITIDAS'),
+            DB::raw('SUM(CASE WHEN registros.recepcion_doc_referencia NOT LIKE "MRT%" THEN 1 ELSE 0 END) as EXTRAIDAS'),
+            DB::raw('SUM(CASE WHEN registros.recepcion_doc_referencia LIKE "MRT%" THEN 1 ELSE 0 END) as REMITIDAS'),
             DB::raw('
-                SUM(CASE WHEN registros.recepcion_doc_referencia NOT LIKE "C%" THEN 1 ELSE 0 END) +
-                SUM(CASE WHEN registros.recepcion_doc_referencia LIKE "C%" THEN 1 ELSE 0 END)
+                SUM(CASE WHEN registros.recepcion_doc_referencia NOT LIKE "MRT%" THEN 1 ELSE 0 END) +
+                SUM(CASE WHEN registros.recepcion_doc_referencia LIKE "MRT%" THEN 1 ELSE 0 END)
             as TOTAL')
         )
         ->groupBy(DB::raw('DATE(registros.fecha_hora_extraccion)'))
