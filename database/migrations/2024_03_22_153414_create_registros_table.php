@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('registros', function (Blueprint $table) {
             $table->id();
-            $table->string('recepcion_doc_referencia');
+            $table->string('recepcion_doc_referencia')->unique();
             $table->unsignedBigInteger('numero_oficio')->unique();
             $table->dateTime('fecha_hora_infraccion');
             $table->dateTime('fecha_hora_extraccion');
