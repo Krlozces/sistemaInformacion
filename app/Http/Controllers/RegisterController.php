@@ -319,13 +319,10 @@ class RegisterController extends Controller
         } catch (\Exception $e) {
             DB::rollBack(); // Revertir la transacción en caso de error
     
-            // Loggear el error
-            Log::error('Error en registerProcesamiento: ' . $e->getMessage());
-    
             return redirect()->back()->withErrors(['error' => 'Ocurrió un error al registrar: ' . $e->getMessage()]);
         }
     }
-    
+
     public function changeImage($id, Request $request){
         //validar que el archivo sea una imagen y no exceder los 2MB
         $incomingFields = $request->validate([
