@@ -20,6 +20,7 @@
             }
         });
     </script>
+    <script src="{{ asset('js/chart.js') }}"></script>
     <meta name="csrf-token" content="{{ csrf_token() }}">
 </head>
 <body>
@@ -209,6 +210,7 @@
         </div>
     </div>
     <script>
+        
         document.addEventListener("DOMContentLoaded", function () {
             // Obtener el modal y el botón para abrirlo
             var modal = document.getElementById("myModal");
@@ -291,17 +293,16 @@
                 }, 1000);
             }
 
-            const labels = @json($labels);
-            const values = @json($values);
+            var chartData = {!! $chartDataJson !!};
 
             var ctx = document.getElementById('myChart').getContext('2d');
             var myChart = new Chart(ctx, {
                 type: 'bar',
                 data: {
-                    labels: labels,
+                    labels: chartData.labels,
                     datasets: [{
-                        label: 'Positivos',
-                        data: values,
+                        label: 'Cantidad de muestras positivas',
+                        data: chartData.values,
                         borderColor: 'rgba(75, 192, 192, 1)',
                         borderWidth: 2,
                         backgroundColor: 'rgba(75, 192, 192, 0.2)',
@@ -344,7 +345,6 @@
                     }
                 });
             });
-
 
             $('#segunMotivosBtn').click(function(){
                 $.ajax({
