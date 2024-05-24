@@ -113,7 +113,7 @@
                 <div class="input-general">
                     <div class="input-group">
                         <label for="numero_oficio">Número de Oficio de referencia:</label>
-                        <input type="text" id="numero_oficio" value="{{ $elemento->recepcion_doc_referencia }}" name="recepcion_doc_referencia" required oninput="validarDocumento(this)">
+                        <input type="text" id="numero_oficio" value="{{ $elemento->recepcion_doc_referencia }}" name="recepcion_doc_referencia" required>
                     </div>
                     <div class="input-group">
                         <label for="procedencia">Procedencia:</label>
@@ -207,7 +207,7 @@
                     </div>
                     <div class="input-group1">
                         <label for="categoria">Categoría:</label>
-                        <input type="text" id="categoria" name="categoria"  oninput="convertirMayusculas(this)" value="{{ $elemento->categoria }}"  maxlength="4">
+                        <input type="text" id="categoria" name="categoria"  oninput="convertirMayusculas(this)" value="{{ $elemento->categoria }}">
                     </div>
                     <div class="input-group1">
                         <label for="vehiculo">Vehículo:</label>
@@ -224,7 +224,7 @@
                 <div class="input-general2">
                     <div class="input-group2">
                         <label for="nombre_policial">Nombre - Apellidos - Grado:</label>
-                        <input type="text" id="nombre_policial" name="nombre_policial" value="{{ $elemento->persona }}" required oninput="validarLetras(this)" readonly>
+                        <input type="text" id="nombre_policial" name="nombre_policial" value="{{ $elemento->persona }}" required oninput="convertirMayusculas(this)">
                     </div>
                 </div>
                 <div class="input-general2">
@@ -265,7 +265,7 @@
                     
                     <div class="input-group3" id="campo_otros" style="display: none;">
                             <label for="otro_tipo_muestra">Especificar otro tipo de muestra:</label>
-                            <input type="text" id="otro_tipo_muestra" name="otro_tipo_muestra" oninput="validarLetras(this)">
+                            <input type="text" id="otro_tipo_muestra" name="otro_tipo_muestra" oninput="convertirMayusculas(this)">
                     </div>
 
                     <div class="input-group3">
