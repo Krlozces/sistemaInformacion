@@ -13,6 +13,7 @@ class ResultadosExport implements WithMultipleSheets
     */
     public function sheets(): array{
         $sheets = [];
+        $sheets[] = new DataExport();
         $sheets[] = new ProduccionExport();
         $sheets[] = new ResultadosConsolidadosSheet();
         $sheets[] = new ResultadosMotivosSheet();
