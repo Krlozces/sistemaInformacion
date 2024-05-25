@@ -270,9 +270,10 @@ class ViewsController extends Controller
             ->first();
         $extraccion = $personalAreaExtra->apellido_paterno . ' ' . $personalAreaExtra->apellido_materno . ', ' . $personalAreaExtra->nombre;
 
+        $elementos->resultado_cuantitativo = number_format($elementos->resultado_cuantitativo, 2, '.', '');
         $resultadoCuantitativoLetras = $this->convertirResultadoALetras($elementos->resultado_cuantitativo);
 
-        $contieneAlcohol = $resultadoCuantitativoLetras > 0.00 ? "LA MUESTRA CONTIENE ALCOHOL ETILICO" : "LA MUESTRA NO CONTIENE ALCOHOL ETILICO";
+        $contieneAlcohol = $elementos->resultado_cuantitativo > 0.00 ? "LA MUESTRA CONTIENE ALCOHOL ETILICO" : "LA MUESTRA NO CONTIENE ALCOHOL ETILICO";
 
         $pdf = FacadePdf::loadView('certificado', compact('elementos', 'personalProcesamiento', 'procesamiento', 'extraccion', 'resultadoCuantitativoLetras', 'contieneAlcohol'));
         $pdf->setPaper('a4');
