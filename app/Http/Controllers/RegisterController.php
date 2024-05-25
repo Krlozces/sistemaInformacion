@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use App\Models\User;
 use App\Models\Clase;
 use App\Models\Grado;
@@ -312,7 +313,7 @@ class RegisterController extends Controller
             if ($clase) {
                 $clase->update(['clase' => $dataExtraccion['clase']]);
             }
-    
+
             DB::commit(); // Confirmar la transacción
     
             return redirect()->route('tbl-certificados')->with('success', "Registro completado");

@@ -236,7 +236,9 @@ class ViewsController extends Controller
 
     public function tblCertificados(){
         $elementos = Persona::join('intervenidos', 'intervenidos.persona_id', '=', 'personas.id')
-        ->select('dni', 'nombre', 'apellido_paterno', 'apellido_materno')
+        ->join('registros', 'registros.intervenido_id', '=', 'intervenidos.id')
+        ->join('muestras', 'muestras.id', '=', 'registros.muestra_id')
+        ->select('dni', 'nombre', 'apellido_paterno', 'apellido_materno', 'muestras.updated_at')
         ->simplePaginate(10);
         $camposCompletados = Session::get('campos_completados', 0);
         $grado = Personal::select('grado')
