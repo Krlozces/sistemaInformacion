@@ -61,6 +61,9 @@ function validarLetras2(event) {
     }
 }
 
+let validarEntrada = input => {
+    input.value = input.value.replace(/[^0-9.,]/g);
+} 
 
 //CONVERTIR RESULTADO A LETRAS
 function convertirNumeroALetras() {
@@ -68,7 +71,7 @@ function convertirNumeroALetras() {
     var numeroDecimal = parseFloat(document.getElementById("numeroDecimal").value);
 
     // Array de palabras para los números del 0 al 19
-    var unidades = ["CERO", "UNO", "DOS", "TRES", "CUATRO", "CINCO", "SEIS", "SIETE", "OCHO", "NUEVE", "DIES", "ONCE", "DOCE", "TRECE", "CATORCE", "QUINCE", "dieciséis", "DIECISIETE", "DIECIOCHO", "DIECINUEVE"];
+    var unidades = ["CERO", "UNO", "DOS", "TRES", "CUATRO", "CINCO", "SEIS", "SIETE", "OCHO", "NUEVE", "DIEZ", "ONCE", "DOCE", "TRECE", "CATORCE", "QUINCE", "DIECISÉIS", "DIECISIETE", "DIECIOCHO", "DIECINUEVE"];
     
     // Array de palabras para las decenas
     var decenas = ["", "", "VEINTE", "TREINTA", "CUARENTA", "CINCUENTA", "SESENTA", "SESENTA", "OCHENTA", "NOVENTA"];
