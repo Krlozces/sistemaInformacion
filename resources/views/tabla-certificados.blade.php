@@ -140,7 +140,7 @@
                     <th>Nombres</th>
                     <th>Apellido Paterno</th>
                     <th>Apellido Materno</th>
-                    <th>Documento</th>
+                    <th>Hora y Fecha</th>
                     <th>Acciones</th>
                 </tr>
             </thead>
@@ -152,8 +152,10 @@
                         <td>{{ $elemento->apellido_paterno }}</td>
                         <td>{{ $elemento->apellido_materno }}</td>
                         <td>
-                            <div id="progress-bar-container">
-                                <div class="progress-bar"></div>
+                            <div>
+                                <div>
+                                    {{ $elemento->updated_at ? $elemento->updated_at->format('d-m-Y') : '01-01-1970' }}
+                                </div>
                             </div>
                         </td>
                         <td class="btn-container">
