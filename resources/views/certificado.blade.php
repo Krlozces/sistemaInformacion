@@ -287,7 +287,7 @@
                                 </div>
                                 <div style="margin:0 auto; height:4px; width:80px; border-top:1px solid black; margin-top:2px;"></div>
                             @elseif ($elementos->description != 'SIN MUESTRA')
-                                <p style="text-align: center; font-size:20px;">{{ $elementos->resultado_cuantitativo }}g/L.</p>
+                                <p style="text-align: center; font-size:20px;">{{ $elementos->resultado_cuantitativo }} g/L.</p>
                                 <div style="width: 100%; height: 20px; border:1px solid black; padding: 10px; margin-left: 10px;">
                                     <p style="text-align: center;">{{ $resultadoCuantitativoLetras }}</p>
                                 </div>
