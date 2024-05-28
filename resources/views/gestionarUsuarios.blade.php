@@ -190,7 +190,14 @@
                                     </div>
                                     <div>
                                         <label for="grado" class="label-text">Grado</label>
-                                        <input type="text" name="grado" id="grado" class="input-field" value="{{ $element->grado }}" required />
+                                        <select name="grado" id="grado" class="input-field">
+                                            @foreach ($grades as $grade)
+                                                <option value="{{ $grade->id }}" {{ $grade->id == $element->id ? 'selected' : '' }}>
+                                                    {{ $grade->grado }}
+                                                </option>
+                                            @endforeach
+                                            {{-- <option value="{{ $element->grado }}">{{}}</option> --}}
+                                        </select>
                                     </div>
                                     <div>
                                         <label for="telefono" class="label-text">Teléfono</label>

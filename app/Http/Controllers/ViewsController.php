@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Log;
 use Carbon\Carbon;
+use App\Models\Grado;
 use App\Models\Muestra;
 use App\Models\Persona;
 use App\Models\Personal;
@@ -35,7 +36,7 @@ class ViewsController extends Controller
     }
 
     public function listUsers(){
-        $elements = Persona::select('dni', 'nombre', 'apellido_paterno', 'apellido_materno', 'grado', 'telefono')
+        $elements = Persona::select('dni', 'nombre', 'apellido_paterno', 'apellido_materno', 'grado', 'telefono', 'grados.id')
         ->join('personal', 'personas.id', '=', 'personal.persona_id')
         ->join('grados', 'personal.grado_id', '=', 'grados.id')
         ->get();
@@ -45,7 +46,9 @@ class ViewsController extends Controller
                 ->where('usuario', Auth::user()->email)
                 ->first();
 
-        return view('gestionarUsuarios', compact('elements', 'grado'));
+        $grades = Grado::all();
+
+        return view('gestionarUsuarios', compact('elements', 'grado', 'grades'));
     }   
 
     public function home(){
