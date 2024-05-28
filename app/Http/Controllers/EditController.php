@@ -35,7 +35,7 @@ class EditController extends Controller
             'nombre' => ['required', 'string'],
             'apellido_paterno' => ['required', 'string'],
             'apellido_materno' => ['required', 'string'],
-            'grado' => ['required', 'string'],
+            'grado' => ['required'],
             'dni' => ['required', 'string', 'min:8'],
             'telefono' => ['required', 'string'],
         ]);
@@ -55,7 +55,7 @@ class EditController extends Controller
         $personal = Personal::where('persona_id', $user->id)->first();
 
         if ($personal) {
-            $grado = Grado::where('grado', $data['grado'])->first();
+            $grado = Grado::where('id', $data['grado'])->first();
             $personal->telefono = $data['telefono'];
             if ($grado) {
                 $personal->grado_id = $grado->id;
