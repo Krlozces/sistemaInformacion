@@ -61,45 +61,72 @@ function validarLetras2(event) {
     }
 }
 
-let validarEntrada = input => {
-    input.value = input.value.replace(/[^0-9.,]/g);
-} 
+function validarEntrada(input) {
+    input.value = input.value.replace(/[^0-9.]/g, '');
+}
 
-//CONVERTIR RESULTADO A LETRAS
 function convertirNumeroALetras() {
-    // Obtener el valor del input
-    var numeroDecimal = parseFloat(document.getElementById("numeroDecimal").value);
+    const input = document.getElementById('numeroDecimal').value;
+    const textarea = document.getElementById('resultado');
+    const numero = parseFloat(input);
 
-    // Array de palabras para los números del 0 al 19
-    var unidades = ["CERO", "UNO", "DOS", "TRES", "CUATRO", "CINCO", "SEIS", "SIETE", "OCHO", "NUEVE", "DIEZ", "ONCE", "DOCE", "TRECE", "CATORCE", "QUINCE", "DIECISÉIS", "DIECISIETE", "DIECIOCHO", "DIECINUEVE"];
-    
-    // Array de palabras para las decenas
-    var decenas = ["", "", "VEINTE", "TREINTA", "CUARENTA", "CINCUENTA", "SESENTA", "SESENTA", "OCHENTA", "NOVENTA"];
-
-    // Array de palabras para las unidades de centésima
-    var centesimas = ["",  "UN", "DOS", "TRES", "CUATRO", "CINCO", "SEIS", "SIETE", "OCHO", "NUEVE"];
-
-    // Separar la parte entera y la parte decimal
-    var parteEntera = Math.floor(numeroDecimal);
-    var parteDecimal = Math.round((numeroDecimal - parteEntera) * 100);
-
-    var parteEnteraEnPalabras = unidades[parteEntera];
-
-    var parteDecimalEnPalabras = "";
-    if (parteDecimal > 0) {
-        if (parteDecimal < 20) {
-            parteDecimalEnPalabras = unidades[parteDecimal];
-        } else {
-            var decena = Math.floor(parteDecimal / 10);
-            var unidad = parteDecimal % 10;
-            parteDecimalEnPalabras = decenas[decena];
-            if (unidad > 0) {
-                parteDecimalEnPalabras += " Y " + centesimas[unidad];
-            }
-        }
+    if (isNaN(numero)) {
+        textarea.value = '';
+        return;
     }
 
-    document.getElementById("resultado").innerHTML = parteEnteraEnPalabras + " GRAMOS " + parteDecimalEnPalabras + " CENTIGRAMOS DE ALCOHOL POR LITRO DE SANGRE";
+    const partes = input.split('.');
+    const gramos = parseInt(partes[0]) || 0;
+    const centigramos = partes[1] ? parseInt(partes[1].padEnd(2, '0')) : 0;
+
+    let resultadoEnLetras = '';
+
+    resultadoEnLetras += convertirNumero(gramos) + ' ' + (gramos === 1 ? 'GRAMO' : 'GRAMOS') + ' ';
+    resultadoEnLetras += convertirCentigramos(centigramos) + ' CENTIGRAMOS DE ALCOHOL POR LITRO DE SANGRE';
+
+    textarea.value = resultadoEnLetras.toUpperCase();
+}
+
+function convertirNumero(numero) {
+    const unidades = ['CERO', 'UNO', 'DOS', 'TRES', 'CUATRO', 'CINCO', 'SEIS', 'SIETE', 'OCHO', 'NUEVE'];
+    const decenas = ['DIEZ', 'ONCE', 'DOCE', 'TRECE', 'CATORCE', 'QUINCE', 'DIECISEIS', 'DIECISIETE', 'DIECIOCHO', 'DIECINUEVE'];
+    const decenas2 = ['VEINTE', 'TREINTA', 'CUARENTA', 'CINCUENTA', 'SESENTA', 'SETENTA', 'OCHENTA', 'NOVENTA'];
+
+    if (numero < 10) {
+        return unidades[numero];
+    } else if (numero < 20) {
+        return decenas[numero - 10];
+    } else if (numero < 100) {
+        const unidad = numero % 10;
+        const decena = Math.floor(numero / 10);
+        if (unidad === 0) {
+            return decenas2[decena - 2];
+        } else {
+            return decenas2[decena - 2] + ' Y ' + unidades[unidad];
+        }
+    } else {
+        return numero.toString();
+    }
+}
+
+function convertirCentigramos(centigramos) {
+    const unidades = ['CERO', 'UN', 'DOS', 'TRES', 'CUATRO', 'CINCO', 'SEIS', 'SIETE', 'OCHO', 'NUEVE'];
+    const decenas = ['DIEZ', 'ONCE', 'DOCE', 'TRECE', 'CATORCE', 'QUINCE', 'DIECISEIS', 'DIECISIETE', 'DIECIOCHO', 'DIECINUEVE'];
+    const decenas2 = ['VEINTE', 'TREINTA', 'CUARENTA', 'CINCUENTA', 'SESENTA', 'SETENTA', 'OCHENTA', 'NOVENTA'];
+
+    if (centigramos < 10) {
+        return 'CERO ' + unidades[centigramos];
+    } else if (centigramos < 20) {
+        return decenas[centigramos - 10];
+    } else {
+        const unidad = centigramos % 10;
+        const decena = Math.floor(centigramos / 10);
+        if (unidad === 0) {
+            return decenas2[decena - 2];
+        } else {
+            return decenas2[decena - 2] + ' Y ' + unidades[unidad];
+        }
+    }
 }
 
 //Añadir un nuevo campo
