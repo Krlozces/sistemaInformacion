@@ -284,34 +284,62 @@ class ViewsController extends Controller
         return $pdf->stream();
     }
 
-    private function convertirResultadoALetras($resultadoNumerico){
-        $unidades = ["CERO", "UNO", "DOS", "TRES", "CUATRO", "CINCO", "SEIS", "SIETE", "OCHO", "NUEVE", "DIES",
-                    "ONCE", "DOCE", "TRECE", "CATORCE", "QUINCE", "dieciséis", "DIECISIETE", "DIECIOCHO", "DIECINUEVE"];
-
-        $decenas = ["", "", "VEINTE", "TREINTA", "CUARENTA", "CINCUENTA", "SESENTA", "SESENTA", "OCHENTA", "NOVENTA"];
-
-        $centesimas = ["", "UN", "DOS", "TRES", "CUATRO", "CINCO", "SEIS", "SIETE", "OCHO", "NUEVE"];
-
+    private function convertirResultadoALetras($resultadoNumerico) {
         $parteEntera = floor($resultadoNumerico);
         $parteDecimal = round(($resultadoNumerico - $parteEntera) * 100);
-
-        $parteEnteraEnPalabras = $unidades[$parteEntera];
-
-        $parteDecimalEnPalabras = "";
-        if ($parteDecimal > 0) {
-            if ($parteDecimal < 20) {
-                $parteDecimalEnPalabras = $unidades[$parteDecimal];
+    
+        $parteEnteraEnPalabras = $this->convertirEnteroALetras($parteEntera);
+        $parteDecimalEnPalabras = $this->convertirDecimalALetras($parteDecimal);
+    
+        return ucfirst($parteEnteraEnPalabras . " " . ($parteEntera == 1 ? "GRAMO" : "GRAMOS") . " " . $parteDecimalEnPalabras . " DE ALCOHOL POR LITRO DE SANGRE");
+    }
+    
+    private function convertirEnteroALetras($num) {
+        $unidades = ["CERO", "UN", "DOS", "TRES", "CUATRO", "CINCO", "SEIS", "SIETE", "OCHO", "NUEVE"];
+        $decenas = ["DIEZ", "ONCE", "DOCE", "TRECE", "CATORCE", "QUINCE", "DIECISÉIS", "DIECISIETE", "DIECIOCHO", "DIECINUEVE"];
+        $decenas2 = ["VEINTE", "TREINTA", "CUARENTA", "CINCUENTA", "SESENTA", "SETENTA", "OCHENTA", "NOVENTA"];
+    
+        if ($num < 10) {
+            return $unidades[$num];
+        } else if ($num < 20) {
+            return $decenas[$num - 10];
+        } else if ($num < 100) {
+            $unidad = $num % 10;
+            $decena = floor($num / 10);
+            if ($unidad == 0) {
+                return $decenas2[($decena - 2)];
             } else {
-                $decena = floor($parteDecimal / 10);
-                $unidad = $parteDecimal % 10;
-                $parteDecimalEnPalabras = $decenas[$decena];
-                if ($unidad > 0) {
-                    $parteDecimalEnPalabras .= " Y " . $centesimas[$unidad];
-                }
+                return $decenas2[($decena - 2)] . ' Y ' . $unidades[$unidad];
             }
+        } else {
+            return (string) $num; // Para casos no contemplados en el rango
         }
-
-        return ucfirst($parteEnteraEnPalabras . " GRAMOS " . $parteDecimalEnPalabras . " CENTIGRAMOS DE ALCOHOL POR LITRO DE SANGRE");
+    }
+    
+    private function convertirDecimalALetras($num) {
+        if ($num == 0) {
+            return 'CERO CERO CENTIGRAMOS';
+        }
+    
+        $unidades = ['CERO', 'UNO', 'DOS', 'TRES', 'CUATRO', 'CINCO', 'SEIS', 'SIETE', 'OCHO', 'NUEVE'];
+        $decenas = ['DIEZ', 'ONCE', 'DOCE', 'TRECE', 'CATORCE', 'QUINCE', 'DIECISÉIS', 'DIECISIETE', 'DIECIOCHO', 'DIECINUEVE'];
+        $decenas2 = ['VEINTE', 'TREINTA', 'CUARENTA', 'CINCUENTA', 'SESENTA', 'SETENTA', 'OCHENTA', 'NOVENTA'];
+    
+        if ($num < 10) {
+            return 'CERO ' . $unidades[$num] . ' CENTIGRAMOS';
+        } else if ($num < 20) {
+            return $decenas[$num - 10] . ' CENTIGRAMOS';
+        } else if ($num < 100) {
+            $decena = floor($num / 10);
+            $unidad = $num % 10;
+            if ($unidad == 0) {
+                return $decenas2[$decena - 2] . ' CENTIGRAMOS';
+            } else {
+                return $decenas2[$decena - 2] . ' Y ' . $unidades[$unidad] . ' CENTIGRAMOS';
+            }
+        } else {
+            return (string) $num . ' CENTIGRAMOS'; // Para casos no contemplados en el rango
+        }
     }
 
     public function obtenerComisarias(){
