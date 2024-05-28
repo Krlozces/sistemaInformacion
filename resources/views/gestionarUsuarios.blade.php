@@ -130,8 +130,10 @@
     <div class="capa1">
         <div class="titulo-container">
             <h4>Gestión del Personal</h4>
-            <button id="btnexel"><a id="letras" href="#"><i id="exel"
-                class="fa-solid fa-file-excel"></i> Exportar</a></button>
+            <button id="btnexel">
+                <a id="letras" href="{{ route('exportar-personal') }}"><i id="exel"
+                class="fa-solid fa-file-excel"></i> Exportar</a>
+            </button>
         </div>
 
         @if (session('success'))
