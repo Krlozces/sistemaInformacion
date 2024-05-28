@@ -64,7 +64,7 @@ Route::post('/motivos', [ViewsController::class, 'segunMotivos'])->name('segun-m
 Route::post('/resultados', [ViewsController::class, 'segunResultados'])->name('segun-resultados');
 
 //Rutas protegidas por autenticación de usuario
-Route::group(['middleware' => ['auth']], function(){
+Route::group(['middleware' => ['auth', 'verified']], function(){
     Route::get('/index', [ViewsController::class, 'home'])->name('home');
 
     Route::group(['middleware' =>  ['role:admin']], function() {
