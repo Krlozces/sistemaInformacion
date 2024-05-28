@@ -8,6 +8,7 @@ use App\Http\Controllers\ViewsController;
 use App\Http\Controllers\ExportController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\CertifiedController;
+use App\Http\Controllers\ExportPersonalController;
 use App\Http\Controllers\ProduccionController;
 
 /*
@@ -69,6 +70,7 @@ Route::group(['middleware' => ['auth']], function(){
     Route::group(['middleware' =>  ['role:admin']], function() {
         Route::get('/principal', [ViewsController::class, 'principal'])->name('principal');
         Route::get('/users', [ViewsController::class, 'listUsers'])->name('listar-usuarios');
+        Route::get('/exportar/personal', [ExportPersonalController::class, 'exportPersonal'])->name('exportar-personal');
     });
     
     Route::group(['middleware' => ['role:extractor|admin']], function() {
