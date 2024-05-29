@@ -13,7 +13,6 @@
 </head>
 
 <body>
-
     <div id="login-container">
         <h2>UNIDAD DE DOSAJE ETÍLICO</h2>
 
@@ -23,7 +22,7 @@
             </div>
 
             <div id="login-form" autocomplete="off">
-                <form method="post" action="">
+                <form method="POST" action="#">
                     @csrf
                     <div class="form-group">
                         <label for="username">
@@ -45,15 +44,11 @@
                             restrictToNumbersAndLength(telefonoInput, 9);
                         });
                     </script>
-
-                    <button class="ingresar">ENVIAR</button>
-
+                    <button type="submit" class="ingresar">ENVIAR</button>
                 </form>
             </div>
         </div>
     </div>
-
-
 </body>
 
 </html>

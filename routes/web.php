@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EditController;
 use App\Http\Controllers\LoginController;
@@ -10,7 +11,6 @@ use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\CertifiedController;
 use App\Http\Controllers\ProduccionController;
 use App\Http\Controllers\ExportPersonalController;
-use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 
 /*

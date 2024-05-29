@@ -1,8 +1,7 @@
 import './bootstrap';
-import 'flowbite';
-// Reference from published scripts
-require('./vendor/livewire-ui/modal');
 
+import Alpine from 'alpinejs';
 
-// Reference from vendor
-require('../../vendor/livewire-ui/modal/resources/js/modal');
+window.Alpine = Alpine;
+
+Alpine.start();
