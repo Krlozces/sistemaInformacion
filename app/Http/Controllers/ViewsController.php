@@ -241,7 +241,7 @@ class ViewsController extends Controller
         $elementos = Persona::join('intervenidos', 'intervenidos.persona_id', '=', 'personas.id')
         ->join('registros', 'registros.intervenido_id', '=', 'intervenidos.id')
         ->join('muestras', 'muestras.id', '=', 'registros.muestra_id')
-        ->select('dni', 'nombre', 'apellido_paterno', 'apellido_materno', 'muestras.updated_at')
+        ->select('dni', 'nombre', 'apellido_paterno', 'apellido_materno', 'muestras.updated_at', 'registros.estado')
         ->simplePaginate(10);
         $camposCompletados = Session::get('campos_completados', 0);
         $grado = Personal::select('grado')
