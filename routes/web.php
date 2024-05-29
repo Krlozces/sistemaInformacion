@@ -1,15 +1,17 @@
 <?php
 
-use App\Http\Controllers\DeleteController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EditController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ViewsController;
+use App\Http\Controllers\DeleteController;
 use App\Http\Controllers\ExportController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\CertifiedController;
-use App\Http\Controllers\ExportPersonalController;
 use App\Http\Controllers\ProduccionController;
+use App\Http\Controllers\ExportPersonalController;
+use Illuminate\Http\Request;
+use Illuminate\Foundation\Auth\EmailVerificationRequest;
 
 /*
 |--------------------------------------------------------------------------
@@ -62,6 +64,21 @@ Route::post('/eliminar-usuario/{dni}', [DeleteController::class, 'deleteUser'])-
 Route::post('/edad', [ViewsController::class, 'segunEdad'])->name('segun-edad');
 Route::post('/motivos', [ViewsController::class, 'segunMotivos'])->name('segun-motivos');
 Route::post('/resultados', [ViewsController::class, 'segunResultados'])->name('segun-resultados');
+
+// Verificar email
+Route::get('/email/verify', function () {
+    return view('auth.verify-email');
+})->middleware('auth')->name('verification.notice');
+
+Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
+    $request->fulfill();
+    return redirect('/index');
+})->middleware(['auth', 'signed'])->name('verification.verify');
+
+Route::post('/email/verification-notification', function (Request $request) {
+    $request->user()->sendEmailVerificationNotification();
+    return back()->with('message', 'Verification link sent!');
+})->middleware(['auth', 'throttle:6,1'])->name('verification.send');
 
 //Rutas protegidas por autenticación de usuario
 Route::group(['middleware' => ['auth', 'verified']], function(){
