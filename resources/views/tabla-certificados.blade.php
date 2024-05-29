@@ -136,6 +136,7 @@
         <table id="dataTable">
             <thead>
                 <tr>
+                    <th>Estado</th>
                     <th>DNI</th>
                     <th>Nombres</th>
                     <th>Apellido Paterno</th>
@@ -147,6 +148,10 @@
             <tbody id="content1">
                 @foreach ($elementos as $elemento)
                     <tr>
+                        <td>
+                            <div class="{{ $elemento->estado == '1' ? 'bg-green' : 'bg-red' }}">
+                            </div>
+                        </td>
                         <td>{{ $elemento->dni }}</td>
                         <td>{{ $elemento->nombre }}</td>
                         <td>{{ $elemento->apellido_paterno }}</td>
