@@ -22,6 +22,8 @@ use Illuminate\Support\Facades\DB;
 use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\Auth;
 use Spatie\Permission\Models\Permission;
+use Illuminate\Auth\Events\Registered;
+
 
 class RegisterController extends Controller
 {
@@ -34,6 +36,7 @@ class RegisterController extends Controller
         $user = User::create($incomingFields);
         Role::create(['name' => 'admin']);
         $user->assignRole('admin');
+        event(new Registered($user));
         return view('index')->with('success', '¡Registro exitoso!');
     }
 
@@ -244,7 +247,8 @@ class RegisterController extends Controller
             if ($registro) {
                 $registro->update([
                     'procesador' => $dataProcesamiento['procesador'],
-                    'incurso' => $dataProcesamiento['incurso'] ?? $registro->incurso
+                    'incurso' => $dataProcesamiento['incurso'] ?? $registro->incurso,
+                    'estado' => '1'
                 ]);
     
                 $muestra = $registro->muestra;
@@ -291,7 +295,7 @@ class RegisterController extends Controller
                             'motivo' => $dataExtraccion['motivo'],
                             'conclusiones' => $dataExtraccion['conclusiones'],
                             'fecha_hora_extraccion' => $dataExtraccion['fecha_hora_extraccion'],
-                            'fecha_hora_infraccion' => $dataExtraccion['fecha_hora_infraccion']
+                            'fecha_hora_infraccion' => $dataExtraccion['fecha_hora_infraccion'],
                         ]);
                     }
     
@@ -315,7 +319,7 @@ class RegisterController extends Controller
             }
 
             DB::commit(); // Confirmar la transacción
-    
+            
             return redirect()->route('tbl-certificados')->with('success', "Registro completado");
         } catch (\Exception $e) {
             DB::rollBack(); // Revertir la transacción en caso de error
