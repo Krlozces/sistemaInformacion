@@ -25,7 +25,8 @@ class Registro extends Model
         'extractor',
         'procesador',
         'conclusiones',
-        'incurso'
+        'incurso',
+        'estado'
     ];
     public function intervenido(){
         return $this->belongsTo(Intervenido::class);
