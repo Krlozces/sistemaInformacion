@@ -233,6 +233,7 @@ class RegisterController extends Controller
             'categoria',
             'vehiculo',
             'placa',
+            'descripcion',
             'tipo_muestra',
             'resultado_cualitativo',
             'observaciones',
@@ -255,6 +256,7 @@ class RegisterController extends Controller
                 if ($muestra) {
                     $muestra->update([
                         'resultado_cuantitativo' => $dataProcesamiento['resultado_cuantitativo'],
+                        'descripcion' => $dataExtraccion['descripcion'],
                         'observaciones' => $dataExtraccion['observaciones'],
                         'resultado_cualitativo' => $dataExtraccion['resultado_cualitativo']
                     ]);

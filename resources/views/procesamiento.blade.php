@@ -266,7 +266,7 @@
                 <div class="input-general3">
                     <div class="input-group3">
                         <label for="tipo_muestra">Tipo de muestra:</label>
-                        <select id="tipo_muestra" name="tipo_muestra" onchange="mostrarCampoOtros()">
+                        <select id="tipo_muestra" name="descripcion" onchange="mostrarCampoOtros()">
                             <option value="SANGRE" {{ $elemento->descripcion == 'SANGRE' ? 'selected' : '' }}>SANGRE</option>
                             <option value="ORINA" {{ $elemento->descripcion == 'ORINA' ? 'selected' : '' }}>ORINA</option>
                             <option value="SIN MUESTRA" {{ $elemento->descripcion == 'SIN MUESTRA' ? 'selected' : '' }}>SIN MUESTRA</option>
