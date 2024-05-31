@@ -13,6 +13,7 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script>
         $.ajaxSetup({
             headers: {
@@ -127,15 +128,15 @@
     <div class="informacion">
         <div>
             @if (session('success'))
-                <div class="alert alert-success">
-                    {{ session('success') }}
-                </div>
+                <script>
+                    swal("Buen trabajo!", "Registro exitoso!", "success");
+                </script>
             @endif
     
             @if (session('error'))
-                <div class="alert alert-danger">
-                    {{ session('error') }}
-                </div>
+                <script>
+                    swal("Oooops!", "Ocurrió un error!", "error");
+                </script>
             @endif
         </div>
         <div class="container3">
