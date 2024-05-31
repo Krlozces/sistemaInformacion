@@ -107,15 +107,21 @@
                 <h4>INFORMACIÓN GENERAL</h4>
             </div>
             @if (session('success'))
-                    <div class="alert alert-success">
+                <script>
+                    swal("Buen trabajo!", "Registro exitoso!", "success");
+                </script>
+                    {{-- <div class="alert alert-success">
                         {{ session('success') }}
-                    </div>
-                @endif
-                @if (session('error'))
-                    <div class="alert alert-danger">
+                    </div> --}}
+            @endif
+            @if (session('error'))
+                <script>
+                        swal("Oooops!", "Ocurrió un error!", "error");
+                </script>
+                    {{-- <div class="alert alert-danger">
                         {{ session('error') }}
-                    </div>
-                @endif
+                    </div> --}}
+            @endif
             @foreach ($elementos as $elemento)
             @if ($elementos)
             <fieldset>
