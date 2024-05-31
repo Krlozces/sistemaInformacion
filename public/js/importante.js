@@ -1,5 +1,5 @@
 //VER CONTRASEÑA
-
+import swal from 'sweetalert';
 
 function togglePasswordVisibility() {
     const passwordInput = document.getElementById("password");
