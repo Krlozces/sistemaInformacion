@@ -11,6 +11,7 @@
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src="{{ asset('js/importante.js') }}"></script>
     <link rel="stylesheet" href="{{ asset('css/listausuarios.css') }}">
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <style>
         tr:hover {
             background-color: lightblue;
@@ -137,14 +138,14 @@
         </div>
 
         @if (session('success'))
-            <div class="alert alert-success">
-                {{ session('success') }}
-            </div>
+            <script>
+                swal("Buen trabajo!", "Registro exitoso!", "success");
+            </script>
         @endif
         @if (session('error'))
-            <div class="alert alert-danger">
-                {{ session('error') }}
-            </div>
+            <script>
+                swal("Oooops!", "Ocurrió un error!", "error");
+            </script>
         @endif
 
         <table id="dataTable">
