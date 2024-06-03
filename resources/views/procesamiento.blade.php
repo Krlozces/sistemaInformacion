@@ -308,7 +308,7 @@
                 </div>
             </fieldset>
 
-            <div class="titulo-container">
+            <div class="titulo">
                 <h4>RESULTADO CUANTITATIVO</h4>
             </div>
             <fieldset>
@@ -320,11 +320,7 @@
                             <option disabled selected>--SELECCIONAR--</option>
                             <option value="">-----------</option>
                             @foreach ($personalProcesamiento as $personal)
-                                <option value="{{ $personal->persona_id }}" @if(isset($personal->Persona)) selected @endif>
-                                    @if(isset($personal->Persona))
-                                        {{ $personal->Persona->nombre }} {{ $personal->Persona->apellido_paterno }} {{ $personal->Persona->apellido_materno }} - {{ $personal->grado->grado }}
-                                    @endif
-                                </option>
+                                <option value="{{ $personal->persona_id }}" {{ $personal->persona_id == $elemento->procesador ? 'selected' : '' }}>{{ $personal->Persona->nombre }} {{ $personal->Persona->apellido_paterno }} {{ $personal->Persona->apellido_materno }} - {{ $personal->grado->grado }}</option>
                             @endforeach
                         </select>
                     </div>

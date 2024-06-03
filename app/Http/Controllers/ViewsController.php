@@ -183,7 +183,7 @@ class ViewsController extends Controller
 
     public function procesamiento($dni){
         // Realizar la consulta para obtener la persona con el DNI proporcionado
-        $elementos = Persona::select('dni', 'nombre', 'apellido_paterno', 'apellido_materno', 'nacionalidad', 'edad', 'placa', 'vehiculo', 'clase', 'recepcion_doc_referencia', 'fecha_hora_infraccion', 'fecha', 'hora', 'fecha_hora_extraccion', 'motivo', 'procedencia', 'persona', 'muestras.observaciones', 'muestras.descripcion', 'licencia', 'categoria', 'resultado_cualitativo', 'resultado_cuantitativo', 'extractor', 'sexo', 'conclusiones', 'incurso')
+        $elementos = Persona::select('dni', 'nombre', 'apellido_paterno', 'apellido_materno', 'nacionalidad', 'edad', 'placa', 'vehiculo', 'clase', 'recepcion_doc_referencia', 'fecha_hora_infraccion', 'fecha', 'hora', 'fecha_hora_extraccion', 'motivo', 'procedencia', 'persona', 'muestras.observaciones', 'muestras.descripcion', 'licencia', 'categoria', 'resultado_cualitativo', 'resultado_cuantitativo', 'extractor', 'sexo', 'conclusiones', 'incurso', 'procesador')
         ->join('intervenidos', 'intervenidos.persona_id', '=', 'personas.id')
         ->join('licencias', 'intervenidos.id', '=', 'licencias.intervenido_id')
         ->join('clases', 'licencias.clase_id', '=', 'clases.id')
