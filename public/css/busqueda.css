@@ -688,14 +688,16 @@ input[type="file"]::placeholder {
 
 .bg-green {
   background-color: green;
-  height: 30px;
+  height: 20px;
   width: 20px;
   margin: auto;
+  border-radius: 50%;
 }
 
 .bg-red {
   background-color: red;
-  height: 30px;
+  height: 20px;
   width: 20px;
   margin: auto;
+  border-radius: 50%;
 }
