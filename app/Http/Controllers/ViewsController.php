@@ -192,15 +192,11 @@ class ViewsController extends Controller
         ->join('unidades', 'unidades.procedencia_id', '=', 'comisarias.id')
         ->join('muestras', 'muestras.id', '=', 'registros.muestra_id')
         ->where('dni', $dni)
-        ->get(); // Obtener solo el primer resultado
+        ->first(); // Obtener solo el primer resultado
         
-        $personalProcesamiento = Personal::where('area_perteneciente', 'areapro')
-        ->with('Persona')
-        ->get();
+        $personalProcesamiento = Personal::where('area_perteneciente', 'areapro')->get();
 
-        $personalAreaExtra = Personal::where('area_perteneciente', 'areaextra')
-        ->with('Persona')
-        ->get();
+        $personalAreaExtra = Personal::where('area_perteneciente', 'areaextra')->get();
 
         $camposCompletados = 24;
 
@@ -212,7 +208,8 @@ class ViewsController extends Controller
                 ->first();
 
         // Verificar si se encontraron resultados
-        if ($elementos->isNotEmpty()) {
+        if ($elementos) {
+            $elementos = $elementos ? [$elementos] : [];
             return view('procesamiento', compact('elementos', 'personalProcesamiento', 'personalAreaExtra', 'grado'));
         } else {
             return redirect()->back()->with('error', 'No se encontró ninguna persona con el DNI proporcionado.');
