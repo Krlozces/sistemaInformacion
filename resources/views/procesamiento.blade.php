@@ -111,20 +111,14 @@
                 <script>
                     swal("Buen trabajo!", "Registro exitoso!", "success");
                 </script>
-                    {{-- <div class="alert alert-success">
-                        {{ session('success') }}
-                    </div> --}}
             @endif
             @if (session('error'))
                 <script>
                         swal("Oooops!", "Ocurrió un error!", "error");
                 </script>
-                    {{-- <div class="alert alert-danger">
-                        {{ session('error') }}
-                    </div> --}}
             @endif
+
             @foreach ($elementos as $elemento)
-            @if ($elementos)
             <fieldset>
                 <legend>Información General</legend>
                 
@@ -313,9 +307,7 @@
                     </div>
                 </div>
             </fieldset>
-            @else
-            <p>No se encontraron datos para el DNI proporcionado.</p>
-            @endif
+
             <div class="titulo-container">
                 <h4>RESULTADO CUANTITATIVO</h4>
             </div>
