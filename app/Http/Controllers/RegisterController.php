@@ -157,7 +157,7 @@ class RegisterController extends Controller
                 'categoria' => $request->categoria,
             ]);
             
-            $metodo = Metodo::create([
+            $metodo = Metodo::firstOrCreate([
                 'descripcion' => $request->descripcion
             ]);
             
