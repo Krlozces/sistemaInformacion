@@ -145,7 +145,7 @@ class RegisterController extends Controller
             $unidad = Unidad::create($unidadData);
     
             // Registrar la clase
-            $clase = Clase::create($request->only(['clase']));
+            $clase = Clase::firstOrCreate($request->only(['clase']));
     
             // Crear la licencia asociada con ese Intervenido
             $licencia = Licencia::create([
