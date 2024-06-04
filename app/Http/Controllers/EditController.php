@@ -70,4 +70,24 @@ class EditController extends Controller
         return redirect()->route('listar-usuarios')->with('success', 'Registro editado con éxito.');
     }
 
+    // todavía no implementado
+    public function changePermission(Request $request, $email) {
+        // Buscar el usuario por email
+        $usuario = User::where('email', $email)->first();
+    
+        if (!$usuario) {
+            return redirect()->route('listar-usuarios')->with('error', 'Usuario no encontrado.');
+        }
+    
+        // Quitar roles anteriores (opcional, dependiendo de tu lógica)
+        $usuario->syncRoles([]);
+    
+        if ($request->area_perteneciente == 'areaextra') {
+            $usuario->assignRole('procesador');
+        } else {
+            $usuario->assignRole('extractor');
+        }
+    
+        return redirect()->route('listar-usuarios')->with('success', 'Permisos actualizados correctamente.');
+    }
 }
