@@ -36,8 +36,8 @@
                 <i class="fas fa-eye-slash" id="show-password" onclick="togglePasswordVisibility()"></i> <!-- Icono de ojo para mostrar/ocultar contraseña -->
               </div>
 
-
-          <a class="olvidar" href="{{ route('ingresar-datos') }}">¿Olvidaste la contraseña?</a>
+              {{-- {{ route('ingresar-datos') }} --}}
+          <a class="olvidar" href="{{ route('password.request') }}">¿Olvidaste la contraseña?</a>
 
           <button class="ingresar" type="submit">INGRESAR </button>
 
