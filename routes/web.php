@@ -11,7 +11,9 @@ use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\CertifiedController;
 use App\Http\Controllers\ProduccionController;
 use App\Http\Controllers\ExportPersonalController;
+use App\Http\Controllers\Auth\NewPasswordController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
+use App\Http\Controllers\Auth\PasswordResetLinkController;
 
 /*
 |--------------------------------------------------------------------------
@@ -44,6 +46,13 @@ Route::post('/login', [LoginController::class, 'login'])->name('signin');
 Route::post('/register-extraccion', [RegisterController::class, 'registerExtraccion'])->name( 'register-extraccion' );
 
 Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
+
+Route::get('forgot-password', [PasswordResetLinkController::class, 'create'])->name('password.request');
+Route::post('forgot-password', [PasswordResetLinkController::class, 'store'])->name('password.email');
+
+Route::get('reset-password/{token}', [NewPasswordController::class, 'create'])->name('password.reset');
+
+Route::post('reset-password', [NewPasswordController::class, 'store'])->name('password.store');
 
 Route::post('/register-personal', [RegisterController::class, 'registerPersonal'])->name('register-personal');
 
