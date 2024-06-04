@@ -142,7 +142,7 @@ class RegisterController extends Controller
     
             $unidadData['persona'] = $request->input('nombre_policial');
             $unidadData['procedencia_id'] = $comisaria->id;
-            $unidad = Unidad::create($unidadData);
+            $unidad = Unidad::firstOrCreate($unidadData);
     
             // Registrar la clase
             $clase = Clase::firstOrCreate($request->only(['clase']));
