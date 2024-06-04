@@ -36,7 +36,7 @@ class ViewsController extends Controller
     }
 
     public function listUsers(){
-        $elements = Persona::select('dni', 'nombre', 'apellido_paterno', 'apellido_materno', 'grado', 'telefono', 'grados.id')
+        $elements = Persona::select('dni', 'nombre', 'apellido_paterno', 'apellido_materno', 'grado', 'telefono', 'grados.id', 'personal.usuario', 'area_perteneciente')
         ->join('personal', 'personas.id', '=', 'personal.persona_id')
         ->join('grados', 'personal.grado_id', '=', 'grados.id')
         ->get();
