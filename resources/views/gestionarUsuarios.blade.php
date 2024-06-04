@@ -157,8 +157,7 @@
                     <th>Apellido Materno</th>
                     <th>Grado</th>
                     <th>Teléfono</th>
-                    <th>Extracion</th>
-                    <th>Procesamiento</th>
+                    <th>Permisos</th>
                     <th>Acciones</th>
                 </tr>
             </thead>
@@ -222,10 +221,13 @@
                                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 11V6m0 8h.01M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
                                 </svg>
                                 <h3 class="message">¿Estás seguro de inhabilitar al siguiente usuario?</h3>
-                                <button data-modal-hide="popup-modal" type="button" class="btn-confirmed">
-                                    Sí, estoy seguro
-                                </button>
-                                <button id="btn-cancel" data-modal-hide="popup-modal" type="button" class="btn-cancel" onclick="closeDelete({{ $element->dni }})">No, cancelar</button>
+                                <form action="{{ route('eliminar-usuario', ['dni' => $element->dni]) }}" method="post">
+                                    @csrf
+                                    <button type="submit" class="btn-confirmed">
+                                        Sí, estoy seguro
+                                    </button>
+                                    <button id="btn-cancel" type="button" class="btn-cancel" onclick="closeDelete({{ $element->dni }})">No, cancelar</button>
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -247,12 +249,6 @@
                         </td>
                         <td>
                             {{ $element->telefono }}
-                        </td>
-                        <td>
-                            <label class="switch">
-                                <input type="checkbox" id="interruptor" onclick="toggleInterruptor()">
-                                <span class="slider round"></span>
-                            </label>
                         </td>
                         <td>
                             <label class="switch">
