@@ -21,7 +21,7 @@ class DeleteController extends Controller
         $personal = Personal::where('persona_id', $user->id)->first();
 
         if ($personal) {
-            $usuario = User::where('email', $personal->email)->first();
+            $usuario = User::where('email', $personal->usuario)->first();
             $personal->delete();
             if ($usuario) {
                 $usuario->delete();
