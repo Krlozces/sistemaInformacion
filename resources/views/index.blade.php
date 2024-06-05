@@ -41,7 +41,7 @@
 
           <button class="ingresar" type="submit">INGRESAR </button>
 
-          <a class="registro" href="{{ route('registrarte') }}">Registrarte</a>
+          <a class="registro" id="registro-btn" href="{{ route('registrarte') }}" onclick="hideButton()">Registrarte</a>
         </form>
       </div>
     </div>
@@ -59,6 +59,10 @@
       const eyeIconClass = type === "password" ? "fa-eye-slash" : "fa-eye";
       showPasswordIcon.classList.remove("fa-eye-slash", "fa-eye");
       showPasswordIcon.classList.add(eyeIconClass);
+    }
+    function hideButton() {
+      const registroBtn = document.getElementById("registro-btn");
+      registroBtn.style.display = "none";
     }
   </script>
 </body>
