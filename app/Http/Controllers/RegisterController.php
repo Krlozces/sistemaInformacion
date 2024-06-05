@@ -128,14 +128,14 @@ class RegisterController extends Controller
     
         try {
             // Registrar al intervenido
-            $registro = Persona::create($request->only(['dni', 'nombre', 'apellido_paterno', 'apellido_materno']));
+            $registro = Persona::firstOrCreate($request->only(['dni', 'nombre', 'apellido_paterno', 'apellido_materno']));
     
             $extraccionData['persona_id'] = $registro->id;
             $extraccion = Extraccion::create($extraccionData);
     
             // Registrar intervenido
             $intervenidoData['persona_id'] = $registro->id;
-            $intervenido = Intervenido::create(array_merge($request->only(['nacionalidad', 'edad', 'sexo']), $intervenidoData));
+            $intervenido = Intervenido::firstOrCreate(array_merge($request->only(['nacionalidad', 'edad', 'sexo']), $intervenidoData));
     
             // Registrar comisaria
             $comisaria = Comisaria::firstOrCreate(['procedencia' => $request->procedencia]);
@@ -148,7 +148,7 @@ class RegisterController extends Controller
             $clase = Clase::firstOrCreate($request->only(['clase']));
     
             // Crear la licencia asociada con ese Intervenido
-            $licencia = Licencia::create([
+            $licencia = Licencia::firstOrCreate([
                 'placa' => $request->placa,
                 'vehiculo' => $request->vehiculo,
                 'intervenido_id' => $intervenido->id, 
