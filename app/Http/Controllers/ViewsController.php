@@ -191,7 +191,7 @@ class ViewsController extends Controller
         ->join('comisarias', 'registros.comisaria_id', '=', 'comisarias.id')
         ->join('unidades', 'unidades.procedencia_id', '=', 'comisarias.id')
         ->join('muestras', 'muestras.id', '=', 'registros.muestra_id')
-        ->where('dni', $dni)
+        ->where('recepcion_doc_referencia', $dni)
         ->first(); // Obtener solo el primer resultado
         
         $personalProcesamiento = Personal::where('area_perteneciente', 'areapro')->get();
@@ -238,7 +238,7 @@ class ViewsController extends Controller
         $elementos = Persona::join('intervenidos', 'intervenidos.persona_id', '=', 'personas.id')
         ->join('registros', 'registros.intervenido_id', '=', 'intervenidos.id')
         ->join('muestras', 'muestras.id', '=', 'registros.muestra_id')
-        ->select('dni', 'nombre', 'apellido_paterno', 'apellido_materno', 'muestras.updated_at', 'registros.estado')
+        ->select('dni', 'nombre', 'apellido_paterno', 'apellido_materno', 'muestras.updated_at', 'registros.estado', 'registros.recepcion_doc_referencia')
         ->simplePaginate(10);
         $camposCompletados = Session::get('campos_completados', 0);
         $grado = Personal::select('grado')
@@ -258,7 +258,7 @@ class ViewsController extends Controller
         ->join('unidades', 'unidades.procedencia_id', '=', 'comisarias.id')
         ->join('muestras', 'muestras.id', '=', 'registros.muestra_id')
         ->join('metodos', 'muestras.metodo_id', '=', 'metodos.id')
-        ->where('dni', $dni)
+        ->where('recepcion_doc_referencia', $dni)
         ->first();
 
         $personalProcesamiento = Personal::join('personas', 'personas.id', '=', 'personal.persona_id')
