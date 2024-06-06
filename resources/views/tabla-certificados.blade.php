@@ -166,13 +166,13 @@
                         </td>
                         <td class="btn-container">
                             <button id="editar" onclick="editEntry()"><a
-                                    href="{{ route('procesamiento', ['dni' => $elemento->dni]) }}"><i
+                                    href="{{ route('procesamiento', ['dni' => $elemento->recepcion_doc_referencia]) }}"><i
                                         class="fa-solid fa-pen-to-square"></i> Editar </a></button>
                             <button id="ver">
                                 <a href="{{ route('exportar-certificado', ['dni' => $elemento->dni]) }}"><i class="fa-solid fa-eye"></i> Ver</a>
                             </button>
                             <button id="pdf">
-                                <a href="{{ route('generarPdf', ['dni' => $elemento->dni]) }}" target="_blank"><i
+                                <a href="{{ route('generarPdf', ['dni' => $elemento->recepcion_doc_referencia]) }}" target="_blank"><i
                                         id="icopdf" class="fa-regular fa-file-pdf"></i> Generar PDF</a>
                             </button>
                         </td>
