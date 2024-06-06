@@ -56,6 +56,7 @@ class DataExport implements FromCollection, WithHeadings, WithStyles
         ->join('certificados', 'certificados.id', '=', 'personal.certificado_id')
         ->join('personas as pro', 'personal.persona_id', '=', 'pro.id')
         ->where('personal.area_perteneciente', 'areapro')
+        ->distinct()
         ->get();
 
         // Iterar sobre los elementos y reemplazar los valores de motivo según la abreviatura
