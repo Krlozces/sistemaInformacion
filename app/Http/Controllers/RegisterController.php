@@ -167,6 +167,10 @@ class RegisterController extends Controller
             $fechaInfraccion = $request->input('fecha_infraccion');
             $horaInfraccion = $request->input('hora_infraccion');
             $tipoMuestra = $request->input('tipo_muestra');
+            $otroTipoMuestra = $request->input('otro_tipo_muestra');
+            if($tipoMuestra == 'otros'){
+                $tipoMuestra = $otroTipoMuestra;
+            }
             
             // Crear un nuevo arreglo de datos para la muestra con 'fecha_muestra' igual a 'fecha_infraccion'
             $muestraData = array_merge($request->only(['observaciones', 'resultado_cualitativo', 'resultado_cuantitativo']), ['fecha_muestra' => $fechaInfraccion], ['hora_muestra' => $horaInfraccion], ['descripcion' => $tipoMuestra], $muestraData);
@@ -201,7 +205,7 @@ class RegisterController extends Controller
             return redirect()->back()->with('success', 'Registro realizado con éxito.');
         } catch (\Exception $e) {
             DB::rollBack();
-            return redirect()->back()->withErrors(['error' => 'Hubo un problema al registrar los datos: ' . $e->getMessage()]);
+            return redirect()->back()->with(['error' => 'Hubo un problema al registrar los datos: ' . $e->getMessage()]);
         }
     }
 
@@ -237,12 +241,15 @@ class RegisterController extends Controller
             'tipo_muestra',
             'resultado_cualitativo',
             'observaciones',
-            'conclusiones'
+            'conclusiones',
+            'otro_tipo_muestra'
         ]);
     
-        DB::beginTransaction(); // Iniciar transacción
+        DB::beginTransaction();
     
         try {
+
+            $otroTipo = $dataExtraccion['otro_tipo_muestra'];
             // Actualización de registro existente
             $registro = Registro::where('recepcion_doc_referencia', $dataExtraccion['recepcion_doc_referencia'])->first();
             if ($registro) {
@@ -254,6 +261,9 @@ class RegisterController extends Controller
     
                 $muestra = $registro->muestra;
                 if ($muestra) {
+                    if($otroTipo){
+                        $dataExtraccion['descripcion'] = $otroTipo;
+                    }
                     $muestra->update([
                         'resultado_cuantitativo' => $dataProcesamiento['resultado_cuantitativo'],
                         'descripcion' => $dataExtraccion['descripcion'],
@@ -270,9 +280,13 @@ class RegisterController extends Controller
             }
     
             // Actualización de persona
-            $persona = Persona::where('dni', $dataExtraccion['dni'])->first();
+            $persona = Persona::where('dni', $dataExtraccion['dni'])
+                    ->join('intervenidos', 'personas.id', '=', 'intervenidos.persona_id')
+                    ->join('registros', 'registros.intervenido_id', '=', 'intervenidos.id')
+                    ->where('recepcion_doc_referencia', $dataExtraccion['recepcion_doc_referencia'])
+                    ->first();
             if ($persona) {
-                $persona->update([
+                $persona->updateOrCreate([
                     'nombre' => $dataExtraccion['nombre'],
                     'apellido_paterno' => $dataExtraccion['apellido_paterno'],
                     'apellido_materno' => $dataExtraccion['apellido_materno']
@@ -282,7 +296,7 @@ class RegisterController extends Controller
                 $intervenido = Intervenido::where('persona_id', $persona->id)->first();
                 if ($intervenido) {
                     // Actualización de intervenido
-                    $intervenido->update([
+                    $intervenido->updateOrCreate([
                         'edad' => $dataExtraccion['edad'],
                         'nacionalidad' => $dataExtraccion['nacionalidad']
                     ]);
@@ -320,13 +334,13 @@ class RegisterController extends Controller
                 $clase->update(['clase' => $dataExtraccion['clase']]);
             }
 
-            DB::commit(); // Confirmar la transacción
+            DB::commit();
             
             return redirect()->route('tbl-certificados')->with('success', "Registro completado");
         } catch (\Exception $e) {
-            DB::rollBack(); // Revertir la transacción en caso de error
+            DB::rollBack();
     
-            return redirect()->back()->withErrors(['error' => 'Ocurrió un error al registrar: ' . $e->getMessage()]);
+            return redirect()->back()->with(['error' => 'Ocurrió un error al registrar: ' . $e->getMessage()]);
         }
     }
 
