@@ -114,7 +114,7 @@
             @endif
             @if (session('error'))
                 <script>
-                        swal("Oooops!", "Ocurrió un error!", "error");
+                    swal("Oooops!", "Ocurrió un error!", "error");
                 </script>
             @endif
 
@@ -271,13 +271,13 @@
                             <option value="SANGRE" {{ $elemento->descripcion == 'SANGRE' ? 'selected' : '' }}>SANGRE</option>
                             <option value="ORINA" {{ $elemento->descripcion == 'ORINA' ? 'selected' : '' }}>ORINA</option>
                             <option value="SIN MUESTRA" {{ $elemento->descripcion == 'SIN MUESTRA' ? 'selected' : '' }}>SIN MUESTRA</option>
-                            <option value="otros" {{ $elemento->descripcion == 'otros' ? 'selected' : '' }}>OTROS</option>
+                            <option value="otros" {{ $elemento->descripcion != 'SIN MUESTRA' && $elemento->descripcion != 'otros' && $elemento->descripcion != 'SANGRE' && $elemento->descripcion != 'ORINA' ? 'selected' : '' }}>OTROS</option>
                         </select>
                     </div>
                     
                     <div class="input-group3" id="campo_otros" style="display: none;">
                             <label for="otro_tipo_muestra">Especificar otro tipo de muestra:</label>
-                            <input type="text" id="otro_tipo_muestra" name="otro_tipo_muestra" oninput="convertirMayusculas(this)">
+                            <input type="text" value="{{ $elemento->descripcion != 'SIN MUESTRA' && $elemento->descripcion != 'otros' && $elemento->descripcion != 'SANGRE' && $elemento->descripcion != 'ORINA' ? $elemento->descripcion : '' }}" id="otro_tipo_muestra" name="otro_tipo_muestra" oninput="convertirMayusculas(this)">
                     </div>
 
                     <div class="input-group3">
@@ -318,7 +318,6 @@
                         <label class="centro" for="procesador">DNI - Nombres y Apellidos Completos - Cargo </label>
                         <select id="procesador" name="procesador">
                             <option disabled selected>--SELECCIONAR--</option>
-                            <option value="">-----------</option>
                             @foreach ($personalProcesamiento as $personal)
                                 <option value="{{ $personal->persona_id }}" {{ $personal->persona_id == $elemento->procesador ? 'selected' : '' }}>{{ $personal->Persona->nombre }} {{ $personal->Persona->apellido_paterno }} {{ $personal->Persona->apellido_materno }} - {{ $personal->grado->grado }}</option>
                             @endforeach
