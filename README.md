@@ -9,6 +9,7 @@ El Sistema de Información para Dosaje Etílico es una plataforma avanzada dise�
 3. Gestión de usuarios y permisos
 4. Generación de informes detallados
 5. Almacenamiento seguro de datos
+6. Visualización de datos a través de gráficos estadísticos
 
 ## TECH STACK USED
 
