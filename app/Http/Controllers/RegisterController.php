@@ -261,7 +261,7 @@ class RegisterController extends Controller
     
                 $muestra = $registro->muestra;
                 if ($muestra) {
-                    if($otroTipo){
+                    if(!empty($otroTipo)){
                         $dataExtraccion['descripcion'] = $otroTipo;
                     }
                     $muestra->update([
@@ -286,25 +286,26 @@ class RegisterController extends Controller
                     ->where('recepcion_doc_referencia', $dataExtraccion['recepcion_doc_referencia'])
                     ->first();
             if ($persona) {
-                $persona->updateOrCreate([
+                $persona->update([
                     'nombre' => $dataExtraccion['nombre'],
                     'apellido_paterno' => $dataExtraccion['apellido_paterno'],
                     'apellido_materno' => $dataExtraccion['apellido_materno']
                 ]);
     
                 // Buscar intervenido usando el id de la persona
-                $intervenido = Intervenido::where('persona_id', $persona->id)->first();
+                $intervenido = $persona->intervenido;
                 if ($intervenido) {
                     // Actualización de intervenido
-                    $intervenido->updateOrCreate([
+                    $intervenido->update([
                         'edad' => $dataExtraccion['edad'],
                         'nacionalidad' => $dataExtraccion['nacionalidad']
                     ]);
     
                     // Actualización de otro registro por intervenido_id
-                    $registroToUpdate = Registro::where('intervenido_id', $intervenido->id)->first();
+                    $registroToUpdate = Registro::where('recepcion_doc_referencia', $dataExtraccion['recepcion_doc_referencia'])->first();
                     if ($registroToUpdate) {
                         $registroToUpdate->update([
+                            // tal vez podría comentarlo ya que este valor es único
                             'recepcion_doc_referencia' => $dataExtraccion['recepcion_doc_referencia'],
                             'fecha' => $dataExtraccion['fecha'],
                             'hora' => $dataExtraccion['hora'],
