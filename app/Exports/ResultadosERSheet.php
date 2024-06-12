@@ -33,6 +33,8 @@ class ResultadosERSheet implements FromCollection, WithHeadings, WithStyles
                 SUM(CASE WHEN registros.recepcion_doc_referencia LIKE "MRT%" THEN 1 ELSE 0 END)
             as TOTAL')
         )
+        ->join('muestras', 'muestras.id', '=', 'registros.muestra_id')
+        ->where('muestras.descripcion', '!=', 'SIN MUESTRA')
         ->groupBy(DB::raw('DATE(registros.fecha_hora_extraccion)'))
         ->get();
     }
