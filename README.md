@@ -14,6 +14,8 @@ El Sistema de Información para Dosaje Etílico es una plataforma avanzada dise�
 
 ## REQUISITOS DEL SISTEMA
 - MySQL
+- PHP
+- Laravel
 - Composer
 
 ## FUNCIONALIDADES DETALLADAS
@@ -31,11 +33,6 @@ Los usuarios pueden generar reportes en formato Excel, que resumen las extraccio
 El sistema incluye un módulo de estadísticas que proporciona gráficos y datos detallados sobre las extracciones y resultados, facilitando la toma de decisiones informadas.
 
 ## TECH STACK USED
-
-- Laravel
-- Git & Github: Version control
-
-##
 
 ![GITHUB](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)
 ![GIT](https://img.shields.io/badge/GIT-E44C30?style=for-the-badge&logo=git&logoColor=white)
