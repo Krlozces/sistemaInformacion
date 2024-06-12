@@ -30,12 +30,12 @@ class ResultadosConsolidadosSheet implements FromCollection, WithHeadings, WithS
             ->select(
                 DB::raw('DATE(muestras.fecha_muestra) as dia'),
                 DB::raw('SUM(CASE WHEN muestras.resultado_cualitativo = "positivo" THEN 1 ELSE 0 END) as POSITIVO'),
-                DB::raw('SUM(CASE WHEN (muestras.resultado_cualitativo = "NEGACIÓN" OR muestras.resultado_cualitativo = "SIN MUESTRA") THEN 1 ELSE 0 END) as TSM'),
+                DB::raw('SUM(CASE WHEN (muestras.resultado_cualitativo = "NEGACIÓN" OR muestras.resultado_cualitativo = "CONSTATACIÓN") THEN 1 ELSE 0 END) as TSM'),
                 DB::raw('SUM(CASE WHEN muestras.resultado_cualitativo = "negativo" THEN 1 ELSE 0 END) as NEGATIVO'),
                 DB::raw('
                 SUM(CASE WHEN muestras.resultado_cualitativo = "positivo" THEN 1 ELSE 0 END) +
                 SUM(CASE WHEN muestras.resultado_cualitativo = "negativo" THEN 1 ELSE 0 END) +
-                SUM(CASE WHEN (muestras.resultado_cualitativo = "NEGACIÓN" OR muestras.resultado_cualitativo = "SIN MUESTRA") THEN 1 ELSE 0 END)
+                SUM(CASE WHEN (muestras.resultado_cualitativo = "NEGACIÓN" OR muestras.resultado_cualitativo = "CONSTATACIÓN") THEN 1 ELSE 0 END)
                 as TOTAL')
             )
             ->groupBy(DB::raw('DATE(muestras.fecha_muestra)'))
