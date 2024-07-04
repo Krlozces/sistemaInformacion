@@ -44,6 +44,7 @@ class ResultadosNCMSheet implements FromCollection, WithHeadings, WithStyles
                 ) as TOTAL'
             )
         )
+        ->whereDate(DB::raw('DATE(registros.fecha_hora_extraccion)'), DB::raw('CURDATE()'))
         ->groupBy(DB::raw('DATE(registros.fecha_hora_extraccion)'))
         ->get();
     }

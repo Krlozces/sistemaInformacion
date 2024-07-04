@@ -42,6 +42,7 @@ class ProduccionExport implements FromCollection, WithHeadings, WithTitle, WithS
                 SUM(CASE WHEN intervenidos.sexo = "F" AND (muestras.resultado_cualitativo = "NEGACIÓN" OR muestras.resultado_cualitativo = "CONSTATACIÓN") THEN 1 ELSE 0 END) 
             as total')
         )
+        ->whereDate(DB::raw('DATE(muestras.fecha_muestra)'), DB::raw('CURDATE()'))
         ->groupBy(DB::raw('DATE(muestras.fecha_muestra)'))
         ->get();
     }

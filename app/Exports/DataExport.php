@@ -37,9 +37,30 @@ class DataExport implements FromCollection, WithHeadings, WithStyles
                 "%H:%i"
             ) as tiempo_transcurrido_minutos'),
             'personas.dni',
-            DB::raw('CAST(muestras.resultado_cuantitativo AS DECIMAL(10,2)) AS resultado_cuantitativo'),
-            DB::raw('CONCAT(pro.apellido_paterno, " ", pro.apellido_materno, " ", pro.nombre) as nombre_procesador'),
-            'certificados.certificado',
+            DB::raw('
+                CASE
+                    WHEN muestras.resultado_cualitativo = "NEGACIÓN" THEN "INCURSO"
+                    WHEN muestras.resultado_cualitativo = "CONSTATACIÓN" THEN "CONSTATACION"
+                    ELSE CAST(muestras.resultado_cuantitativo AS DECIMAL(10,2))
+                END AS resultado_cuantitativo
+            '),
+            DB::raw('
+                CASE
+                    WHEN muestras.resultado_cualitativo IN ("NEGACIÓN", "CONSTATACIÓN") THEN 
+                        (SELECT CONCAT(extr_personas.apellido_paterno, " ", extr_personas.apellido_materno, " ", extr_personas.nombre)
+                            FROM personal as extr
+                            JOIN personas as extr_personas ON extr.persona_id = extr_personas.id
+                            WHERE extr.id = registros.extractor)
+                    ELSE 
+                        CONCAT(pro.apellido_paterno, " ", pro.apellido_materno, " ", pro.nombre)
+                END AS nombre_procesador
+            '),
+            DB::raw('
+                CASE
+                    WHEN muestras.resultado_cualitativo IN ("NEGACIÓN", "CONSTATACIÓN") THEN "-----"
+                    ELSE certificados.certificado
+                END AS certificado
+            '),
             'registros.motivo',
             'intervenidos.edad',
             DB::raw('CONCAT(numero_oficio, "-", recepcion_doc_referencia) as certificado_ddee'),
@@ -55,21 +76,26 @@ class DataExport implements FromCollection, WithHeadings, WithStyles
         ->join('personal', 'personal.id', '=', 'registros.procesador')
         ->join('certificados', 'certificados.id', '=', 'personal.certificado_id')
         ->join('personas as pro', 'personal.persona_id', '=', 'pro.id')
-        ->where('personal.area_perteneciente', 'areapro')
+        ->whereDate('muestras.fecha_muestra', DB::raw('CURDATE()'))
+        // ->where('personal.area_perteneciente', 'areapro')
         ->distinct()
         ->get();
 
         // Iterar sobre los elementos y reemplazar los valores de motivo según la abreviatura
         foreach ($elementos as $elemento) {
-            switch ($elemento->motivo) {
-                case 'PELIGRO COMUN':
-                    $elemento->motivo = 'PC';
-                    break;
-                case 'ACCIDENTE DE TRANSITO':
-                    $elemento->motivo = 'AT';
-                    break;
-                default:
-                    break;
+            if ($elemento->resultado_cualitativo === 'NEGACIÓN') {
+                $elemento->resultado = 'INCURSO';
+            } elseif ($elemento->resultado_cualitativo === 'CONSTATACIÓN') {
+                $elemento->resultado = 'CONSTATACION';
+            }
+    
+            // Reemplazar valores de motivo según la abreviatura
+            if (strpos($elemento->motivo, 'ACCIDENTE') === 0) {
+                $elemento->motivo = 'AT';
+            } elseif (strpos($elemento->motivo, 'PELIGRO') === 0) {
+                $elemento->motivo = 'PC';
+            } elseif (strpos($elemento->motivo, 'APARENTE') === 0) {
+                $elemento->motivo = 'AP';
             }
         }
 
@@ -275,7 +301,7 @@ class DataExport implements FromCollection, WithHeadings, WithStyles
 
         $sheet->getColumnDimension('L')->setWidth(10);
         $sheet->getColumnDimension('M')->setWidth(6);
-        $sheet->getColumnDimension('N')->setWidth(32);
+        $sheet->getColumnDimension('N')->setWidth(45);
         $sheet->getColumnDimension('O')->setWidth(12);
         $sheet->getColumnDimension('P')->setWidth(7);
         $sheet->getColumnDimension('Q')->setWidth(5);
