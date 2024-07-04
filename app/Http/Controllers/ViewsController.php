@@ -63,6 +63,25 @@ class ViewsController extends Controller
             return Carbon::parse($item->fecha_muestra)->format('Y-m-d');
         });
 
+        $fecha = \Carbon\Carbon::now();
+        $numeroMes = $fecha->format('m');
+        $nombresMeses = [
+            '01' => 'ENERO',
+            '02' => 'FEBRERO',
+            '03' => 'MARZO',
+            '04' => 'ABRIL',
+            '05' => 'MAYO',
+            '06' => 'JUNIO',
+            '07' => 'JULIO',
+            '08' => 'AGOSTO',
+            '09' => 'SEPTIEMBRE',
+            '10' => 'OCTUBRE',
+            '11' => 'NOVIEMBRE',
+            '12' => 'DICIEMBRE',
+        ];
+        $nombreMes = $nombresMeses[$numeroMes];
+        $anio = $fecha->format('Y');
+
         $labels = [];
         $values = [];
 
@@ -87,7 +106,7 @@ class ViewsController extends Controller
                 ->where('usuario', Auth::user()->email)
                 ->first();
 
-        return view('home', compact('grado', 'chartDataJson'));
+        return view('home', compact('grado', 'chartDataJson', 'nombreMes', 'anio'));
     }
 
     public function segunEdad(){

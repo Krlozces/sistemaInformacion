@@ -142,7 +142,7 @@
         <div class="container3">
             <!-- Contenedores que parecen botones -->
             <div class="boton1">
-                RESUMEN ABRIL 2024
+                RESUMEN {{ $nombreMes }} {{ $anio }}
                 <a href="{{ route('exportar-consolidado') }}">
                     <i class="fa-solid fa-rectangle-list"></i>
                 </a>
@@ -179,7 +179,7 @@
             </div>
     
             <div class="boton6">
-                ESTADISTICA ABRIL 2024 SAN INGNACIO CUALITATIVA 
+                ESTADISTICA {{ $nombreMes }} {{ $anio }} SAN INGNACIO CUALITATIVA 
                 <i class="fa-solid fa-chart-pie"></i>
             </div>
         </div>
