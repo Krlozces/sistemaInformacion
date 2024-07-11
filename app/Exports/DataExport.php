@@ -76,7 +76,6 @@ class DataExport implements FromCollection, WithHeadings, WithStyles
         ->join('personal', 'personal.id', '=', 'registros.procesador')
         ->join('certificados', 'certificados.id', '=', 'personal.certificado_id')
         ->join('personas as pro', 'personal.persona_id', '=', 'pro.id')
-        ->whereDate('muestras.fecha_muestra', DB::raw('CURDATE()'))
         // ->where('personal.area_perteneciente', 'areapro')
         ->distinct()
         ->get();
