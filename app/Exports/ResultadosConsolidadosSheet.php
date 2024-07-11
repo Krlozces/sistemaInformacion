@@ -38,7 +38,6 @@ class ResultadosConsolidadosSheet implements FromCollection, WithHeadings, WithS
                 SUM(CASE WHEN (muestras.resultado_cualitativo = "NEGACIÓN" OR muestras.resultado_cualitativo = "CONSTATACIÓN") THEN 1 ELSE 0 END)
                 as TOTAL')
             )
-            ->whereDate(DB::raw('DATE(muestras.fecha_muestra)'), DB::raw('CURDATE()'))
             ->groupBy(DB::raw('DATE(muestras.fecha_muestra)'))
             ->get();
     }
