@@ -35,7 +35,6 @@ class ResultadosERSheet implements FromCollection, WithHeadings, WithStyles
         )
         ->join('muestras', 'muestras.id', '=', 'registros.muestra_id')
         ->where('muestras.descripcion', '!=', 'SIN MUESTRA')
-        ->whereRaw('DATE(registros.fecha_hora_extraccion) = CURDATE()')
         ->groupBy(DB::raw('DATE(registros.fecha_hora_extraccion)'))
         ->get();
     }
