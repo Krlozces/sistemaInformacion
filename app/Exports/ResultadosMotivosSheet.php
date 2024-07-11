@@ -25,18 +25,18 @@ class ResultadosMotivosSheet implements FromCollection, WithHeadings, WithStyles
 
     private function resultadosMotivos(){
         return Registro::select(
-                DB::raw('DATE(registros.fecha_hora_extraccion) as dia'),
-                DB::raw('SUM(CASE WHEN registros.motivo = "ACCIDENTE DE TRANSITO" THEN 1 ELSE 0 END) as AT'),
-                DB::raw('SUM(CASE WHEN registros.motivo = "PRESUNCION DE EBRIEDAD" THEN 1 ELSE 0 END) as PE'),
-                DB::raw('SUM(CASE WHEN registros.motivo != "PRESUNCION DE EBRIEDAD" AND registros.motivo != "ACCIDENTE DE TRANSITO" THEN 1 ELSE 0 END) as OTRO'),
-                DB::raw('
-                    SUM(CASE WHEN registros.motivo = "ACCIDENTE DE TRANSITO" THEN 1 ELSE 0 END) +
-                    SUM(CASE WHEN registros.motivo = "PRESUNCION DE EBRIEDAD" THEN 1 ELSE 0 END) +
-                    SUM(CASE WHEN registros.motivo != "PRESUNCION DE EBRIEDAD" AND registros.motivo != "ACCIDENTE DE TRANSITO" THEN 1 ELSE 0 END)
-                as TOTAL')
-            )
-            ->groupBy(DB::raw('DATE(registros.fecha_hora_extraccion)'))
-            ->get();
+            DB::raw('DATE(registros.fecha_hora_extraccion) as dia'),
+            DB::raw('SUM(CASE WHEN registros.motivo LIKE "ACCIDENTE DE TRANSITO%" THEN 1 ELSE 0 END) as AT'),
+            DB::raw('SUM(CASE WHEN registros.motivo LIKE "PRESUNCION DE EBRIEDAD" OR registros.motivo like "PELIGRO COMUN%" THEN 1 ELSE 0 END) as PE'),
+            DB::raw('SUM(CASE WHEN registros.motivo NOT LIKE "PRESUNCION DE EBRIEDAD" AND registros.motivo NOT LIKE "ACCIDENTE DE TRANSITO%" AND registros.motivo NOT LIKE "PELIGRO COMUN%" THEN 1 ELSE 0 END) as OTRO'),
+            DB::raw('
+                SUM(CASE WHEN registros.motivo LIKE "ACCIDENTE DE TRANSITO%" THEN 1 ELSE 0 END) +
+                SUM(CASE WHEN registros.motivo LIKE "PRESUNCION DE EBRIEDAD" OR registros.motivo LIKE "PELIGRO COMUN%" THEN 1 ELSE 0 END) +
+                SUM(CASE WHEN registros.motivo NOT LIKE "PRESUNCION DE EBRIEDAD" AND registros.motivo NOT LIKE "ACCIDENTE DE TRANSITO%" AND registros.motivo NOT LIKE "PELIGRO COMUN%" THEN 1 ELSE 0 END)
+            as TOTAL')
+        )
+        ->groupBy(DB::raw('DATE(registros.fecha_hora_extraccion)'))
+        ->get();
     }
 
     public function headings(): array
