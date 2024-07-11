@@ -138,7 +138,7 @@
             <thead>
                 <tr>
                     <th>Estado</th>
-                    <th>DNI</th>
+                    <th>Doc de referencia</th>
                     <th>Nombres</th>
                     <th>Apellido Paterno</th>
                     <th>Apellido Materno</th>
@@ -153,7 +153,7 @@
                             <div class="{{ $elemento->estado == '1' ? 'bg-green' : 'bg-red' }}">
                             </div>
                         </td>
-                        <td>{{ $elemento->dni }}</td>
+                        <td>{{ $elemento->recepcion_doc_referencia }}</td>
                         <td>{{ $elemento->nombre }}</td>
                         <td>{{ $elemento->apellido_paterno }}</td>
                         <td>{{ $elemento->apellido_materno }}</td>
