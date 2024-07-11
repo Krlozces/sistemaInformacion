@@ -35,7 +35,6 @@ class ResultadosMotivosSheet implements FromCollection, WithHeadings, WithStyles
                     SUM(CASE WHEN registros.motivo != "PRESUNCION DE EBRIEDAD" AND registros.motivo != "ACCIDENTE DE TRANSITO" THEN 1 ELSE 0 END)
                 as TOTAL')
             )
-            ->whereDate(DB::raw('DATE(registros.fecha_hora_extraccion)'), DB::raw('CURDATE()'))
             ->groupBy(DB::raw('DATE(registros.fecha_hora_extraccion)'))
             ->get();
     }
