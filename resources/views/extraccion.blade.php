@@ -114,7 +114,7 @@
                 @endif
                 <div class="input-general">
                     <div>
-                        <input class="w-14" type="text" value="{{ $nuevoCodigo }}" id="campoIncremental" name="numero_oficio" readonly>
+                        <input class="w-14" type="text" id="campoIncremental" name="numero_oficio">
                     </div>
                 </div>
 
